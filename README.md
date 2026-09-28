@@ -1,7 +1,7 @@
 # Real-Time Stock Market Pipeline
 
-A streaming data pipeline that ingests stock prices from a public market data
-API, processes them in real time and stores the results for analytics.
+A streaming data pipeline that ingests stock trades in real time, processes
+them with windowed aggregations and stores the results for analytics.
 
 Data engineering learning project and part of an application portfolio.
 
@@ -11,13 +11,18 @@ Data engineering learning project and part of an application portfolio.
 
 ## What this project builds
 
-- Continuous ingestion of stock prices from the
-  [Alpha Vantage API](https://www.alphavantage.co)
+- Real-time ingestion of US stock trades via the
+  [Finnhub](https://finnhub.io) WebSocket API
+- A replay mode that streams historical intraday data into the pipeline,
+  independent of API limits and market hours
 - A Kafka topic as a buffer between ingestion and processing
 - A Spark Structured Streaming job that computes windowed metrics
   (e.g. moving averages, min/max, volume per time window)
-- Persistence of raw ticks and aggregated metrics in PostgreSQL for
+- Persistence of raw trades and aggregated metrics in PostgreSQL for
   downstream analytics
+
+The whole stack runs locally with Docker Compose and uses only free,
+open-source components and free API tiers.
 
 ## Learning goals
 
@@ -30,36 +35,55 @@ Data engineering learning project and part of an application portfolio.
 
 ```mermaid
 flowchart LR
-    A[Alpha Vantage API] -->|poll| B[Python producer]
-    B -->|JSON events| C[(Kafka topic)]
-    C --> D[Spark Structured Streaming]
-    D -->|raw ticks + window aggregates| E[(PostgreSQL)]
-    E --> F[Analytics / dashboard]
+    A[Finnhub WebSocket] -->|live trades| C[Python producer]
+    B[Historical intraday data] -->|replay| C
+    C -->|JSON events| D[(Kafka topic)]
+    D --> E[Spark Structured Streaming]
+    E -->|raw trades + window aggregates| F[(PostgreSQL)]
+    F --> G[Analytics / dashboard]
 ```
 
 | Stage | Technology | Responsibility |
 | --- | --- | --- |
-| Source | Alpha Vantage REST API | Intraday stock prices |
-| Ingestion | Python producer | Polls the API and publishes one event per price record |
+| Source (live) | Finnhub WebSocket API | Real-time trades for US stocks |
+| Source (replay) | Historical intraday data | Reproducible stream for tests and demos |
+| Ingestion | Python producer | Publishes one event per trade, same schema for both sources |
 | Transport | Apache Kafka | Decouples ingestion from processing, buffers events |
 | Processing | Spark Structured Streaming | Parses events, applies event-time windows and aggregations |
-| Storage | PostgreSQL | Stores raw ticks and windowed metrics |
+| Storage | PostgreSQL | Stores raw trades and windowed metrics |
 
-## Data source
+Both sources feed the same Kafka topic with the same event schema, so the
+streaming job does not need to know where the data comes from.
 
-[Alpha Vantage](https://www.alphavantage.co) provides free stock market data
-via REST. A free API key is required. The free tier is rate-limited, so the
-producer polls a small set of symbols at a conservative interval; check the
-current limits on the Alpha Vantage website.
+## Data storage
 
-The API key is read from the environment variable `ALPHAVANTAGE_API_KEY` and
-is never committed to the repository.
+- **PostgreSQL** is the persistent store: raw trades and windowed
+  aggregates per symbol.
+- **Kafka** retains events only temporarily (retention period) and acts as
+  a buffer, not as long-term storage.
+- **Spark checkpoints** store streaming progress so the job can resume after
+  a restart.
+
+## Data sources
+
+**Live: Finnhub.** Finnhub offers a free tier with a WebSocket endpoint that
+pushes trades for US stocks as they happen. A free API key is required.
+Trades only arrive during US market hours.
+
+**Replay: historical intraday data.** Historical intraday prices are
+downloaded once and replayed into Kafka at a configurable speed. This
+provides a steady stream outside market hours and makes tests and demos
+reproducible.
+
+API keys are read from environment variables (e.g. `FINNHUB_API_KEY`) and
+are never committed to the repository. Free-tier limits change over time;
+check the current terms on the provider's website.
 
 ## Planned repository structure
 
 ```
 .
-├── producer/        # Python producer: Alpha Vantage -> Kafka
+├── producer/        # Python producer: Finnhub / replay -> Kafka
 ├── streaming/       # Spark Structured Streaming job: Kafka -> PostgreSQL
 ├── sql/             # PostgreSQL schema
 ├── tests/           # Unit tests
@@ -71,13 +95,15 @@ is never committed to the repository.
 
 Setup instructions follow once the first components are implemented. The
 target is a local stack started with Docker Compose (Kafka, Spark,
-PostgreSQL) plus the producer.
+PostgreSQL) plus the producer. Running all services at once needs roughly
+8 GB of RAM; 16 GB is comfortable.
 
 ## Roadmap
 
 - [ ] Local infrastructure with Docker Compose (Kafka, PostgreSQL, Spark)
-- [ ] Producer: poll Alpha Vantage and publish events to Kafka
-- [ ] Streaming job: consume events and write raw ticks to PostgreSQL
+- [ ] Producer, replay mode: stream historical intraday data into Kafka
+- [ ] Producer, live mode: Finnhub WebSocket into Kafka
+- [ ] Streaming job: consume events and write raw trades to PostgreSQL
 - [ ] Window operations: aggregated metrics per symbol and time window
 - [ ] Tests and CI (`black`, `ruff`, `pytest`)
 - [ ] Analytics layer / dashboard on top of PostgreSQL
@@ -85,4 +111,5 @@ PostgreSQL) plus the producer.
 ## Credits
 
 Project idea based on the overview "7 Free Data Engineering Projects"
-by Nishant Kumar.
+by Nishant Kumar, which proposes Alpha Vantage as data source. This project
+uses Finnhub instead because its free tier provides a real-time stream.
