@@ -3,7 +3,7 @@
 A streaming data pipeline that ingests stock trades in real time, processes
 them with windowed aggregations and stores the results for analytics.
 
-Data engineering learning project and part of an application portfolio.
+Data engineering learning project.
 
 > **Status:** work in progress. This README describes the target design;
 > components are added step by step and the sections below are updated as
