@@ -11,7 +11,6 @@ Usage::
 
 import importlib
 
-import matplotlib.pyplot as plt
 import pandas as pd
 import yfinance as yf
 from ci import (
@@ -23,6 +22,7 @@ from ci import (
     legend_row,
     month_axis,
     new_figure,
+    save,
 )
 from matplotlib.lines import Line2D
 
@@ -108,8 +108,7 @@ def plot(price_eur, earnings, path):
         ],
     )
     month_axis(ax)
-    fig.savefig(path, dpi=150)
-    plt.close(fig)
+    save(fig, path)
 
 
 if __name__ == "__main__":

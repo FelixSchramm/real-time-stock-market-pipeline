@@ -8,9 +8,8 @@ Usage::
     python data_exploration/v2_polished/01_plot_price_eur.py
 """
 
-import matplotlib.pyplot as plt
 import yfinance as yf
-from ci import COLORS, end_label, german, month_axis, new_figure
+from ci import COLORS, end_label, german, month_axis, new_figure, save
 
 # MSFT keeps slot 2 (blue) in every chart, AAPL slot 1.
 COLOR = COLORS[1]
@@ -49,8 +48,7 @@ def plot(price_eur, path):
         COLOR,
     )
     month_axis(ax)
-    fig.savefig(path, dpi=150)
-    plt.close(fig)
+    save(fig, path)
 
 
 if __name__ == "__main__":

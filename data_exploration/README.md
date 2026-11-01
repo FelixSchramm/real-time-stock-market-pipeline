@@ -25,6 +25,9 @@ folders produce the same three plots from the same data:
 
 Example: `python data_exploration/v2_polished/01_plot_price_eur.py`
 
+Dark mode (v2 only): `CI_MODE=dark python data_exploration/v2_polished/01_plot_price_eur.py`
+writes `01_price_eur_dark.png` next to the light version.
+
 Each folder has its own `ci.py` (`use_ci()` and, in v2, the layout helpers);
 the values come from `style/felix-schramm-ci.json`.
 

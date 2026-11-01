@@ -8,9 +8,8 @@ Usage::
     python data_exploration/v2_polished/03_plot_cashflow.py
 """
 
-import matplotlib.pyplot as plt
 import yfinance as yf
-from ci import COLORS, german, legend_row, new_figure
+from ci import COLORS, german, legend_row, new_figure, save
 from matplotlib.patches import Patch
 
 # CI categorical colors in fixed order (forest, blue, orchid).
@@ -69,8 +68,7 @@ def plot(cashflow, path):
     ax.set_xticks(list(positions))
     ax.set_xticklabels([fiscal_label(d) for d in cashflow.index])
     legend_row(fig, [Patch(color=color, label=label) for _, label, color in SERIES])
-    fig.savefig(path, dpi=150)
-    plt.close(fig)
+    save(fig, path)
 
 
 if __name__ == "__main__":

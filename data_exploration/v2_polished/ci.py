@@ -3,9 +3,13 @@
 Compared to ``v1_basic/ci.py`` this adds: title and subtitle at the left
 edge, a card behind the plot, German number and month formatting and
 direct end labels. All values come from ``style/felix-schramm-ci.json``.
+
+Set ``CI_MODE=dark`` to use the dark tokens; :func:`save` then writes the
+PNG with a ``_dark`` suffix next to the light one.
 """
 
 import json
+import os
 from pathlib import Path
 
 import matplotlib.dates as mdates
@@ -18,9 +22,10 @@ from matplotlib.ticker import FuncFormatter
 CI = json.loads(
     (Path(__file__).parents[2] / "style" / "felix-schramm-ci.json").read_text()
 )
-COLORS = [c["hex"] for c in CI["color"]["categorical"]["light"]]
-NEUTRAL = CI["color"]["neutral"]["light"]
-FINANCE = CI["color"]["finance"]["light"]
+MODE = os.environ.get("CI_MODE", "light")
+COLORS = [c["hex"] for c in CI["color"]["categorical"][MODE]]
+NEUTRAL = CI["color"]["neutral"][MODE]
+FINANCE = CI["color"]["finance"][MODE]
 # Keep only installed fonts, Matplotlib warns once per missing family otherwise.
 INSTALLED = {f.name for f in font_manager.fontManager.ttflist}
 FONTS = [
@@ -183,3 +188,16 @@ def end_label(ax, x, y, text, color):
         va="center",
         fontsize=11,
     )
+
+
+def save(fig, path):
+    """Save the figure, with a ``_dark`` suffix in dark mode, and close it.
+
+    :param fig: figure to save
+    :param path: output PNG path of the light version
+    :return: None
+    """
+    if MODE == "dark":
+        path = path.replace(".png", "_dark.png")
+    fig.savefig(path, dpi=150)
+    plt.close(fig)
