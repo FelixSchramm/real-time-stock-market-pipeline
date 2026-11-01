@@ -160,7 +160,7 @@ def month_axis(ax):
     ax.xaxis.set_major_formatter(FuncFormatter(label))
 
 
-def end_label(ax, x, y, text, color):
+def end_label(ax, x, y, text, color, offset_y=0):
     """Mark the last value with a dot and write its label next to it.
 
     :param ax: axes to draw on
@@ -168,6 +168,7 @@ def end_label(ax, x, y, text, color):
     :param y: y position of the last value
     :param text: label, e.g. ``"466,71 €"``
     :param color: series color of the dot
+    :param offset_y: vertical label offset in points (dot stays at the value)
     :return: None
     """
     ax.scatter(
@@ -182,7 +183,7 @@ def end_label(ax, x, y, text, color):
     ax.annotate(
         text,
         (x, y),
-        xytext=(9, 0),
+        xytext=(9, offset_y),
         textcoords="offset points",
         va="center",
         fontsize=11,

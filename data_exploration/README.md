@@ -35,3 +35,13 @@ Each folder has its own `ci.py` (`use_ci()` and, from v2 on, the layout helpers)
 the values come from `style/felix-schramm-ci.json`.
 
 Requirements: `pip install yfinance matplotlib`
+
+## Additional dark-mode comparisons
+
+| Script | Output | Content |
+|---|---|---|
+| `v3_dark/05_plot_indexed.py` | `v3_dark/05_indexed.png` | AAPL, MSFT, NVDA adjusted closes over one year, indexed to 100 at their first common close |
+
+Run from the repository root, e.g.
+`python data_exploration/v3_dark/05_plot_indexed.py`. The comparison uses a
+common trading calendar and stops if any requested price series is missing.
