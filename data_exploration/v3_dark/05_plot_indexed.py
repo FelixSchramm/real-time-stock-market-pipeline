@@ -1,4 +1,4 @@
-"""Compare AAPL, MSFT and NVDA daily closes, indexed to 100.
+"""Compare the approved stocks' daily closes, indexed to 100.
 
 Usage::
 
@@ -7,7 +7,6 @@ Usage::
 
 import yfinance as yf
 from ci import (
-    COLORS,
     NEUTRAL,
     end_label,
     german,
@@ -17,8 +16,7 @@ from ci import (
     save,
 )
 from matplotlib.lines import Line2D
-
-TICKERS = ["AAPL", "MSFT", "NVDA"]
+from stocks import TICKER_COLORS, TICKERS
 
 
 def load_prices():
@@ -45,12 +43,14 @@ def load_prices():
 def plot(close, path):
     """Draw indexed prices with end labels separated by at least 15 points.
 
-    :param close: complete daily closes with at most four ticker columns
+    :param close: complete daily closes for up to four approved stock symbols
     :param path: output PNG path
     :return: None
     """
     if not 1 <= len(close.columns) <= 4:
         raise ValueError("Der Linienvergleich unterstützt höchstens vier Aktien.")
+    if not close.columns.is_unique or any(t not in TICKERS for t in close):
+        raise ValueError("Nur eindeutige Aktien aus der freigegebenen Auswahl nutzen.")
     indexed = close.div(close.iloc[0]).mul(100)
     fig, ax = new_figure(
         "Kursentwicklung, Basis 100",
@@ -58,9 +58,10 @@ def plot(close, path):
         legend_row=True,
     )
     handles = []
-    for i, ticker in enumerate(indexed):
-        ax.plot(indexed.index, indexed[ticker], color=COLORS[i])
-        handles.append(Line2D([], [], color=COLORS[i], label=ticker))
+    for ticker in indexed:
+        color = TICKER_COLORS[ticker]
+        ax.plot(indexed.index, indexed[ticker], color=color)
+        handles.append(Line2D([], [], color=color, label=ticker))
     ax.axhline(100, color=NEUTRAL["axis"], linewidth=1)
     month_axis(ax)
     legend_row(fig, handles)
@@ -75,7 +76,7 @@ def plot(close, path):
             indexed.index[-1],
             value,
             f"{ticker} {german(value)}",
-            COLORS[list(indexed.columns).index(ticker)],
+            TICKER_COLORS[ticker],
             offset_y=(position - actual) * 72 / fig.dpi,
         )
         previous = position
