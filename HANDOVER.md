@@ -4,7 +4,7 @@ Living handover document for the autonomous session chain
 (see CLAUDE.md, section "Autonomous session protocol").
 Update after every completed unit of work and before every handover.
 
-**Last updated:** 2026-09-28 (setup session — protocol files only)
+**Last updated:** 2026-11-01 (work plan: chart issues #3-#7 added)
 **Chain status:** not started (kickoff pending, see below)
 
 ## Kickoff checklist (to be done by the user or a setup session)
@@ -24,7 +24,14 @@ start:
 
 ## Work plan
 
-- (no issues yet — fill in `#N — title` in processing order)
+1. #3 — feat: candlestick chart with volume panel (v3_dark/04)
+2. #4 — feat: indexed price comparison of several stocks (v3_dark/05)
+3. #5 — feat: monthly returns heatmap (v3_dark/06)
+4. #6 — feat: drawdown chart of several stocks (v3_dark/07)
+5. #7 — feat: KPI tiles per stock (v3_dark/08)
+
+Context: chart ideas from the CI preview page (`style/ci-preview.html`), to
+be built in Matplotlib in `data_exploration/v3_dark/` with its `ci.py`.
 
 ## Done
 
