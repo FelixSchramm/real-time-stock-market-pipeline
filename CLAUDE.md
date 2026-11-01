@@ -20,6 +20,18 @@ are added or closed.
 Each issue is written to be self-contained. Read the issue in full before
 starting it.
 
+### Stock selection for charts
+
+User requirement (2026-11-01): charts with three or more stock series use
+only the owner's actual portfolio stocks. For #4–#7 import the approved
+selection and stable color mapping from `data_exploration/v3_dark/stocks.py`
+(ORCL, MSFT, MCD). Do not substitute arbitrary example tickers. Check the
+private portfolio source before changing this selection; demo positions,
+watchlists and zero holdings are not eligible. If the source is unavailable,
+ask the owner instead of guessing. Keep spreadsheet IDs, quantities, weights
+and cost bases out of source code, issues and logs. A benchmark index is not
+an additional stock series. #21 remains deferred at the user's request.
+
 Note: external services (market data APIs, message brokers, databases) and
 their credentials may not be available in a fresh cloud session. Issues that
 need them should degrade gracefully: implement + document the code path, and

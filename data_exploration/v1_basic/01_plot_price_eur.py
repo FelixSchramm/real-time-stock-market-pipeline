@@ -12,7 +12,7 @@ import matplotlib.pyplot as plt
 import yfinance as yf
 from ci import COLORS, use_ci
 
-# MSFT keeps slot 2 (blue) in every chart, AAPL slot 1.
+# MSFT keeps slot 2 (blue) in every chart, ORCL slot 1.
 COLOR = COLORS[1]
 
 

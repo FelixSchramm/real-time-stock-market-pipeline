@@ -11,7 +11,7 @@ Usage::
 import yfinance as yf
 from ci import COLORS, end_label, german, month_axis, new_figure, save
 
-# MSFT keeps slot 2 (blue) in every chart, AAPL slot 1.
+# MSFT keeps slot 2 (blue) in every chart, ORCL slot 1.
 COLOR = COLORS[1]
 
 
