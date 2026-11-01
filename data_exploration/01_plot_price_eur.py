@@ -10,8 +10,10 @@ Usage::
 
 import matplotlib.pyplot as plt
 import yfinance as yf
+from ci import COLORS, use_ci
 
-COLOR = "#2a78d6"
+# MSFT keeps slot 2 (blue) in every chart, AAPL slot 1.
+COLOR = COLORS[1]
 
 
 def load_msft_eur():
@@ -34,6 +36,7 @@ def plot(price_eur, path):
     :param path: output PNG path
     :return: None
     """
+    use_ci()
     fig, ax = plt.subplots(figsize=(10, 5))
     ax.plot(price_eur.index, price_eur, color=COLOR, linewidth=2)
     ax.annotate(
@@ -46,8 +49,6 @@ def plot(price_eur, path):
     ax.set_title("Microsoft (MSFT) in Euro, Jahresbeginn bis heute")
     ax.set_xlabel("Datum")
     ax.set_ylabel("Schlusskurs in EUR")
-    ax.grid(alpha=0.3)
-    ax.spines[["top", "right"]].set_visible(False)
     fig.tight_layout()
     fig.savefig(path, dpi=150)
 

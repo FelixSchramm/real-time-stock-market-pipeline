@@ -11,12 +11,13 @@ Usage::
 
 import matplotlib.pyplot as plt
 import yfinance as yf
+from ci import COLORS, use_ci
 
-# Categorical colors in fixed order (blue, orange, aqua), light-surface variants.
+# CI categorical colors in fixed order (forest, blue, copper).
 SERIES = [
-    ("Operating Cash Flow", "Operativer Cashflow", "#2a78d6"),
-    ("Capital Expenditure", "Capex (Investitionen)", "#eb6834"),
-    ("Free Cash Flow", "Free Cashflow", "#1baf7a"),
+    ("Operating Cash Flow", "Operativer Cashflow", COLORS[0]),
+    ("Capital Expenditure", "Capex (Investitionen)", COLORS[1]),
+    ("Free Cash Flow", "Free Cashflow", COLORS[2]),
 ]
 
 
@@ -51,6 +52,7 @@ def plot(cashflow, path):
     :param path: output PNG path
     :return: None
     """
+    use_ci()
     fig, ax = plt.subplots(figsize=(10, 5))
     width = 0.27
     positions = range(len(cashflow))
@@ -64,9 +66,6 @@ def plot(cashflow, path):
     ax.set_title("Microsoft (MSFT): Cashflow und Investitionen pro Quartal")
     ax.set_xlabel("Fiskalquartal (Geschäftsjahr endet im Juni) und Quartalsende")
     ax.set_ylabel("Mrd. USD")
-    ax.grid(axis="y", alpha=0.3)
-    ax.set_axisbelow(True)
-    ax.spines[["top", "right"]].set_visible(False)
     ax.legend(frameon=False, loc="upper left")
     fig.tight_layout()
     fig.savefig(path, dpi=150)
