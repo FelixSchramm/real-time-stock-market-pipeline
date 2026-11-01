@@ -30,7 +30,11 @@ def text_color(background):
     """
 
     def luminance(color):
-        """Return relative sRGB luminance for a Matplotlib color."""
+        """Return relative sRGB luminance.
+
+        :param color: Matplotlib color specification
+        :return: relative luminance between zero and one
+        """
         rgb = np.array(to_rgb(color))
         linear = np.where(rgb <= 0.04045, rgb / 12.92, ((rgb + 0.055) / 1.055) ** 2.4)
         return linear @ [0.2126, 0.7152, 0.0722]
