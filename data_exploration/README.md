@@ -6,3 +6,14 @@ ranges) before it is built into the ingestion and streaming code.
 Notebooks and scripts here are throwaway analysis, not production code.
 Never commit API keys or raw data dumps; read credentials from environment
 variables.
+
+## Scripts
+
+Run from the repo root. Numbering gives the order they were built in.
+
+| Script | Output |
+|---|---|
+| `01_plot_price_eur.py` | `01_price_eur.png`: MSFT price in EUR, year to date |
+| `02_plot_price_earnings.py` | `02_price_earnings.png`: same price with quarterly EPS surprise markers |
+
+Requirements: `pip install yfinance matplotlib`
