@@ -1,100 +1,72 @@
 # HANDOVER
 
-Living handover document for chart implementation.
-Update after every completed unit of work and before every handover.
+**Last updated:** 2026-11-01
+**Chain status:** chart work complete; separate review explicitly waived by user
 
-**Last updated:** 2026-11-01 (issue #4 completed with final four-stock selection)
-**Chain status:** interactive implementation; automatic relay inactive
+## Session instructions
 
-## Current owner instructions
+The user requested all pending visualizations, including final integration,
+without a review. This overrides the reviewer/relay steps in `CLAUDE.md` for
+this work. No reviewer, successor session or fallback routine was created.
+The current owner workflow is direct checked writes to main, without PRs or
+review, with chart images shown in chat. The automatic relay remains inactive. #21 (CI distribution) remains deferred.
 
-- Push completed, checked changes directly to `main`, without a PR or a
-  separate review. Show updated chart images in chat. The owner explicitly
-  superseded the legacy integration/worker/reviewer workflow on 2026-11-01.
-- All charts with three or more stock series use actual portfolio stocks.
-  The final explicit selection is **ORCL, MSFT, 9988.HK, SAP.DE** (Oracle,
-  Microsoft, Alibaba's Hong Kong ordinary share, SAP's Xetra share).
-- Reuse `data_exploration/v3_dark/stocks.py`: approved tickers, stable CI
-  colors and adjusted USD OHLC. Do not substitute the US ADRs for HK/Xetra.
-- No external Claude session or fallback schedule was started. The relay
-  remains inactive; do not create one unless the owner requests it.
+## Completed chart work
 
-## Work plan
+- #4: prepared indexed comparison integrated via PR #22 without a separate
+  review, as requested. The approved ORCL/MSFT/9988.HK/SAP.DE selection is preserved.
+- #5: twelve complete months of adjusted returns, nine discrete color bins,
+  signed cell labels and contrast-aware text (`v3_dark/06`).
+- #6: one-year drawdown with separated direct end labels (`v3_dark/07`).
+- #7: price, daily/year return, annual log volatility and max-drawdown tiles
+  using the approved stock selection (`v3_dark/08`).
+- #9–#19: all eleven Microsoft epic charts, including optional institutional
+  holders and implied volatility. Scripts and generated PNGs are directly in
+  `data_exploration/`, numbered 04–14 as specified by the issues.
+- #8: epic implementation complete. The chart catalog documents each script,
+  units, event timing and snapshot limitations, with a complete PNG gallery.
+- Shared CI, end-label spacing, drawdown arithmetic and a small Microsoft
+  data helper are reused. No new dashboard, streaming infrastructure, API
+  credentials or portfolio-private data were introduced.
 
-1. #4 — indexed price comparison (done)
-2. #5 — feat: monthly returns heatmap (v3_dark/06)
-3. #6 — feat: drawdown chart of several stocks (v3_dark/07)
-4. #7 — feat: KPI tiles per stock (v3_dark/08)
-5. #9 — MSFT annual cash flow
-6. #10 — MSFT quarterly income and margins
-7. #11 — MSFT earnings reaction
-8. #13 — MSFT benchmark and drawdown
-9. #12 — MSFT historical P/E
-10. #14 — MSFT dividends and yield
-11. #15 — MSFT analyst targets and recommendations
-12. #16 — MSFT price target development
-13. #17 — MSFT insider transactions
-14. #18 — MSFT institutional holders (optional)
-15. #19 — MSFT implied volatility (optional)
+## Verification
 
-#8 tracks the MSFT chart epic. #21 (CI distribution) stays open and is
-deferred at the user's explicit request on 2026-11-01; do not implement it
-as part of this chart work.
+- All 15 additional scripts (the indexed comparison plus 14 new charts)
+  ran successfully with real Yahoo/yfinance data on 2026-11-01.
+- Generated PNGs inspected; dark-theme axis-label contrast corrected.
+- 12 offline tests pass: complete months/missing prices, drawdown and manual
+  KPI arithmetic, fiscal years/margins, local dates, next-session earnings
+  reaction, no after-close EPS lookahead, missing quarters, calendar-year
+  dividend windows, analyst/insider classification, stale option filtering, native foreign-market trading calendars.
+- Black, Ruff and whitespace checks pass for changed Python code.
+- Run `python -m unittest discover -s tests -v` from the repository root.
 
-Context: chart ideas from the CI preview page (`style/ci-preview.html`), to
-be built in Matplotlib in `data_exploration/v3_dark/` with its `ci.py`.
+## Publication
 
-## Done
-
-- #3 candlestick chart with volume panel: `04_plot_candles.py` in all three
-  folders (`v1_basic`, `v2_polished`, `v3_dark`), at the user's request for
-  MSFT instead of AAPL. Merged directly into `main` at the user's request
-  (no integration branch yet). `new_figure` in v2/v3 `ci.py` now passes
-  extra keywords to `plt.subplots` (stacked panels); reuse it for #4-#7.
-- #4: indexed comparison and PNG use the final four-stock selection, with
-  >=15 pt spacing between end labels and fixed colors even if columns reorder.
-- `stocks.load_history` converts HKD to USD by dividing by `USDHKD=X` and
-  EUR to USD by multiplying by `EURUSD=X`. FX gaps only are forward-filled;
-  stock prices retain native trading calendars. Volume remains share counts.
-- HTML preview refreshed with each listing's actual adjusted USD OHLC. It
-  aligns indexed prices on common dates, but calculates monthly returns,
-  volatility and running highs on each stock's native calendar.
-- Verification: actual yfinance runs succeeded; synthetic checks passed for
-  FX directions, missing-FX rejection, unchanged volume, native calendars,
-  common-date alignment, base 100, stable colors, four near-equal end labels
-  and unapproved-stock rejection. Black, Ruff and whitespace checks passed.
-- Browser checks passed on desktop/mobile, including UTF-8, hover tooltips
-  and independent numeric checks of all four stocks' volatility, maximum
-  drawdown and latest monthly return. Chart images were exported for chat.
-- Original PR #22 was merged into `integration` at `7eb0283` with review
-  waived by the owner. The final selection and workflow follow-ups go
-  directly to `main`, preserving that merge and the earlier handover.
-
-## In progress
-
-- No review is pending. The standalone Python scripts for #5–#7 are still
-  open work; the corresponding HTML preview panels already exist.
+Initial chart commits were integrated through PR #23 without a review.
+Concurrent main commit `e5c53c6` supplied the final four-stock selection, USD
+conversion and direct-main workflow. It is preserved in full. The new charts
+use its `load_history` helper and native calendars; foreign-market highs are
+not discarded for drawdown or risk. PR #24 was closed without merging.
+The combined, checked result is published directly to main, without further
+PRs or review, as required by the latest owner instructions in CLAUDE.md.
+Show the resulting chart images in chat. The disabled relay stays inactive.
 
 ## Next step
 
-- Implement #5 with the shared approved universe and USD loader, then #6/#7.
-  Publish completed changes directly to main and show PNGs in chat.
-- The remaining chart issues are specified sufficiently for implementation;
-  no product clarification is pending. #21 is deliberately deferred.
+No further chart implementation or review is needed for this work plan.
+#21 stays open and is deliberately not part of this delivery. The Kafka,
+Spark and PostgreSQL stack in the main README is still a target design; these
+charts are standalone data exploration, not a running streaming dashboard.
 
-## Open questions / decisions taken
+## Data limitations
 
-- External services (market data API, broker, database) and their
-  credentials may not be available in a cloud session. Implement and
-  document the code path anyway and record here which steps still need a
-  local run for verification.
-
-## Known pitfalls
-
-- Never force-push existing branches. Preserve any concurrent remote work.
-- Use current owner instructions above, not the disabled relay's PR rules.
-- Never commit API keys or credentials; use environment variables.
-- Parallel yfinance downloads hit a SQLite cache lock in this fresh
-  environment. The new script uses `threads=False`; no requested ticker is
-  silently omitted. yfinance 1.7.0 with pandas 3.1.0 emits upstream pandas
-  deprecation warnings; the chart still renders successfully.
+- Prices and snapshots reflect the last available market session; the run
+  date is a Sunday. Options are filtered by open interest, plausible positive
+  IV and last trade within seven days, but are still quoted snapshots.
+- Institutional holdings carry filing dates, not live ownership estimates.
+- Historical P/E uses adjusted reported EPS and may differ from GAAP portals.
+- Yahoo fundamentals and event history have limited coverage. Missing required
+  data stops a script; no synthetic data is used in committed PNGs.
+- Never force-push `integration`, commit secrets or replace approved stock
+  symbols without checking the owner's portfolio instruction.

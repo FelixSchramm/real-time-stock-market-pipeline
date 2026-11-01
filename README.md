@@ -9,6 +9,14 @@ Data engineering learning project.
 > components are added step by step and the sections below are updated as
 > they land.
 
+**Available now:** the [data exploration and chart gallery](data_exploration/README.md)
+contains 15 additional visualizations: approved-stock comparisons, monthly
+returns, drawdown and KPI tiles, plus Microsoft's financial statements,
+earnings reactions, valuation, benchmark, dividends, analysts, insiders,
+institutional holders and options. Scripts and real-data PNGs are included.
+The streaming infrastructure below remains planned; these are standalone
+Matplotlib analyses rather than a live PostgreSQL dashboard.
+
 ## What this project builds
 
 - Real-time ingestion of US stock trades via the

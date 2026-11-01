@@ -57,6 +57,7 @@ def use_ci():
             "font.size": 11,
             "axes.prop_cycle": cycler(color=COLORS),
             "axes.edgecolor": NEUTRAL["axis"],
+            "axes.labelcolor": NEUTRAL["ink_secondary"],
             "axes.spines.top": False,
             "axes.spines.right": False,
             "axes.spines.left": False,
@@ -199,3 +200,31 @@ def save(fig, path):
     """
     fig.savefig(path, dpi=150)
     plt.close(fig)
+
+
+def end_labels(ax, values, colors, formatter=german):
+    """Label series ends with at least 15 points of vertical separation.
+
+    :param ax: axes with their final limits already set
+    :param values: time-indexed DataFrame of plotted values
+    :param colors: mapping from column name to series color
+    :param formatter: function formatting the numeric part of each label
+    :return: None
+    """
+    fig = ax.figure
+    fig.canvas.draw()
+    previous = float("inf")
+    gap = 15 * fig.dpi / 72
+    last = values.apply(lambda series: series.dropna().iloc[-1])
+    for name, value in last.sort_values(ascending=False).items():
+        actual = ax.transData.transform((0, value))[1]
+        position = min(actual, previous - gap)
+        end_label(
+            ax,
+            values[name].last_valid_index(),
+            value,
+            f"{name} {formatter(value)}",
+            colors[name],
+            offset_y=(position - actual) * 72 / fig.dpi,
+        )
+        previous = position

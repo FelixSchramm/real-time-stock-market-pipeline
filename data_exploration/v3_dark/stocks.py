@@ -8,6 +8,7 @@ Only market symbols and their stable CI colors belong here. Keep the private
 source, quantities, cost bases and account information outside the repository.
 """
 
+import pandas as pd
 import yfinance as yf
 from ci import COLORS
 
@@ -54,3 +55,15 @@ def load_history(period="1y"):
             raise ValueError("Mindestens eine gültige Aktienkursreihe fehlt.")
         history[ticker] = frame
     return history
+
+
+def load_prices(period="1y"):
+    """Combine adjusted USD closes while preserving native trading calendars.
+
+    :param period: Yahoo lookback period
+    :return: outer-aligned prices; non-trading days remain missing
+    """
+    return pd.concat(
+        {ticker: frame["Close"] for ticker, frame in load_history(period).items()},
+        axis=1,
+    ).reindex(columns=TICKERS)
