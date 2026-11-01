@@ -15,14 +15,15 @@ import importlib
 import matplotlib.pyplot as plt
 import pandas as pd
 import yfinance as yf
+from ci import COLORS, FINANCE, NEUTRAL, use_ci
 from matplotlib.lines import Line2D
 
 # Module names starting with a digit cannot be used in an import statement.
 load_msft_eur = importlib.import_module("01_plot_price_eur").load_msft_eur
 
-COLOR = "#2a78d6"
-BEAT = "#008300"
-MISS = "#e34948"
+COLOR = COLORS[1]
+BEAT = FINANCE["up"]
+MISS = FINANCE["down"]
 
 
 def load_earnings(start):
@@ -47,6 +48,7 @@ def plot(price_eur, earnings, path):
     :param path: output PNG path
     :return: None
     """
+    use_ci()
     fig, ax = plt.subplots(figsize=(10, 5))
     ax.plot(price_eur.index, price_eur, color=COLOR, linewidth=2)
     for date, row in earnings.iterrows():
@@ -59,7 +61,7 @@ def plot(price_eur, earnings, path):
             color=BEAT if beat else MISS,
             s=90,
             zorder=3,
-            edgecolors="white",
+            edgecolors=NEUTRAL["surface"],
         )
         ax.annotate(
             f"EPS {row['Surprise(%)']:+.1f} %",
@@ -82,8 +84,6 @@ def plot(price_eur, earnings, path):
     ax.set_title("Microsoft (MSFT) in Euro mit Quartalszahlen (EPS-Überraschung)")
     ax.set_xlabel("Datum")
     ax.set_ylabel("Schlusskurs in EUR")
-    ax.grid(alpha=0.3)
-    ax.spines[["top", "right"]].set_visible(False)
     fig.tight_layout()
     fig.savefig(path, dpi=150)
 

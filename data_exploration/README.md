@@ -17,4 +17,7 @@ Run from the repo root. Numbering gives the order they were built in.
 | `02_plot_price_earnings.py` | `02_price_earnings.png`: same price with quarterly EPS surprise markers |
 | `03_plot_cashflow.py` | `03_cashflow.png`: operating cash flow, capex, free cash flow per quarter (USD) |
 
+All plots use the personal CI via `ci.py` (`use_ci()`), values in
+`style/felix-schramm-ci.json`.
+
 Requirements: `pip install yfinance matplotlib`
