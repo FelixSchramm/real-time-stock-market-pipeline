@@ -44,6 +44,7 @@ be built in Matplotlib in `data_exploration/v3_dark/` with its `ci.py`.
   `v3_dark`), not only v3 as the issue says. No PR yet (the integration
   branch does not exist; kickoff pending). `new_figure` in v2/v3 `ci.py` now
   passes extra keywords to `plt.subplots` (needed for stacked panels).
+  The user changed the ticker from AAPL (issue text) to MSFT.
 
 ## Next step
 

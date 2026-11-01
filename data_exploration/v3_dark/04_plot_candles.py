@@ -1,4 +1,4 @@
-"""Plot daily AAPL candles with a volume panel and two moving averages (dark).
+"""Plot daily MSFT candles with a volume panel and two moving averages (dark).
 
 Price and volume sit in two stacked panels with a shared x-axis instead of
 on two y-axes. Rising days are hollow, falling days filled, so the direction
@@ -21,12 +21,12 @@ SMA_COLORS = {20: COLORS[1], 50: COLORS[6]}
 
 
 def load_candles():
-    """Download one year of daily AAPL candles and keep the last ``DAYS``.
+    """Download one year of daily MSFT candles and keep the last ``DAYS``.
 
     :return: DataFrame with ``Open``, ``High``, ``Low``, ``Close``, ``Volume``
         and the moving averages ``SMA 20`` and ``SMA 50``
     """
-    ohlc = yf.Ticker("AAPL").history(period="1y", interval="1d")
+    ohlc = yf.Ticker("MSFT").history(period="1y", interval="1d")
     # Average over the full year before slicing, so both lines start at the left edge.
     for window in SMA_COLORS:
         ohlc[f"SMA {window}"] = ohlc["Close"].rolling(window).mean()
@@ -61,7 +61,7 @@ def plot(ohlc, path):
     :return: None
     """
     fig, (ax, ax_vol) = new_figure(
-        "AAPL: Tageskerzen und Volumen",
+        "Microsoft (MSFT): Tageskerzen und Volumen",
         f"Letzte {DAYS} Handelstage in USD, "
         "gleitende Durchschnitte über 20 und 50 Tage",
         legend_row=True,

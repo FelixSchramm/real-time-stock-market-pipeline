@@ -24,7 +24,7 @@ folders produce the same plots from the same data:
 | `01_plot_price_eur.py` | `01_price_eur.png`: MSFT price in EUR, year to date |
 | `02_plot_price_earnings.py` | `02_price_earnings.png`: same price with quarterly EPS surprise markers |
 | `03_plot_cashflow.py` | `03_cashflow.png`: operating cash flow, capex, free cash flow per quarter (USD) |
-| `04_plot_candles.py` | `04_candles.png`: AAPL daily candles of the last 60 trading days with SMA 20/50 and a volume panel |
+| `04_plot_candles.py` | `04_candles.png`: MSFT daily candles of the last 60 trading days with SMA 20/50 and a volume panel |
 
 Example: `python data_exploration/v3_dark/01_plot_price_eur.py`
 
