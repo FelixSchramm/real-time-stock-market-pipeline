@@ -33,6 +33,17 @@ def load_cashflow():
     return cashflow
 
 
+def fiscal_label(quarter_end):
+    """Label a quarter end with Microsoft's fiscal quarter (year ends in June).
+
+    :param quarter_end: last day of the quarter (pandas Timestamp)
+    :return: two-line label, e.g. ``"Q1 GJ26\\n09/2025"``
+    """
+    fiscal_year = quarter_end.year + (quarter_end.month > 6)
+    fiscal_quarter = (quarter_end.month - 7) % 12 // 3 + 1
+    return f"Q{fiscal_quarter} GJ{fiscal_year % 100}\n{quarter_end:%m/%Y}"
+
+
 def plot(cashflow, path):
     """Draw grouped bars per quarter and label the free cash flow bars.
 
@@ -49,9 +60,9 @@ def plot(cashflow, path):
         if name == "Free Cash Flow":
             ax.bar_label(bars, fmt="%.1f", padding=3)
     ax.set_xticks(list(positions))
-    ax.set_xticklabels([d.strftime("%m/%Y") for d in cashflow.index])
+    ax.set_xticklabels([fiscal_label(d) for d in cashflow.index])
     ax.set_title("Microsoft (MSFT): Cashflow und Investitionen pro Quartal")
-    ax.set_xlabel("Quartalsende")
+    ax.set_xlabel("Fiskalquartal (Geschäftsjahr endet im Juni) und Quartalsende")
     ax.set_ylabel("Mrd. USD")
     ax.grid(axis="y", alpha=0.3)
     ax.set_axisbelow(True)
