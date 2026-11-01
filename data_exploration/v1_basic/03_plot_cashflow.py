@@ -6,7 +6,7 @@ dropped.
 
 Usage::
 
-    python data_exploration/03_plot_cashflow.py
+    python data_exploration/v1_basic/03_plot_cashflow.py
 """
 
 import matplotlib.pyplot as plt
@@ -73,5 +73,5 @@ def plot(cashflow, path):
 
 if __name__ == "__main__":
     data = load_cashflow()
-    plot(data, "data_exploration/03_cashflow.png")
+    plot(data, "data_exploration/v1_basic/03_cashflow.png")
     print(data.round(1))

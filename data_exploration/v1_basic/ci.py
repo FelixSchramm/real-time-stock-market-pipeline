@@ -12,7 +12,7 @@ from cycler import cycler
 from matplotlib import font_manager
 
 CI = json.loads(
-    (Path(__file__).parents[1] / "style" / "felix-schramm-ci.json").read_text()
+    (Path(__file__).parents[2] / "style" / "felix-schramm-ci.json").read_text()
 )
 COLORS = [c["hex"] for c in CI["color"]["categorical"]["light"]]
 NEUTRAL = CI["color"]["neutral"]["light"]

@@ -7,7 +7,7 @@ label shows the surprise in percent. The price series is reused from
 
 Usage::
 
-    python data_exploration/02_plot_price_earnings.py
+    python data_exploration/v1_basic/02_plot_price_earnings.py
 """
 
 import importlib
@@ -90,4 +90,8 @@ def plot(price_eur, earnings, path):
 
 if __name__ == "__main__":
     price = load_msft_eur()
-    plot(price, load_earnings(price.index[0]), "data_exploration/02_price_earnings.png")
+    plot(
+        price,
+        load_earnings(price.index[0]),
+        "data_exploration/v1_basic/02_price_earnings.png",
+    )
