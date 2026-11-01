@@ -2,8 +2,10 @@
   "$schema_note": "Design tokens of Felix Schramm's personal CI. Derived from the cover letter template and CV (Century Gothic, forest green rule #2E5A2E, grey #666666). Categorical palettes validated for colour-vision deficiency (protan/deutan, OKLab Delta E) and contrast.",
   "meta": {
     "name": "Felix Schramm CI",
-    "version": "1.1.0",
+    "version": "1.2.0",
     "date": "2026-11-01",
+    "default_mode": "dark",
+    "default_mode_note": "Mode used by charts unless they say otherwise. Light values stay available, e.g. for print.",
     "sources": [
       "profile/anschreiben_vorlage.docx",
       "profile/Lebenslauf_Felix_Schramm_DE.docx"
