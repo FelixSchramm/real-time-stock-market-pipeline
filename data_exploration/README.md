@@ -15,5 +15,6 @@ Run from the repo root. Numbering gives the order they were built in.
 |---|---|
 | `01_plot_price_eur.py` | `01_price_eur.png`: MSFT price in EUR, year to date |
 | `02_plot_price_earnings.py` | `02_price_earnings.png`: same price with quarterly EPS surprise markers |
+| `03_plot_cashflow.py` | `03_cashflow.png`: operating cash flow, capex, free cash flow per quarter (USD) |
 
 Requirements: `pip install yfinance matplotlib`
