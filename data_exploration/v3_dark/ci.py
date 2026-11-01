@@ -57,6 +57,7 @@ def use_ci():
             "font.size": 11,
             "axes.prop_cycle": cycler(color=COLORS),
             "axes.edgecolor": NEUTRAL["axis"],
+            "axes.labelcolor": NEUTRAL["ink_secondary"],
             "axes.spines.top": False,
             "axes.spines.right": False,
             "axes.spines.left": False,
