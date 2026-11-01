@@ -13,9 +13,10 @@ portfolio for data roles.
 
 ## Work plan
 
-Current owner workflow (2026-11-01): push completed changes directly to
-`main`, without a separate PR or review, and show updated chart images in
-chat. This overrides the integration/feature-branch/reviewer requirements
+Current owner workflow (2026-11-01): push every completed, checked commit
+immediately to `main`, without a separate PR or review. Push before starting
+the next unit of work; do not accumulate unpushed commits. Show updated
+chart images in chat. This overrides the integration/feature-branch/reviewer requirements
 of the legacy relay below and in `CLAUDE_CODING_RULES.md`. The automatic
 Claude relay and fallback schedule remain inactive.
 

@@ -16,6 +16,8 @@ Referenced from CLAUDE.md; applies to every session and every role.
 - Current owner workflow (2026-11-01): push completed, checked changes
   directly to `main`, with no separate PR or review. Show updated chart
   images in chat. This supersedes the legacy relay's branch/reviewer rules.
+- Push immediately after every commit, before starting further work. Do not
+  accumulate multiple unpushed commits.
 - Reference the issue number in each commit
   (e.g. `feat: add price ingestion job (#1)`).
 - Commit messages explain the WHY in the body when it is not obvious.
