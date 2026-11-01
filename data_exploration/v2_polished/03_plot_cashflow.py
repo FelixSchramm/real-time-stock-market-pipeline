@@ -13,7 +13,7 @@ import yfinance as yf
 from ci import COLORS, german, legend_row, new_figure
 from matplotlib.patches import Patch
 
-# CI categorical colors in fixed order (forest, blue, copper).
+# CI categorical colors in fixed order (forest, blue, orchid).
 SERIES = [
     ("Operating Cash Flow", "Operativer Cashflow", COLORS[0]),
     ("Capital Expenditure", "Capex (Investitionen)", COLORS[1]),

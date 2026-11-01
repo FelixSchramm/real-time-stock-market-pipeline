@@ -2,7 +2,7 @@
   "$schema_note": "Design tokens of Felix Schramm's personal CI. Derived from the cover letter template and CV (Century Gothic, forest green rule #2E5A2E, grey #666666). Categorical palettes validated for colour-vision deficiency (protan/deutan, OKLab Delta E) and contrast.",
   "meta": {
     "name": "Felix Schramm CI",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "date": "2026-11-01",
     "sources": [
       "profile/anschreiben_vorlage.docx",
@@ -74,29 +74,29 @@
       }
     },
     "categorical": {
-      "note": "Assign in this fixed order, never cycled. Max 7 series; beyond that fold into 'Andere'. Scatter/choropleth/small multiples: max 3 slots. Light slots 3, 4, 6, 7 are below 3:1 on the surface, so always add direct labels or a table view.",
+      "note": "Assign in this fixed order, never cycled. Max 7 series; beyond that fold into 'Andere'. Scatter/choropleth/small multiples: max 3 slots. Light slots 3, 4, 5, 7 are below 3:1 on the surface, so always add direct labels or a table view.",
       "validation": {
-        "light": "adjacent CVD Delta E >= 15.1, normal vision >= 21.2, surface #FBFBF8",
-        "dark":  "adjacent CVD Delta E >= 14.5, normal vision >= 19.7, all >= 3:1 on #161A17",
+        "light": "adjacent CVD Delta E >= 14.5, normal vision >= 16.1, surface #FBFBF8",
+        "dark":  "adjacent CVD Delta E >= 10.0, normal vision >= 18.5, all >= 3:1 on #161A17",
         "first_three_all_pairs": "pass in both modes"
       },
       "light": [
         { "slot": 1, "name": "forest", "hex": "#2E7F3A" },
         { "slot": 2, "name": "blue",   "hex": "#316CB5" },
-        { "slot": 3, "name": "copper", "hex": "#E98D5B" },
-        { "slot": 4, "name": "teal",   "hex": "#00BFC8" },
-        { "slot": 5, "name": "violet", "hex": "#8370C7" },
-        { "slot": 6, "name": "ochre",  "hex": "#D39E26" },
-        { "slot": 7, "name": "orchid", "hex": "#D788CC" }
+        { "slot": 3, "name": "orchid", "hex": "#D788CC" },
+        { "slot": 4, "name": "copper", "hex": "#E98D5B" },
+        { "slot": 5, "name": "teal",   "hex": "#00BFC8" },
+        { "slot": 6, "name": "violet", "hex": "#8370C7" },
+        { "slot": 7, "name": "ochre",  "hex": "#D39E26" }
       ],
       "dark": [
         { "slot": 1, "name": "forest", "hex": "#458D4D" },
         { "slot": 2, "name": "blue",   "hex": "#346AAC" },
-        { "slot": 3, "name": "copper", "hex": "#9F5021" },
-        { "slot": 4, "name": "teal",   "hex": "#00A1A9" },
-        { "slot": 5, "name": "violet", "hex": "#6B5AA8" },
-        { "slot": 6, "name": "ochre",  "hex": "#A07100" },
-        { "slot": 7, "name": "orchid", "hex": "#9A5591" }
+        { "slot": 3, "name": "orchid", "hex": "#C276A2" },
+        { "slot": 4, "name": "copper", "hex": "#9F5021" },
+        { "slot": 5, "name": "teal",   "hex": "#00A1A9" },
+        { "slot": 6, "name": "violet", "hex": "#6B5AA8" },
+        { "slot": 7, "name": "ochre",  "hex": "#A07100" }
       ]
     },
     "sequential": {
