@@ -7,6 +7,7 @@ import numpy as np
 import pandas as pd
 from ci import FINANCE, NEUTRAL, german, save, use_ci
 from matplotlib.patches import FancyBboxPatch
+from returns import drawdown
 from stocks import TICKER_COLORS, load_prices
 
 
@@ -25,7 +26,7 @@ def metrics(close):
             "day": close.iloc[-1] / close.iloc[-2] - 1,
             "year": close.iloc[-1] / close.iloc[0] - 1,
             "volatility": np.log(close / close.shift()).std() * np.sqrt(252),
-            "drawdown": (close / close.cummax() - 1).min(),
+            "drawdown": drawdown(close).min() / 100,
         }
     )
 

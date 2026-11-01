@@ -3,16 +3,8 @@
 from ci import NEUTRAL, end_labels, german, legend_row, month_axis, new_figure, save
 from matplotlib.lines import Line2D
 from matplotlib.ticker import FuncFormatter
+from returns import drawdown
 from stocks import TICKER_COLORS, TICKERS, load_prices
-
-
-def drawdown(close):
-    """Calculate drawdown from the running high in the supplied period.
-
-    :param close: daily prices, Series or DataFrame
-    :return: drawdown in percent, including zero on new highs
-    """
-    return close.div(close.cummax()).sub(1).mul(100)
 
 
 def percent(value):
