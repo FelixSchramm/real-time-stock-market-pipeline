@@ -15,6 +15,7 @@ import importlib
 import matplotlib.pyplot as plt
 import pandas as pd
 import yfinance as yf
+from matplotlib.lines import Line2D
 
 # Module names starting with a digit cannot be used in an import statement.
 load_msft_eur = importlib.import_module("01_plot_price_eur").load_msft_eur
@@ -67,6 +68,17 @@ def plot(price_eur, earnings, path):
             textcoords="offset points",
             ha="center",
         )
+    # Proxy handles: the legend lists both outcomes even if one never occurred.
+    handles = [
+        Line2D([], [], color=COLOR, linewidth=2, label="MSFT Schlusskurs in EUR"),
+        Line2D(
+            [], [], color=BEAT, marker="^", linestyle="", label="EPS über Erwartung"
+        ),
+        Line2D(
+            [], [], color=MISS, marker="v", linestyle="", label="EPS unter Erwartung"
+        ),
+    ]
+    ax.legend(handles=handles, frameon=False, loc="upper left")
     ax.set_title("Microsoft (MSFT) in Euro mit Quartalszahlen (EPS-Überraschung)")
     ax.set_xlabel("Datum")
     ax.set_ylabel("Schlusskurs in EUR")
