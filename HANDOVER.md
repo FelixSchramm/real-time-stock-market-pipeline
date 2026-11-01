@@ -4,7 +4,7 @@ Living handover document for the autonomous session chain
 (see CLAUDE.md, section "Autonomous session protocol").
 Update after every completed unit of work and before every handover.
 
-**Last updated:** 2026-11-01 (work plan: chart issues #3-#7 added)
+**Last updated:** 2026-11-01 (issue #3 merged into `main`)
 **Chain status:** not started (kickoff pending, see below)
 
 ## Kickoff checklist (to be done by the user or a setup session)
@@ -24,18 +24,21 @@ start:
 
 ## Work plan
 
-1. #3 — feat: candlestick chart with volume panel (v3_dark/04)
-2. #4 — feat: indexed price comparison of several stocks (v3_dark/05)
-3. #5 — feat: monthly returns heatmap (v3_dark/06)
-4. #6 — feat: drawdown chart of several stocks (v3_dark/07)
-5. #7 — feat: KPI tiles per stock (v3_dark/08)
+1. #4 — feat: indexed price comparison of several stocks (v3_dark/05)
+2. #5 — feat: monthly returns heatmap (v3_dark/06)
+3. #6 — feat: drawdown chart of several stocks (v3_dark/07)
+4. #7 — feat: KPI tiles per stock (v3_dark/08)
 
 Context: chart ideas from the CI preview page (`style/ci-preview.html`), to
 be built in Matplotlib in `data_exploration/v3_dark/` with its `ci.py`.
 
 ## Done
 
-- (nothing yet — protocol files added on 2026-09-28)
+- #3 candlestick chart with volume panel: `04_plot_candles.py` in all three
+  folders (`v1_basic`, `v2_polished`, `v3_dark`), at the user's request for
+  MSFT instead of AAPL. Merged directly into `main` at the user's request
+  (no integration branch yet). `new_figure` in v2/v3 `ci.py` now passes
+  extra keywords to `plt.subplots` (stacked panels); reuse it for #4-#7.
 
 ## In progress
 
