@@ -40,7 +40,7 @@ Requirements: `pip install yfinance matplotlib`
 
 | Script | Output | Content |
 |---|---|---|
-| `v3_dark/05_plot_indexed.py` | `v3_dark/05_indexed.png` | ORCL, MSFT, MCD adjusted closes over one year, indexed to 100 at their first common close |
+| `v3_dark/05_plot_indexed.py` | `v3_dark/05_indexed.png` | ORCL, MSFT, 9988.HK, SAP.DE adjusted USD closes over one year, indexed to 100 at their first common close |
 
 Run from the repository root, e.g.
 `python data_exploration/v3_dark/05_plot_indexed.py`. The comparison uses a
@@ -48,10 +48,19 @@ common trading calendar and stops if any requested price series is missing.
 
 Charts comparing three or more stocks use only stocks from the owner's
 actual portfolio. The shared approved selection is in `v3_dark/stocks.py`:
-Oracle (`ORCL`, slot 1), Microsoft (`MSFT`, slot 2), McDonald's (`MCD`, slot 3).
-All three trade in USD. The indexed chart and HTML preview use this selection
+Oracle (`ORCL`, slot 1), Microsoft (`MSFT`, slot 2), Alibaba (`9988.HK`, slot 3),
+SAP (`SAP.DE`, slot 4). Alibaba uses its Hong Kong ordinary share, SAP its
+Xetra share. The shared loader converts HKD prices to USD by dividing by
+`USDHKD=X` and EUR prices by multiplying by `EURUSD=X`; stock splits and
+dividends are adjusted by yfinance. Only FX gaps are forward-filled; stock
+prices keep their actual trading days. The indexed chart uses the common
+trading dates, while the preview's monthly returns, volatility and drawdown
+use each stock's own daily history. The indexed chart and HTML preview use this selection
 and keep each stock's color fixed. The upcoming monthly-return, drawdown and
 KPI-tile scripts must reuse it as well.
 Check the private portfolio source before adding or replacing a symbol;
 watchlist entries and synthetic demo positions are not holdings. Do not
 commit spreadsheet identifiers, quantities, weights or cost bases.
+
+Owner workflow (2026-11-01): push completed, checked work directly to `main`;
+no separate PR or review is requested. Show the updated charts in chat.

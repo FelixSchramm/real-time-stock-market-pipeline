@@ -1,34 +1,27 @@
 # HANDOVER
 
-Living handover document for the autonomous session chain
-(see CLAUDE.md, section "Autonomous session protocol").
+Living handover document for chart implementation.
 Update after every completed unit of work and before every handover.
 
-**Last updated:** 2026-11-01 (issue #4 implemented, PR #22 review pending)
-**Chain status:** interactive implementation; automatic relay not started
+**Last updated:** 2026-11-01 (issue #4 completed with final four-stock selection)
+**Chain status:** interactive implementation; automatic relay inactive
 
-## Kickoff checklist (to be done by the user or a setup session)
+## Current owner instructions
 
-The integration branch now exists, initialized from `main` at
-`5fa9e62b345418eb1b65d5ca0715a63187c97502`. Issue #4 was implemented in an
-interactive Codex session. No fallback routine was created and no external
-Claude session was started. The Claude-specific remote-session tools are
-not available in this session; the automatic relay remains inactive.
-
-Original relay setup checklist:
-
-1. Create the work plan as GitHub issues (self-contained, one issue = one
-   PR) and list their processing order under "Work plan" below.
-2. Integration branch created and pushed (done).
-3. Create the fallback routine (claude-code-remote `create_trigger`,
-   cron `0 6,18 * * *`, `create_new_session_on_fire: true`) with the
-   fallback prompt from CLAUDE.md, section "Prompt templates".
-4. Start the first worker session with the "Reviewer → worker" template
-   for the first issue.
+- Push completed, checked changes directly to `main`, without a PR or a
+  separate review. Show updated chart images in chat. The owner explicitly
+  superseded the legacy integration/worker/reviewer workflow on 2026-11-01.
+- All charts with three or more stock series use actual portfolio stocks.
+  The final explicit selection is **ORCL, MSFT, 9988.HK, SAP.DE** (Oracle,
+  Microsoft, Alibaba's Hong Kong ordinary share, SAP's Xetra share).
+- Reuse `data_exploration/v3_dark/stocks.py`: approved tickers, stable CI
+  colors and adjusted USD OHLC. Do not substitute the US ADRs for HK/Xetra.
+- No external Claude session or fallback schedule was started. The relay
+  remains inactive; do not create one unless the owner requests it.
 
 ## Work plan
 
-1. #4 — feat: indexed price comparison of several stocks (v3_dark/05)
+1. #4 — indexed price comparison (done)
 2. #5 — feat: monthly returns heatmap (v3_dark/06)
 3. #6 — feat: drawdown chart of several stocks (v3_dark/07)
 4. #7 — feat: KPI tiles per stock (v3_dark/08)
@@ -58,21 +51,34 @@ be built in Matplotlib in `data_exploration/v3_dark/` with its `ci.py`.
   MSFT instead of AAPL. Merged directly into `main` at the user's request
   (no integration branch yet). `new_figure` in v2/v3 `ci.py` now passes
   extra keywords to `plt.subplots` (stacked panels); reuse it for #4-#7.
+- #4: indexed comparison and PNG use the final four-stock selection, with
+  >=15 pt spacing between end labels and fixed colors even if columns reorder.
+- `stocks.load_history` converts HKD to USD by dividing by `USDHKD=X` and
+  EUR to USD by multiplying by `EURUSD=X`. FX gaps only are forward-filled;
+  stock prices retain native trading calendars. Volume remains share counts.
+- HTML preview refreshed with each listing's actual adjusted USD OHLC. It
+  aligns indexed prices on common dates, but calculates monthly returns,
+  volatility and running highs on each stock's native calendar.
+- Verification: actual yfinance runs succeeded; synthetic checks passed for
+  FX directions, missing-FX rejection, unchanged volume, native calendars,
+  common-date alignment, base 100, stable colors, four near-equal end labels
+  and unapproved-stock rejection. Black, Ruff and whitespace checks passed.
+- Browser checks passed on desktop/mobile, including UTF-8, hover tooltips
+  and independent numeric checks of all four stocks' volatility, maximum
+  drawdown and latest monthly return. Chart images were exported for chat.
+- Original PR #22 was merged into `integration` at `7eb0283` with review
+  waived by the owner. The final selection and workflow follow-ups go
+  directly to `main`, preserving that merge and the earlier handover.
 
 ## In progress
 
-- #4: implemented on `issue-4-indexed`, commit `50a3d94`.
-  PR [#22](https://github.com/FelixSchramm/real-time-stock-market-pipeline/pull/22)
-  targets `integration`; state: **review pending**, not merged.
-- Real yfinance data used (31.10.2025–30.10.2026); PNG generated and visually
-  inspected. Synthetic checks verified the shared base 100, exact indexed
-  values, >=15 pt end-label spacing, series-count limit and missing-series
-  rejection. Black, Ruff and whitespace checks passed.
+- No review is pending. The standalone Python scripts for #5–#7 are still
+  open work; the corresponding HTML preview panels already exist.
 
 ## Next step
 
-- Review PR #22 following the reviewer protocol. After a merge into
-  `integration`, close #4 manually, archive this handover and proceed to #5.
+- Implement #5 with the shared approved universe and USD loader, then #6/#7.
+  Publish completed changes directly to main and show PNGs in chat.
 - The remaining chart issues are specified sufficiently for implementation;
   no product clarification is pending. #21 is deliberately deferred.
 
@@ -85,13 +91,8 @@ be built in Matplotlib in `data_exploration/v3_dark/` with its `ci.py`.
 
 ## Known pitfalls
 
-- Never force-push `integration`.
-- Issue PRs target the integration branch, not `main` — GitHub's `Closes #N`
-  auto-close does not fire there; the reviewer closes issues manually after
-  the merge.
-- Every issue PR is merged only by a reviewer session (see CLAUDE.md,
-  "Reviewer session"); always record the open PR number and its state
-  (review pending / findings open / merged) here.
+- Never force-push existing branches. Preserve any concurrent remote work.
+- Use current owner instructions above, not the disabled relay's PR rules.
 - Never commit API keys or credentials; use environment variables.
 - Parallel yfinance downloads hit a SQLite cache lock in this fresh
   environment. The new script uses `threads=False`; no requested ticker is

@@ -5,7 +5,7 @@ Usage::
     python data_exploration/v3_dark/05_plot_indexed.py
 """
 
-import yfinance as yf
+import pandas as pd
 from ci import (
     NEUTRAL,
     end_label,
@@ -16,7 +16,7 @@ from ci import (
     save,
 )
 from matplotlib.lines import Line2D
-from stocks import TICKER_COLORS, TICKERS
+from stocks import TICKER_COLORS, TICKERS, load_history
 
 
 def load_prices():
@@ -24,14 +24,11 @@ def load_prices():
 
     :return: complete daily closing prices in the fixed ticker order
     """
-    close = yf.download(
-        TICKERS,
-        period="1y",
-        interval="1d",
-        auto_adjust=True,
-        progress=False,
-        threads=False,
-    )["Close"].reindex(columns=TICKERS)
+    close = pd.concat(
+        {ticker: frame["Close"] for ticker, frame in load_history().items()},
+        axis=1,
+        join="inner",
+    )
     if close.empty or close.isna().all().any():
         raise ValueError("Mindestens eine Kursreihe fehlt; kein Vergleich möglich.")
     close = close.dropna()
@@ -54,7 +51,7 @@ def plot(close, path):
     indexed = close.div(close.iloc[0]).mul(100)
     fig, ax = new_figure(
         "Kursentwicklung, Basis 100",
-        f"Tagesschlusskurs indexiert auf den {indexed.index[0]:%d.%m.%Y}",
+        f"Schlusskurse in USD, indexiert auf den {indexed.index[0]:%d.%m.%Y}",
         legend_row=True,
     )
     handles = []
