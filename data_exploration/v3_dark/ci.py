@@ -10,6 +10,7 @@ from pathlib import Path
 
 import matplotlib.dates as mdates
 import matplotlib.pyplot as plt
+import numpy as np
 from cycler import cycler
 from matplotlib import font_manager
 from matplotlib.patches import FancyBboxPatch
@@ -91,16 +92,17 @@ def german(value, decimals=0):
     )
 
 
-def new_figure(title, subtitle, legend_row=False):
+def new_figure(title, subtitle, legend_row=False, **subplots):
     """Create a figure with a card, a left-aligned title and a subtitle.
 
     :param title: chart title (what is shown)
     :param subtitle: unit and time range, replaces the axis titles
     :param legend_row: leave room for a legend row below the subtitle
-    :return: tuple ``(fig, ax)``
+    :param subplots: passed on to ``plt.subplots``, e.g. ``nrows=2`` for panels
+    :return: tuple ``(fig, ax)``, ``ax`` is an array if there are several panels
     """
     use_ci()
-    fig, ax = plt.subplots(figsize=FIG_SIZE)
+    fig, ax = plt.subplots(figsize=FIG_SIZE, **subplots)
     fig.subplots_adjust(
         left=0.075, right=0.88, bottom=0.11, top=0.76 if legend_row else 0.81
     )
@@ -119,7 +121,8 @@ def new_figure(title, subtitle, legend_row=False):
     fig.patches.append(card)
     fig.text(LEFT, 0.915, title, fontsize=15)
     fig.text(LEFT, 0.87, subtitle, fontsize=11, color=NEUTRAL["ink_secondary"])
-    ax.yaxis.set_major_formatter(FuncFormatter(lambda v, _: german(v)))
+    for panel in np.atleast_1d(ax):
+        panel.yaxis.set_major_formatter(FuncFormatter(lambda v, _: german(v)))
     return fig, ax
 
 
