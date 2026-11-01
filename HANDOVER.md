@@ -39,7 +39,11 @@ be built in Matplotlib in `data_exploration/v3_dark/` with its `ci.py`.
 
 ## In progress
 
-- (nothing)
+- Issue #3 (candles) implemented on branch `issue-03-candles` at the user's
+  direct request, in all three folders (`v1_basic`, `v2_polished`,
+  `v3_dark`), not only v3 as the issue says. No PR yet (the integration
+  branch does not exist; kickoff pending). `new_figure` in v2/v3 `ci.py` now
+  passes extra keywords to `plt.subplots` (needed for stacked panels).
 
 ## Next step
 
