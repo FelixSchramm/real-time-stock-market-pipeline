@@ -5,7 +5,7 @@ EUR/USD rate of the same day.
 
 Usage::
 
-    python data_exploration/01_plot_price_eur.py
+    python data_exploration/v1_basic/01_plot_price_eur.py
 """
 
 import matplotlib.pyplot as plt
@@ -55,5 +55,5 @@ def plot(price_eur, path):
 
 if __name__ == "__main__":
     series = load_msft_eur()
-    plot(series, "data_exploration/01_price_eur.png")
+    plot(series, "data_exploration/v1_basic/01_price_eur.png")
     print(series.describe())

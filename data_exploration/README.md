@@ -9,15 +9,28 @@ variables.
 
 ## Scripts
 
-Run from the repo root. Numbering gives the order they were built in.
+Run from the repo root. Numbering gives the order they were built in. All
+folders produce the same three plots from the same data:
 
-| Script | Output |
+- `v1_basic/`: first version, CI colors and font only.
+- `v2_polished/`: title and subtitle at the left edge instead of axis titles,
+  German month names and number format, a labeled dot on the last value,
+  legend as one row above the plot, a card behind the chart.
+- `v3_dark/`: same as v2, permanently in the CI default mode (`meta.default_mode`
+  in the JSON, currently dark). Plain file names, no switch needed.
+
+| Script (in every folder) | Output |
 |---|---|
 | `01_plot_price_eur.py` | `01_price_eur.png`: MSFT price in EUR, year to date |
 | `02_plot_price_earnings.py` | `02_price_earnings.png`: same price with quarterly EPS surprise markers |
 | `03_plot_cashflow.py` | `03_cashflow.png`: operating cash flow, capex, free cash flow per quarter (USD) |
 
-All plots use the personal CI via `ci.py` (`use_ci()`), values in
-`style/felix-schramm-ci.json`.
+Example: `python data_exploration/v3_dark/01_plot_price_eur.py`
+
+Dark mode in v2: `CI_MODE=dark python data_exploration/v2_polished/01_plot_price_eur.py`
+writes `01_price_eur_dark.png` next to the light version.
+
+Each folder has its own `ci.py` (`use_ci()` and, from v2 on, the layout helpers);
+the values come from `style/felix-schramm-ci.json`.
 
 Requirements: `pip install yfinance matplotlib`

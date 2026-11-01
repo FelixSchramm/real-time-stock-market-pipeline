@@ -1,19 +1,18 @@
-"""Plot quarterly operating cash flow, capex and free cash flow of MSFT.
+"""Plot quarterly operating cash flow, capex and free cash flow of MSFT (dark).
 
-Values are in billion USD, as reported by Microsoft (no currency conversion).
-yfinance only provides the last few quarters, quarters without data are
-dropped.
+Same plot as ``v2_polished/03_plot_cashflow.py``: billion USD as reported by
+Microsoft, quarters without data are dropped.
 
 Usage::
 
-    python data_exploration/03_plot_cashflow.py
+    python data_exploration/v3_dark/03_plot_cashflow.py
 """
 
-import matplotlib.pyplot as plt
 import yfinance as yf
-from ci import COLORS, use_ci
+from ci import COLORS, german, legend_row, new_figure, save
+from matplotlib.patches import Patch
 
-# CI categorical colors in fixed order (forest, blue, copper).
+# CI categorical colors in fixed order (forest, blue, orchid).
 SERIES = [
     ("Operating Cash Flow", "Operativer Cashflow", COLORS[0]),
     ("Capital Expenditure", "Capex (Investitionen)", COLORS[1]),
@@ -52,26 +51,27 @@ def plot(cashflow, path):
     :param path: output PNG path
     :return: None
     """
-    use_ci()
-    fig, ax = plt.subplots(figsize=(10, 5))
-    width = 0.27
+    fig, ax = new_figure(
+        "Microsoft (MSFT): Cashflow und Investitionen",
+        "Mrd. USD je Fiskalquartal, das Geschäftsjahr endet im Juni",
+        legend_row=True,
+    )
+    # Bars need no room for end labels on the right.
+    fig.subplots_adjust(right=0.96)
+    width = 0.24
     positions = range(len(cashflow))
-    for i, (name, label, color) in enumerate(SERIES):
-        x = [p + (i - 1) * width for p in positions]
-        bars = ax.bar(x, cashflow[name], width=width * 0.9, color=color, label=label)
+    for i, (name, _, color) in enumerate(SERIES):
+        x = [p + (i - 1) * (width + 0.02) for p in positions]
+        bars = ax.bar(x, cashflow[name], width=width, color=color)
         if name == "Free Cash Flow":
-            ax.bar_label(bars, fmt="%.1f", padding=3)
+            ax.bar_label(bars, labels=[german(v, 1) for v in cashflow[name]], padding=4)
     ax.set_xticks(list(positions))
     ax.set_xticklabels([fiscal_label(d) for d in cashflow.index])
-    ax.set_title("Microsoft (MSFT): Cashflow und Investitionen pro Quartal")
-    ax.set_xlabel("Fiskalquartal (Geschäftsjahr endet im Juni) und Quartalsende")
-    ax.set_ylabel("Mrd. USD")
-    ax.legend(frameon=False, loc="upper left")
-    fig.tight_layout()
-    fig.savefig(path, dpi=150)
+    legend_row(fig, [Patch(color=color, label=label) for _, label, color in SERIES])
+    save(fig, path)
 
 
 if __name__ == "__main__":
     data = load_cashflow()
-    plot(data, "data_exploration/03_cashflow.png")
+    plot(data, "data_exploration/v3_dark/03_cashflow.png")
     print(data.round(1))
