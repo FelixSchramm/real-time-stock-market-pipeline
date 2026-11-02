@@ -1,5 +1,5 @@
 {
-  "retrieved_at": "2026-11-01T22:50:06.788536+00:00",
+  "retrieved_at": "2026-11-02T10:09:16.887914+00:00",
   "yfinance_version": "1.7.0",
   "outputs": {
     "03": "charts/03_cashflow_quarterly.png",
@@ -64,5 +64,6 @@
   },
   "fetch_errors": {},
   "render_errors": {},
-  "baseline_commit": "71a8bbeaa147e84cd8ac2a1eb80e4b0af9fb0c42"
+  "baseline_commit": "71a8bbeaa147e84cd8ac2a1eb80e4b0af9fb0c42",
+  "ci_version": "1.3.0"
 }

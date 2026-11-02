@@ -40,7 +40,9 @@ def text_color(background):
         return linear @ [0.2126, 0.7152, 0.0722]
 
     cell = luminance(background)
-    inks = [CI["color"]["neutral"][m]["ink"] for m in ("light", "dark")]
+    inks = [CI["color"]["diverging"]["label"]] + [
+        CI["color"]["neutral"][m]["ink"] for m in ("light", "dark")
+    ]
     return max(
         inks,
         key=lambda ink: (max(cell, luminance(ink)) + 0.05)
@@ -67,9 +69,11 @@ def plot(returns, path):
     values = returns.T.to_numpy()
     bins = np.digitize(values, THRESHOLDS)
     ax.grid(False)
+    cmap = ListedColormap(colors)
+    cmap.set_bad(CI["color"]["diverging"]["missing"])
     ax.pcolormesh(
         np.ma.masked_invalid(values),
-        cmap=ListedColormap(colors),
+        cmap=cmap,
         norm=BoundaryNorm([-np.inf, *THRESHOLDS, np.inf], 9),
         edgecolors=NEUTRAL["surface"],
         linewidth=2 * 72 / 150,

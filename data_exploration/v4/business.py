@@ -4,8 +4,21 @@ import numpy as np
 import pandas as pd
 from calculations import equity_value, implied_growth, roic, trailing_four
 from data import ROOT, statement
-from matplotlib.colors import TwoSlopeNorm
-from theme import COLORS, DOWN, INK, MUTED, bars, figure, finish, lines, number, percent
+from matplotlib.colors import LinearSegmentedColormap, TwoSlopeNorm
+from theme import (
+    COLORS,
+    DOWN,
+    INK,
+    MUTED,
+    VALUE_COLORS,
+    VALUE_TEXT,
+    bars,
+    figure,
+    finish,
+    lines,
+    number,
+    percent,
+)
 
 CF = ["Operating Cash Flow", "Capital Expenditure", "Free Cash Flow"]
 CF_NAMES = dict(zip(CF, ["Operativer CF", "Capex (Abfluss)", "Free Cashflow"]))
@@ -517,7 +530,7 @@ def reverse_dcf(bundle):
     limit = max(1, np.nanmax(np.abs(ratio)))
     left.imshow(
         ratio,
-        cmap="BrBG",
+        cmap=LinearSegmentedColormap.from_list("ci_diverging", VALUE_COLORS),
         norm=TwoSlopeNorm(vmin=-limit, vcenter=0, vmax=limit),
         aspect="auto",
     )
@@ -529,7 +542,7 @@ def reverse_dcf(bundle):
             ha="center",
             va="center",
             fontsize=9,
-            color="#101510" if abs(ratio[r, c]) < limit * 0.6 else "white",
+            color=VALUE_TEXT,
         )
     left.set_xticks(
         range(len(growths)), [percent(g * 100) for g in growths], rotation=30

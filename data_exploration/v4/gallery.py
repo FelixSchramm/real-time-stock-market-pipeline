@@ -266,10 +266,11 @@ def build(bundle, manifest):
     sections = []
     markdown = [
         "# V4 – Unternehmensanalyse und Vorher-/Nachher-Vergleich\n",
-        "Alle bisherigen Dateien bleiben erhalten. `baseline/` enthält zusätzlich eine byteidentische Kopie der ursprünglichen 67 Analyse- und Style-Dateien.\n",
+        "Die Ausgangsversion bleibt in `baseline/` als byteidentische Kopie der ursprünglichen 67 Analyse- und Style-Dateien erhalten. Live-Charts verwenden die aktuelle CI-Farbskala.\n",
         "[Interaktive Vergleichsgalerie](index.html) · [Geschäftsmodell und Quellen](research.md) · [Methodik](METHODS.md)\n",
         "**Galerie lokal öffnen:** Repository herunterladen/klonen und `data_exploration/v4/index.html` im Browser öffnen. GitHub zeigt HTML als Quelltext; die PNG-Vergleiche unten funktionieren direkt auf GitHub.\n",
         f'Datenabruf: **{manifest["retrieved_at"]}**. 29 Diagrammthemen, davon 19 überarbeitet und 10 ergänzt. 44 PNGs einschließlich EUR/USD- und Renditevarianten. Kein Live-Dashboard.\n',
+        f'Wertefarbskala: CI **{manifest.get("ci_version", "1.2.0")}** · Rot → Grau → Grün, definiert in `../../style/felix-schramm-ci.json`.\n',
         "## Reproduzieren\n\n```sh\npython -m pip install -r data_exploration/v4/requirements.txt\npython data_exploration/v4/generate.py --refresh\npython -m unittest discover -s tests -v\n```\n",
         "Ohne `--refresh` wird ein vorhandener lokaler Snapshot wiederverwendet. `.cache/` wird nicht committet. Die Segmenttabelle ist separat aus dem Geschäftsbericht belegt und wird nicht von Yahoo aktualisiert.\n",
     ]

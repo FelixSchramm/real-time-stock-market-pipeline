@@ -14,6 +14,9 @@ from theme import (
     MUTED,
     TICKER_COLORS,
     UP,
+    VALUE_COLORS,
+    VALUE_MISSING,
+    VALUE_TEXT,
     bars,
     figure,
     finish,
@@ -65,18 +68,9 @@ def comparison(bundle, currency="EUR", total=True):
     outputs["05"] = finish(fig, "05_indexed" + suffix, bundle, note)
 
     returns = monthly_returns(history.loc[:end], bundle["retrieved_at"])
-    # Monotonically brighter magnitudes on the dark background; signed numbers remain primary.
-    palette = [
-        "#F2A383",
-        "#CC7959",
-        "#925038",
-        "#56382B",
-        "#343B35",
-        "#25472E",
-        "#3A7046",
-        "#65A271",
-        "#A5D5AA",
-    ]
+    # All live return heatmaps share the CI's red/grey/green value scale.
+    cmap = ListedColormap(VALUE_COLORS)
+    cmap.set_bad(VALUE_MISSING)
     bounds = [-100, -10, -5, -2, -0.5, 0.5, 2, 5, 10, 1000]
     fig, (ax,) = figure(
         "Welche Monate haben die Rendite geprägt?",
@@ -87,7 +81,7 @@ def comparison(bundle, currency="EUR", total=True):
     values = returns.T.to_numpy(dtype=float)
     mesh = ax.imshow(
         np.ma.masked_invalid(values),
-        cmap=ListedColormap(palette),
+        cmap=cmap,
         norm=BoundaryNorm(bounds, 9),
         aspect="auto",
     )
@@ -102,7 +96,7 @@ def comparison(bundle, currency="EUR", total=True):
             ),
             ha="center",
             va="center",
-            color="#101510" if abs(value) >= 10 else INK,
+            color=VALUE_TEXT,
             fontsize=10,
         )
     ax.set_yticks(range(4), [NAMES[t] for t in TICKERS])
@@ -119,11 +113,14 @@ def comparison(bundle, currency="EUR", total=True):
         extend="both",
     )
     cb.set_label("Monatsrendite (%) · Randklassen ≤ −10 / ≥ +10", fontsize=9)
+    cb.ax.xaxis.set_major_formatter(
+        FuncFormatter(lambda value, _: ("+" if value > 0 else "") + number(value, 0))
+    )
     outputs["06"] = finish(
         fig,
         "06_monthly_returns" + suffix,
         bundle,
-        "Grau: nahe null. Heller: größerer Ausschlag. Fehlende Daten bleiben unbewertet; keine aufgefüllten Aktienkurse.",
+        "Rot: negativ · Grau: nahe null · Grün: positiv. Kräftigere Farbe: größerer Ausschlag. Vorzeichen bleiben sichtbar; fehlende Kurse werden nicht aufgefüllt.",
     )
 
     dd = drawdown(history).loc[start:end]

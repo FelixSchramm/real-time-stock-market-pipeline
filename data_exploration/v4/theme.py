@@ -1,5 +1,6 @@
 """Readable, self-contained V4 plotting helpers; all outputs stay inside V4."""
 
+import json
 import textwrap
 from pathlib import Path
 
@@ -13,6 +14,10 @@ import pandas as pd
 from matplotlib.ticker import FuncFormatter, MaxNLocator
 
 ROOT = Path(__file__).resolve().parent
+CI = json.loads((ROOT.parents[1] / "style" / "felix-schramm-ci.json").read_text())
+VALUE_COLORS = CI["color"]["diverging"]["returns_dark"]
+VALUE_TEXT = CI["color"]["diverging"]["label"]
+VALUE_MISSING = CI["color"]["diverging"]["missing"]
 COLORS = ["#75B77B", "#73A8EB", "#D89ABF", "#DDA270", "#75C8C6", "#B5A1E5"]
 INK, MUTED, BG, GRID = "#EDEFEA", "#BCC4BC", "#161A17", "#333C35"
 UP, DOWN = "#75B77B", "#F3A184"

@@ -1,24 +1,26 @@
 # V4 – Prüfung vom 02.11.2026
 
-- Alle 29 Diagrammthemen wurden aus einem gemeinsamen Yahoo-Snapshot
-  vom 01.11.2026 neu gerendert: 44 PNGs einschließlich der Vergleichsvarianten.
-  `manifest.json` enthält keine Abruf- oder Renderfehler.
-- Alle 21 Offline-Tests bestehen, darunter neun V4-Tests: vollständige Monate,
-  fehlende Quartale, Hoch vor dem sichtbaren Zeitraum, durchschnittliches
-  investiertes Kapital, Reverse-DCF-Rechnung, Optionsfilter, Achsenpräzision,
-  Segmentabgleich und unveränderte Originalbilder.
-- Black, Ruff und `git diff --check` bestehen für die Änderungen.
-- Alle 29 Standardansichten wurden als Bilder geprüft. Endbeschriftungen,
-  Zahlenpräzision und die Darstellung auf kleinen Bildschirmen wurden korrigiert.
-- Chromium: Desktop mit 1440 × 1000 und Mobilansicht mit 390 × 844 Pixeln.
-  Vorher/V4, EUR/USD, Kurs-/Gesamtrendite, Ereignismarker, Gruppennavigation
-  und Analystenfilter funktionieren; keine JavaScript-Fehler. Diagramme
-  bleiben mobil horizontal scrollbar, ohne die gesamte Seite zu verbreitern.
-- Alle 67 Dateien der Ausgangsversion sind byteidentisch gesichert.
-  Alle bisherigen Analyse- und Style-Dateien bleiben am ursprünglichen Ort.
-- Segmentumsätze und operative Ergebnisse wurden mit Microsoft Annual Report
-  2026, Note 18, abgeglichen. Die Summe 2026 beträgt 331.839 Mio. USD Umsatz
-  und 155.237 Mio. USD operatives Ergebnis.
+- Alle 29 Diagrammthemen wurden aus dem gemeinsamen Yahoo-Snapshot vom
+  02.11.2026, 10:09 UTC neu gerendert: 44 PNGs inklusive Vergleichsvarianten.
+  `manifest.json` enthält keine Abruf- oder Renderfehler und nennt CI 1.3.0.
+- Die divergierende Wertefarbskala nutzt die Treemap-Anker #B3261E (negativ),
+  #5F6368 (null) und #188038 (positiv) aus der zentralen CI JSON.
+- Alle vier Monatsrenditevarianten zeigen die Skalenbeschriftung
+  −10, −5, −2, 0, +2, +5, +10. Die tatsächlich gerenderten Tick-Texte wurden
+  geprüft. Numerische Zellen behalten ebenfalls ihre Vorzeichen.
+- Weiße Zellschrift erreicht auf allen neun Farbstufen mindestens 5,02:1
+  Kontrast. Auch die interpolierte Reverse-DCF-Skala wurde auf mindestens
+  4,5:1 geprüft. Fehlende Werte haben eine eigene Füllfarbe.
+- Die zentrale JSON, die eingebettete JSON und die drei CSS-Modi der
+  eigenständigen CI-Vorschau stimmen überein. Andere Farbgruppen bleiben gleich.
+- Alle 21 Offline-Tests bestehen. Die zwei absichtlich neu gefärbten V3-PNGs
+  haben unveränderte Originale in der Baseline; deren SHA-256 ist fest geprüft.
+  Alle übrigen ursprünglichen PNGs stimmen weiterhin mit der Baseline überein.
+- Alle 67 Dateien unter `baseline/` bleiben unverändert. V3-Monatsrenditen und
+  V3-Analysten wurden mit der neuen Wertefarbskala neu erzeugt.
+- V3-/V4-Heatmaps wurden visuell geprüft. Die Inline-JavaScript-Syntax der
+  CI-Vorschau wurde mit `node --check` geprüft. Black, Ruff und Whitespace-
+  Prüfung sind erfolgreich.
 
 Prüfbefehle ab Repository-Wurzel:
 
@@ -32,3 +34,4 @@ git diff --check
 
 Ein frischer Abruf kann andere Zahlen liefern. Die HTML-Galerie nutzt lokale
 PNG-Dateien und benötigt zum Betrachten weder Netzwerkzugriff noch API-Schlüssel.
+Die Segmentauswertung bleibt die separat belegte Quelle aus dem Geschäftsbericht.

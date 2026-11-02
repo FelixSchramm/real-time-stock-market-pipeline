@@ -1,5 +1,6 @@
 """Test V4 valuation, period alignment, liquidity filters and baseline integrity."""
 
+import hashlib
 import importlib.util
 import unittest
 from pathlib import Path
@@ -108,13 +109,23 @@ class V4Finance(unittest.TestCase):
         self.assertEqual(labels, ["7,48", "7,50", "7,52"])
         theme.plt.close(fig)
 
-    def test_original_pngs_are_preserved_byte_for_byte(self):
-        """Comparison baseline cannot silently replace any original chart."""
+    def test_baseline_pngs_are_preserved_after_live_palette_update(self):
+        """Keep immutable originals while allowing the owner's live recoloring."""
         root = V4.parents[1]
+        recolored = {
+            "v3_dark/06_monthly_returns.png": "4c568a431d2a6f170870e9d7ef418ddc55b08c8923353302c2c42663e77392d0",
+            "10_analysts.png": "a0e9a9724c958009b9f953ea49a9b3bdbf93774d5005dcd0ca125f77b0c4017d",
+        }
         for old in (V4 / "baseline/data_exploration").rglob("*.png"):
             original = root / old.relative_to(V4 / "baseline")
             # The eleven root-level V3 charts now continue the series as 09–19.
             relative = old.relative_to(V4 / "baseline/data_exploration")
+            if relative.as_posix() in recolored:
+                self.assertEqual(
+                    hashlib.sha256(old.read_bytes()).hexdigest(),
+                    recolored[relative.as_posix()],
+                )
+                continue
             if relative.parent == Path("."):
                 number, suffix = relative.name.split("_", 1)
                 original = V4.parent / "v3_dark" / f"{int(number) + 5:02d}_{suffix}"

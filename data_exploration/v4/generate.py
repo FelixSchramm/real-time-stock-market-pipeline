@@ -10,6 +10,7 @@ import json
 import business
 import market
 from data import ROOT, fetch
+from theme import CI
 
 
 def main():
@@ -70,6 +71,7 @@ def main():
     metadata = {
         "retrieved_at": bundle["retrieved_at"],
         "yfinance_version": bundle["version"],
+        "ci_version": CI["meta"]["version"],
         "outputs": outputs,
         "variants": variants,
         "fetch_errors": bundle["errors"],

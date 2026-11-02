@@ -1,7 +1,7 @@
 # HANDOVER
 
 **Last updated:** 2026-11-02
-**Chain status:** V3 file layout consolidated; V4 comparison preserved; relay inactive
+**Chain status:** CI 1.3.0 red/grey/green value scale applied; relay inactive
 
 ## Session instructions
 
@@ -10,6 +10,28 @@ without a review. This overrides the reviewer/relay steps in `CLAUDE.md` for
 this work. No reviewer, successor session or fallback routine was created.
 The current owner workflow is direct checked writes to main, without PRs or
 review, with chart images shown in chat. The automatic relay remains inactive. #21 (CI distribution) remains deferred.
+
+## Diverging value colors (CI 1.3.0)
+
+The owner selected the red/grey/green treemap scale, not the suggested
+orange/blue alternative. Value colors use the treemap anchors #B3261E,
+#5F6368 and #188038 under `color.diverging`. Nine return bins retain their
+existing thresholds. White text and explicit minus/plus signs appear in
+numeric cells and the monthly-return colorbar (zero is unsigned).
+
+The main CI JSON, standalone HTML preview, V3 heatmap/analyst PNG and V4
+value consumers are updated. V4 now reads these value tokens instead of
+hard-coded ramps. The reverse-DCF value heatmap uses the same diverging
+colors. Other CI color categories keep their previous tokens.
+
+V4 was regenerated coherently: all 29 themes / 44 PNGs use the Yahoo snapshot
+from 2026-11-02 10:09 UTC, with no fetch or render errors. `manifest.json`
+records CI version 1.3.0. The archived 67-file baseline remains unchanged;
+tests pin the two baseline PNG hashes whose live V3 counterparts were
+intentionally recolored, and still compare all other original PNGs. All 21
+offline tests pass. Legend signs were checked on the rendered colorbar; the
+minimum white-text contrast is 5.02:1 across all nine value fills. Black,
+Ruff, preview JavaScript syntax and token/preview consistency checks pass.
 
 ## V3 file layout
 

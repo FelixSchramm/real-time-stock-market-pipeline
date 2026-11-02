@@ -2,8 +2,8 @@
   "$schema_note": "Design tokens of Felix Schramm's personal CI. Derived from the cover letter template and CV (Century Gothic, forest green rule #2E5A2E, grey #666666). Categorical palettes validated for colour-vision deficiency (protan/deutan, OKLab Delta E) and contrast.",
   "meta": {
     "name": "Felix Schramm CI",
-    "version": "1.2.0",
-    "date": "2026-11-01",
+    "version": "1.3.0",
+    "date": "2026-11-02",
     "default_mode": "dark",
     "default_mode_note": "Mode used by charts unless they say otherwise. Light values stay available, e.g. for print.",
     "sources": [
@@ -107,9 +107,31 @@
       "copper": ["#FAEFEA", "#F2D8CC", "#E8BCA9", "#DC9D81", "#CE7E59", "#BB6135", "#A0491A", "#863100", "#6D1700"]
     },
     "diverging": {
-      "note": "Negative arm copper, neutral grey midpoint, positive arm forest. Equal steps per arm. Always print the sign (+/-) because the hue pair is weak for red-green colour blindness.",
-      "returns_light": ["#863100", "#BB6135", "#DC9D81", "#F2D8CC", "#E7E8E5", "#D2E4D2", "#8EBC91", "#489050", "#136022"],
-      "returns_dark":  ["#E8BCA9", "#CE7E59", "#A0491A", "#6D1700", "#323331", "#004908", "#2F7839", "#6AA66E", "#B2D1B3"]
+      "note": "Diverging value scale: red for negative values, grey at zero, green for positive values. Anchors match stock_treemap: #B3261E / #5F6368 / #188038. Saturation encodes magnitude. Always show signed values; never rely on red/green alone.",
+      "label": "#FFFFFF",
+      "missing": "#3C4043",
+      "returns_light": [
+        "#B3261E",
+        "#9E3530",
+        "#894443",
+        "#745456",
+        "#5F6368",
+        "#4D6A5C",
+        "#3C7250",
+        "#2A7944",
+        "#188038"
+      ],
+      "returns_dark": [
+        "#B3261E",
+        "#9E3530",
+        "#894443",
+        "#745456",
+        "#5F6368",
+        "#4D6A5C",
+        "#3C7250",
+        "#2A7944",
+        "#188038"
+      ]
     },
     "finance": {
       "note": "Up/down follows the market convention (green/red) but is never colour-only: use filled vs hollow candles, triangle icons and signed numbers.",

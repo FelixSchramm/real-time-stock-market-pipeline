@@ -5,7 +5,7 @@
 - Yahoo Finance über yfinance 1.7.0: ein gemeinsam abgerufener Snapshot für
   sämtliche Diagramme und Varianten. Abrufdatum steht in jedem Bild und in
   `manifest.json`; Kurs- und Berichtsperioden stehen getrennt im Diagramm.
-- Der mitgelieferte Stand wurde am **01.11.2026 um 22:50 UTC** abgerufen;
+- Der aktuelle gemeinsame Stand wurde am **02.11.2026 um 10:09 UTC** abgerufen;
   jüngster Aktienhandelstag ist der **30.10.2026**. Eine Galerieöffnung holt
   keine neuen Daten. `generate.py --refresh` erzeugt eine neue Momentaufnahme.
 - [Microsoft Annual Report 2026](https://www.microsoft.com/investor/reports/ar26/index.html),
@@ -17,6 +17,15 @@
 - Der lokale API-Cache ist nicht versioniert. Bilder, Methodik, kleine belegte
   Segmentauswertung und Datum sind versioniert. Yahoo kann vergangene Daten
   revidieren; erneuter Abruf ist deshalb nicht zwangsläufig pixelidentisch.
+
+## Wertefarben
+
+CI 1.3.0 liest die divergierende Rot–Grau–Grün-Skala aus
+`../../style/felix-schramm-ci.json` (`color.diverging`). Rot steht für negative,
+Grau für neutrale und Grün für positive Werte. Zahlen und Farbskalen behalten
+ihre Vorzeichen; null hat kein Vorzeichen. Weiße Zellbeschriftung ist gegen
+alle neun Farbstufen auf mindestens 4,5:1 Kontrast geprüft. Fehlende Werte
+erhalten eine eigene Füllfarbe. Die archivierte Baseline behält ihre alten Farben.
 
 ## Kurse und Vergleichbarkeit
 
@@ -92,7 +101,7 @@ Keine Mengen, Gewichte, Einstandswerte oder privaten Portfolioquellen.
   Jahres-CFO minus Cash-Capex als vereinfachter Eigenkapital-Cashflow-Proxy.
   Weder neue Verschuldung noch Verwässerung werden modelliert. Da auf
   Eigenkapitalebene gerechnet wird, wird nicht zusätzlich Nettoschuld abgezogen.
-  Die Heatmap zeigt USD je Aktie; Braun liegt unter, Grün über dem aktuellen
+  Die Heatmap zeigt USD je Aktie; Rot liegt unter, Grün über dem aktuellen
   Kurs. Keine geschätzten Owner Earnings, kein Modell von Garantierenditen.
   Langfristiges Wachstum, Capex, Terminalwert und Discount Rate dominieren das
   Ergebnis. Gewünschte Annahmen sind in `business.reverse_dcf` ausdrücklich

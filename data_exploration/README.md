@@ -128,7 +128,10 @@ python -m unittest discover -s tests -v
 
 ### Preview gallery
 
-The committed PNGs were generated from real market data on 2026-11-01.
+The original PNGs were generated from real market data on 2026-11-01.
+The return heatmap and analyst snapshot were refreshed on 2026-11-02 with
+CI 1.3.0. Numeric heatmaps use the red → grey → green diverging scale from
+[`color.diverging`](../style/README.md), with signed labels and legend values.
 Click any preview to open the full image.
 
 | Price comparison | Monthly returns | Drawdown |

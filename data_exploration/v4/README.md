@@ -1,8 +1,9 @@
 # V4 – Unternehmensanalyse und Vorher-/Nachher-Vergleich
-Alle bisherigen Dateien bleiben erhalten. `baseline/` enthält zusätzlich eine byteidentische Kopie der ursprünglichen 67 Analyse- und Style-Dateien.
+Die Ausgangsversion bleibt in `baseline/` als byteidentische Kopie der ursprünglichen 67 Analyse- und Style-Dateien erhalten. Live-Charts verwenden die aktuelle CI-Farbskala.
 [Interaktive Vergleichsgalerie](index.html) · [Geschäftsmodell und Quellen](research.md) · [Methodik](METHODS.md)
 **Galerie lokal öffnen:** Repository herunterladen/klonen und `data_exploration/v4/index.html` im Browser öffnen. GitHub zeigt HTML als Quelltext; die PNG-Vergleiche unten funktionieren direkt auf GitHub.
-Datenabruf: **2026-11-01T22:50:06.788536+00:00**. 29 Diagrammthemen, davon 19 überarbeitet und 10 ergänzt. 44 PNGs einschließlich EUR/USD- und Renditevarianten. Kein Live-Dashboard.
+Datenabruf: **2026-11-02T10:09:16.887914+00:00**. 29 Diagrammthemen, davon 19 überarbeitet und 10 ergänzt. 44 PNGs einschließlich EUR/USD- und Renditevarianten. Kein Live-Dashboard.
+Wertefarbskala: CI **1.3.0** · Rot → Grau → Grün, definiert in `../../style/felix-schramm-ci.json`.
 ## Reproduzieren
 
 ```sh
