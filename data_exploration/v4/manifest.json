@@ -1,0 +1,68 @@
+{
+  "retrieved_at": "2026-11-01T22:50:06.788536+00:00",
+  "yfinance_version": "1.7.0",
+  "outputs": {
+    "03": "charts/03_cashflow_quarterly.png",
+    "04": "charts/04_candles.png",
+    "09": "charts/09_cashflow_annual.png",
+    "10": "charts/10_income.png",
+    "11": "charts/11_earnings_reaction.png",
+    "12": "charts/12_pe_ratio.png",
+    "14": "charts/14_dividends.png",
+    "15": "charts/15_analysts.png",
+    "16": "charts/16_price_targets.png",
+    "17": "charts/17_insiders.png",
+    "18": "charts/18_holders.png",
+    "19": "charts/19_implied_vol.png",
+    "20": "charts/20_balance_sheet.png",
+    "21": "charts/21_roic.png",
+    "22": "charts/22_cash_quality.png",
+    "23": "charts/23_capital_allocation.png",
+    "24": "charts/24_per_share.png",
+    "25": "charts/25_estimates.png",
+    "26": "charts/26_valuation.png",
+    "27": "charts/27_reverse_dcf.png",
+    "28": "charts/28_segments.png",
+    "29": "charts/29_cash_bridge.png",
+    "01": "charts/01_price_eur.png",
+    "02": "charts/02_price_events.png",
+    "05": "charts/05_indexed_EUR_total.png",
+    "06": "charts/06_monthly_returns_EUR_total.png",
+    "07": "charts/07_drawdown_EUR_total.png",
+    "08": "charts/08_kpis_EUR_total.png",
+    "13": "charts/13_benchmark_EUR_total.png"
+  },
+  "variants": {
+    "EUR_total": {
+      "05": "charts/05_indexed_EUR_total.png",
+      "06": "charts/06_monthly_returns_EUR_total.png",
+      "07": "charts/07_drawdown_EUR_total.png",
+      "08": "charts/08_kpis_EUR_total.png",
+      "13": "charts/13_benchmark_EUR_total.png"
+    },
+    "EUR_price": {
+      "05": "charts/05_indexed_EUR_price.png",
+      "06": "charts/06_monthly_returns_EUR_price.png",
+      "07": "charts/07_drawdown_EUR_price.png",
+      "08": "charts/08_kpis_EUR_price.png",
+      "13": "charts/13_benchmark_EUR_price.png"
+    },
+    "USD_total": {
+      "05": "charts/05_indexed_USD_total.png",
+      "06": "charts/06_monthly_returns_USD_total.png",
+      "07": "charts/07_drawdown_USD_total.png",
+      "08": "charts/08_kpis_USD_total.png",
+      "13": "charts/13_benchmark_USD_total.png"
+    },
+    "USD_price": {
+      "05": "charts/05_indexed_USD_price.png",
+      "06": "charts/06_monthly_returns_USD_price.png",
+      "07": "charts/07_drawdown_USD_price.png",
+      "08": "charts/08_kpis_USD_price.png",
+      "13": "charts/13_benchmark_USD_price.png"
+    }
+  },
+  "fetch_errors": {},
+  "render_errors": {},
+  "baseline_commit": "71a8bbeaa147e84cd8ac2a1eb80e4b0af9fb0c42"
+}
