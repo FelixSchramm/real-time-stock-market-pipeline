@@ -1,0 +1,602 @@
+<meta charset="utf-8">
+<title>CI Felix Schramm</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Questrial&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one left-aligned reading column (CV logic: caps label, forest hairline, content), charts break out to full column width */
+:root {
+  --page: #F6F7F4;
+  --surface: #FBFBF8;
+  --ink: #1A1A1A;
+  --ink2: #666666;
+  --muted: #7C7E78;
+  --grid: #E3E5DF;
+  --axis: #C4C7BF;
+  --border: rgba(26,26,26,0.10);
+  --forest: #2E5A2E;
+  --forest-tint: #EDF4ED;
+  --copper: #BB6135;
+  --s1: #2E7F3A; --s2: #316CB5; --s3: #D788CC; --s4: #E98D5B; --s5: #00BFC8; --s6: #8370C7; --s7: #D39E26;
+  --up: #1F7A3F; --down: #E8735A; --up-text: #1F7A3F; --down-text: #A0491A; --vol: #C4C7BF;
+  --sma20: #316CB5; --sma50: #D39E26;
+  --d0: #863100; --d1: #BB6135; --d2: #DC9D81; --d3: #F2D8CC; --d4: #E7E8E5; --d5: #D2E4D2; --d6: #8EBC91; --d7: #489050; --d8: #136022;
+  --cell-strong-ink: #FFFFFF;
+  --font: 'Century Gothic', 'Questrial', 'URW Gothic', 'TeX Gyre Adventor', sans-serif;
+  --mono: 'JetBrains Mono', ui-monospace, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --page: #0F120F; --surface: #161A17; --ink: #EDEFEA; --ink2: #BFC3BA; --muted: #8A8C86;
+    --grid: #262B27; --axis: #3A403B; --border: rgba(255,255,255,0.10);
+    --forest: #8EBC91; --forest-tint: #1B261C; --copper: #CE7E59;
+    --s1: #458D4D; --s2: #346AAC; --s3: #C276A2; --s4: #9F5021; --s5: #00A1A9; --s6: #6B5AA8; --s7: #A07100;
+    --up: #3A8A47; --down: #E9896D; --up-text: #6AA66E; --down-text: #E9896D; --vol: #3A403B;
+    --sma20: #4A80C8; --sma50: #C99520;
+    --d0: #E8BCA9; --d1: #CE7E59; --d2: #A0491A; --d3: #6D1700; --d4: #323331; --d5: #004908; --d6: #2F7839; --d7: #6AA66E; --d8: #B2D1B3;
+    --cell-strong-ink: #161A17;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --page: #0F120F; --surface: #161A17; --ink: #EDEFEA; --ink2: #BFC3BA; --muted: #8A8C86;
+  --grid: #262B27; --axis: #3A403B; --border: rgba(255,255,255,0.10);
+  --forest: #8EBC91; --forest-tint: #1B261C; --copper: #CE7E59;
+  --s1: #458D4D; --s2: #346AAC; --s3: #C276A2; --s4: #9F5021; --s5: #00A1A9; --s6: #6B5AA8; --s7: #A07100;
+  --up: #3A8A47; --down: #E9896D; --up-text: #6AA66E; --down-text: #E9896D; --vol: #3A403B;
+  --sma20: #4A80C8; --sma50: #C99520;
+  --d0: #E8BCA9; --d1: #CE7E59; --d2: #A0491A; --d3: #6D1700; --d4: #323331; --d5: #004908; --d6: #2F7839; --d7: #6AA66E; --d8: #B2D1B3;
+  --cell-strong-ink: #161A17;
+  color-scheme: dark;
+}
+
+body { background: var(--page); color: var(--ink); font-family: var(--font); font-size: 15px; line-height: 1.6; }
+.wrap { max-width: 980px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 48px 80px; display: grid; gap: 56px; }
+h1, h2, h3 { font-weight: 400; text-wrap: balance; margin: 0; }
+p { margin: 0; max-width: 65ch; }
+.prose { display: grid; gap: 12px; }
+.label { font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--forest); padding-bottom: 6px; border-bottom: 1px solid var(--forest); }
+section { display: grid; gap: 24px; }
+.muted { color: var(--ink2); }
+.small { font-size: 13px; }
+
+/* Header mirrors the letterhead: name, contact line, forest rule */
+header { display: grid; gap: 20px; }
+.letterhead { display: grid; gap: 4px; padding-bottom: 14px; border-bottom: 1px solid var(--forest); }
+.letterhead .name { font-size: clamp(30px, 6vw, 44px); letter-spacing: 0.01em; line-height: 1.1; }
+.letterhead .contact { color: var(--ink2); font-size: 13px; }
+.lede { font-size: 19px; line-height: 1.5; max-width: 60ch; }
+
+.pillars { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 24px; }
+.pillar { display: grid; gap: 6px; align-content: start; }
+.pillar h3 { font-size: 16px; }
+.pillar p { color: var(--ink2); font-size: 14px; }
+
+/* Typography specimen */
+.specimen { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: 32px; align-items: start; }
+@media (max-width: 720px) { .specimen { grid-template-columns: minmax(0, 1fr); } }
+.glyphs { font-size: clamp(56px, 12vw, 104px); line-height: 1; color: var(--forest); }
+.scale { display: grid; gap: 10px; }
+.scale-row { display: grid; grid-template-columns: 76px minmax(0, 1fr); gap: 12px; align-items: baseline; border-top: 1px solid var(--grid); padding-top: 8px; }
+.scale-row .k { font-size: 11px; color: var(--muted); font-family: var(--mono); }
+
+/* Swatches */
+.brand-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 16px; }
+.chip { display: grid; gap: 6px; font-size: 13px; }
+.chip .sw { height: 64px; border-radius: 8px; box-shadow: inset 0 0 0 1px var(--border); }
+.chip .hex { font-family: var(--mono); font-size: 12px; color: var(--ink2); }
+.cat-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.cat-table th { text-align: left; font-weight: 400; color: var(--muted); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; padding: 6px 8px; border-bottom: 1px solid var(--axis); }
+.cat-table td { padding: 8px; border-bottom: 1px solid var(--grid); vertical-align: middle; }
+.pair { display: inline-flex; align-items: center; gap: 8px; font-family: var(--mono); font-size: 12px; color: var(--ink2); }
+.pair i { width: 28px; height: 18px; border-radius: 4px; display: inline-block; box-shadow: inset 0 0 0 1px var(--border); }
+.ramp { display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; gap: 2px; border-radius: 6px; overflow: hidden; height: 36px; }
+.ramp-block { display: grid; gap: 6px; }
+.ramp-cap { display: flex; justify-content: space-between; font-size: 12px; color: var(--ink2); gap: 12px; }
+.two { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; }
+.scroll { overflow-x: auto; }
+
+/* Charts */
+.chart-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 20px; display: grid; gap: 12px; min-width: 0; }
+.chart-head { display: grid; gap: 2px; }
+.chart-head h3 { font-size: 16px; }
+.chart-head p { font-size: 13px; color: var(--ink2); }
+.why { font-size: 13px; color: var(--ink2); border-left: 2px solid var(--forest); padding-left: 12px; max-width: 70ch; }
+.plot { position: relative; min-width: 0; }
+.plot svg { display: block; width: 100%; height: auto; overflow: visible; }
+.plot svg text { font-family: var(--font); }
+.legend { display: flex; flex-wrap: wrap; gap: 6px 16px; font-size: 12px; color: var(--ink2); }
+.legend span { display: inline-flex; align-items: center; gap: 6px; }
+.legend i { width: 14px; height: 3px; border-radius: 2px; display: inline-block; }
+.legend i.box { width: 10px; height: 10px; border-radius: 2px; }
+.tip { position: absolute; pointer-events: none; background: var(--surface); border: 1px solid var(--border); box-shadow: 0 4px 16px rgba(0,0,0,0.12); border-radius: 8px; padding: 8px 10px; font-size: 12px; line-height: 1.5; min-width: 140px; z-index: 2; font-variant-numeric: tabular-nums; }
+.tip .t { color: var(--ink2); margin-bottom: 2px; }
+.tip .r { display: flex; align-items: center; gap: 6px; justify-content: space-between; }
+.tip .r b { font-weight: 400; color: var(--ink); }
+.tip .dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+
+.kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
+.kpi { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 16px 18px; display: grid; gap: 10px; }
+.kpi .tk { display: flex; align-items: center; gap: 8px; font-size: 13px; letter-spacing: 0.1em; color: var(--ink2); }
+.kpi .tk i { width: 10px; height: 10px; border-radius: 50%; }
+.kpi .big { font-size: 30px; line-height: 1; }
+.kpi .big small { font-size: 13px; color: var(--ink2); margin-left: 4px; }
+.kpi dl { margin: 0; display: grid; grid-template-columns: 1fr auto; gap: 4px 12px; font-size: 13px; }
+.kpi dt { color: var(--ink2); }
+.kpi dd { margin: 0; text-align: right; font-variant-numeric: tabular-nums; }
+.pos { color: var(--up-text); } .neg { color: var(--down-text); }
+
+.heat { border-collapse: separate; border-spacing: 2px; font-size: 12px; font-variant-numeric: tabular-nums; width: 100%; min-width: 640px; }
+.heat th { font-weight: 400; color: var(--ink2); padding: 4px 6px; text-align: center; }
+.heat th.row { text-align: left; letter-spacing: 0.08em; }
+.heat td { text-align: center; padding: 9px 2px; border-radius: 4px; color: var(--ink); }
+.heat td.strong { color: var(--cell-strong-ink); }
+
+/* Code */
+.code-block { display: grid; gap: 8px; min-width: 0; }
+.code-top { display: flex; justify-content: space-between; align-items: center; gap: 12px; font-size: 13px; color: var(--ink2); }
+pre { margin: 0; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 14px 16px; overflow-x: auto; font-family: var(--mono); font-size: 12px; line-height: 1.55; color: var(--ink); max-height: 420px; }
+button { font-family: var(--font); font-size: 13px; background: transparent; color: var(--forest); border: 1px solid var(--forest); border-radius: 6px; padding: 5px 12px; cursor: pointer; }
+button:hover { background: var(--forest-tint); }
+button:focus-visible { outline: 2px solid var(--forest); outline-offset: 2px; }
+ul.ideas { margin: 0; padding-left: 18px; display: grid; gap: 8px; max-width: 70ch; }
+ul.ideas li::marker { color: var(--forest); }
+footer { font-size: 12px; color: var(--muted); border-top: 1px solid var(--grid); padding-top: 16px; }
+</style>
+
+<div class="wrap">
+  <header>
+    <div class="letterhead">
+      <div class="name">Felix Schramm</div>
+      <div class="contact">Corporate Identity für Portfolio-Projekte · Vorschlag vom 1. November 2026</div>
+    </div>
+    <p class="lede">Eine Schrift, eine Leitfarbe, eine geprüfte Datenpalette. Alles steckt in einer JSON-Datei, aus der Matplotlib, Plotly und Streamlit ihre Werte lesen, damit Anschreiben, Lebenslauf und Dashboards wie aus einem Guss wirken.</p>
+    <div class="pillars">
+      <div class="pillar"><h3>Century Gothic</h3><p>Die Schrift aus Anschreiben und Lebenslauf. Im Web und auf Streamlit Cloud springt Questrial ein, die frei verfügbare, sehr ähnliche geometrische Schrift.</p></div>
+      <div class="pillar"><h3>Waldgrün #2E5A2E</h3><p>Die Farbe der Trennlinien in deinen Bewerbungsunterlagen. Sie wird zur Leitfarbe für Überschriften, Linien und Links, und Slot 1 der Datenpalette ist ihre aufgehellte Variante.</p></div>
+      <div class="pillar"><h3>Geprüfte Datenfarben</h3><p>Sieben Kategorienfarben in fester Reihenfolge, für helle und dunkle Darstellung getrennt abgestimmt und auf Rot-Grün-Schwäche sowie Kontrast geprüft.</p></div>
+    </div>
+  </header>
+
+  <section>
+    <div class="label">Typografie</div>
+    <div class="specimen">
+      <div class="prose">
+        <div class="glyphs">Aa Gg 128</div>
+        <p class="muted small">Century Gothic ist lizenzpflichtig (Monotype, mit MS Office installiert). Für alles, was im Browser läuft, gilt der Stack <code>'Century Gothic', 'Questrial', sans-serif</code>: Wer Office hat, sieht das Original, alle anderen Questrial. Die Schrift hat nur einen Schnitt, deshalb entsteht Hierarchie über Größe, Versalien mit Sperrung und die grüne Linie statt über Fettdruck.</p>
+      </div>
+      <div class="scale" id="scale"></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="label">Farben</div>
+    <div class="brand-row" id="brand"></div>
+    <div class="prose">
+      <h3 style="font-size:16px">Kategorienfarben für Diagramme</h3>
+      <p class="muted small">Immer in dieser Reihenfolge vergeben, nie zyklisch wiederholen. Eine Aktie behält ihre Farbe in jedem Diagramm (ORCL ist immer Slot 1, MSFT Slot 2, 9988.HK Slot 3, SAP.DE Slot 4). Benachbarte Farben haben unter simulierter Rot-Grün-Schwäche einen Abstand von mindestens ΔE 10 (Ziel 8). Für Streudiagramme und Karten höchstens die ersten drei verwenden.</p>
+    </div>
+    <div class="scroll"><table class="cat-table" id="cat"></table></div>
+    <div class="two">
+      <div class="ramp-block"><div class="small">Sequenziell Waldgrün: Volumen, Dichte, Karten</div><div class="ramp" id="ramp-seq"></div><div class="ramp-cap"><span>wenig</span><span>viel</span></div></div>
+      <div class="ramp-block"><div class="small">Divergierend: Renditen, Abweichungen</div><div class="ramp" id="ramp-div"></div><div class="ramp-cap"><span>negativ</span><span>0</span><span>positiv</span></div></div>
+    </div>
+    <div class="two">
+      <div class="ramp-block">
+        <div class="small">Kurs steigt / fällt</div>
+        <div class="legend" style="font-size:13px"><span><i class="box" style="background:var(--up)"></i>▲ steigt</span><span><i class="box" style="background:var(--down)"></i>▼ fällt</span></div>
+        <p class="muted small">Grün und Rot sind an der Börse Konvention, für Menschen mit Rot-Grün-Schwäche aber schwer zu trennen. Deshalb trägt die Farbe nie allein: Dreieck, Vorzeichen und hohle oder gefüllte Kerzen sagen dasselbe. Für eine barrierearme Variante liegt Blau/Kupfer in der JSON.</p>
+      </div>
+      <div class="ramp-block">
+        <div class="small">Statusfarben, nur für Pipeline-Zustände</div>
+        <div class="legend" style="font-size:13px"><span><i class="box" style="background:#0CA30C"></i>läuft</span><span><i class="box" style="background:#FAB219"></i>Verzögerung</span><span><i class="box" style="background:#EC835A"></i>gestört</span><span><i class="box" style="background:#D03B3B"></i>ausgefallen</span></div>
+        <p class="muted small">Reserviert für Zustände wie Kafka-Lag oder fehlgeschlagene Jobs, nie als Serienfarbe, immer mit Symbol und Text.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="label">Visualisierungen für das Stock-Repo</div>
+    <p>Verglichen werden Oracle (ORCL), Microsoft (MSFT), Alibaba (9988.HK) und SAP (SAP.DE). Grundlage sind bereinigte und in USD umgerechnete Tagesschlusskurse von Yahoo Finance (31.10.2025 bis 30.10.2026). Dein bestehendes <code>plot_prices.py</code> zeigt die indexierte Kursentwicklung, die Idee ist gut und bleibt der Einstieg. Dazu kommen drei Ansichten, die zur Pipeline passen: Kerzen mit Volumen, Monatsrenditen und Drawdown.</p>
+
+    <div class="kpis" id="kpis"></div>
+
+    <div class="chart-card">
+      <div class="chart-head"><h3>Kursentwicklung, Basis 100</h3><p>Schlusskurse in USD, indexiert auf den ersten gemeinsamen Handelstag</p></div>
+      <div class="legend" id="lg-idx"></div>
+      <div class="plot" id="c-idx"></div>
+      <div class="why">Neu gegenüber deinem Plot: Titel links statt Achsentitel, nur horizontale Haarlinien, Endbeschriftungen ohne Überlappung, feste Farbe pro Ticker und ein Fadenkreuz mit Tooltip.</div>
+    </div>
+
+    <div class="chart-card">
+      <div class="chart-head"><h3>MSFT, Tageskerzen und Volumen</h3><p>Letzte 60 Handelstage, gleitende Durchschnitte über 20 und 50 Tage</p></div>
+      <div class="legend" id="lg-candle"></div>
+      <div class="plot" id="c-candle"></div>
+      <div class="why">Preis und Volumen stehen in zwei Feldern übereinander statt auf zwei y-Achsen. Steigende Tage sind hohl, fallende gefüllt, damit die Richtung auch ohne Farbe lesbar ist. Passt direkt zu den OHLC-Fenstern, die der Spark-Job später berechnet.</div>
+    </div>
+
+    <div class="chart-card">
+      <div class="chart-head"><h3>Monatsrenditen</h3><p>Veränderung des Schlusskurses gegenüber dem Vormonatsende</p></div>
+      <div class="scroll"><table class="heat" id="c-heat"></table></div>
+      <div class="why">Divergierende Skala mit grauer Mitte: Kupfer für Verluste, Grün für Gewinne, jede Zelle mit Vorzeichen beschriftet. Gut für das README, weil eine Tabelle mehr Information auf wenig Fläche zeigt als drei Linien.</div>
+    </div>
+
+    <div class="chart-card">
+      <div class="chart-head"><h3>Drawdown</h3><p>Abstand zum bisherigen Höchststand in Prozent</p></div>
+      <div class="legend" id="lg-dd"></div>
+      <div class="plot" id="c-dd"></div>
+      <div class="why">Zeigt Risiko statt Rendite. Ein klassisches Analysten-Diagramm, das in Bewerbungsgesprächen gut erklärbar ist.</div>
+    </div>
+
+    <div class="prose">
+      <h3 style="font-size:16px">Sobald die Streaming-Pipeline läuft</h3>
+      <ul class="ideas">
+        <li><b style="font-weight:400">Live-Ticker:</b> Trades pro Sekunde je Symbol als Linie über die letzten 15 Minuten, mit hervorgehobenem letzten Punkt.</li>
+        <li><b style="font-weight:400">Fenster-Aggregate:</b> 1-Minuten-Kerzen direkt aus den Spark-Fenstern, gleiche Darstellung wie oben.</li>
+        <li><b style="font-weight:400">Pipeline-Gesundheit:</b> Kafka-Consumer-Lag und Verarbeitungszeit als Kennzahlen mit Statusfarbe, Symbol und Text.</li>
+        <li><b style="font-weight:400">Datenqualität:</b> Lücken pro Symbol und Stunde als sequenzielle Heatmap in Waldgrün.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <div class="label">Umsetzung</div>
+    <p>Die JSON ist die einzige Quelle für alle Werte. Mein Vorschlag: Sie liegt in jedem Portfolio-Repo unter <code>style/felix-schramm-ci.json</code>, ein kleines Modul lädt sie für Matplotlib und Plotly. Das NOW-Dashboard zur Ladeinfrastruktur behält bewusst die NOW-Farben, weil es für eine konkrete Bewerbung im Design des Arbeitgebers gebaut ist.</p>
+    <div class="code-block">
+      <div class="code-top"><span>felix-schramm-ci.json</span><button type="button" id="copy-json">JSON kopieren</button></div>
+      <pre id="json-view"></pre>
+    </div>
+    <div class="code-block">
+      <div class="code-top"><span>style/ci.py · Matplotlib und Plotly</span><button type="button" data-copy="py">Code kopieren</button></div>
+      <pre id="py">"""Load the personal CI tokens and apply them to Matplotlib and Plotly."""
+
+import json
+from pathlib import Path
+
+import matplotlib.pyplot as plt
+import plotly.graph_objects as go
+import plotly.io as pio
+from cycler import cycler
+
+CI = json.loads((Path(__file__).parent / "felix-schramm-ci.json").read_text())
+COLORS = [c["hex"] for c in CI["color"]["categorical"]["light"]]
+NEUTRAL = CI["color"]["neutral"]["light"]
+FONT = CI["typography"]["font_family"]
+
+
+def use_matplotlib():
+    """Set rcParams to the CI look (left title, y-grid only, no frame).
+
+    :return: None
+    """
+    plt.rcParams.update({
+        "font.family": FONT["stack_matplotlib"],
+        "axes.prop_cycle": cycler(color=COLORS),
+        "axes.titlelocation": "left",
+        "axes.titlesize": 13,
+        "axes.labelcolor": NEUTRAL["ink_secondary"],
+        "axes.edgecolor": NEUTRAL["axis"],
+        "axes.spines.top": False,
+        "axes.spines.right": False,
+        "axes.spines.left": False,
+        "axes.grid": True,
+        "axes.grid.axis": "y",
+        "grid.color": NEUTRAL["gridline"],
+        "xtick.color": NEUTRAL["ink_muted"],
+        "ytick.color": NEUTRAL["ink_muted"],
+        "figure.facecolor": NEUTRAL["surface"],
+        "axes.facecolor": NEUTRAL["surface"],
+        "text.color": NEUTRAL["ink"],
+        "lines.linewidth": 2,
+        "legend.frameon": False,
+    })
+
+
+def use_plotly():
+    """Register the CI as Plotly template "felix" and make it the default.
+
+    :return: None
+    """
+    pio.templates["felix"] = go.layout.Template(layout={
+        "font": {"family": FONT["stack_css"], "color": NEUTRAL["ink"]},
+        "colorway": COLORS,
+        "paper_bgcolor": NEUTRAL["surface"],
+        "plot_bgcolor": NEUTRAL["surface"],
+        "title": {"x": 0, "xanchor": "left"},
+        "xaxis": {"showgrid": False, "linecolor": NEUTRAL["axis"]},
+        "yaxis": {"gridcolor": NEUTRAL["gridline"], "zeroline": False},
+        "legend": {"orientation": "h", "x": 0, "y": 1.08},
+    })
+    pio.templates.default = "felix"</pre>
+    </div>
+    <div class="code-block">
+      <div class="code-top"><span>.streamlit/config.toml</span><button type="button" data-copy="toml">Code kopieren</button></div>
+      <pre id="toml">[theme]
+base = "light"
+primaryColor = "#2E5A2E"
+backgroundColor = "#FBFBF8"
+secondaryBackgroundColor = "#EDF4ED"
+textColor = "#1A1A1A"</pre>
+    </div>
+    <p class="muted small">Im bestehenden <code>plot_prices.py</code> reicht dann <code>use_matplotlib()</code> vor dem Plotten, und die Zeile <code>COLORS = ["#2a78d6", "#eb6834"]</code> entfällt.</p>
+  </section>
+
+  <footer>Kursdaten: Yahoo Finance über yfinance, Tagesschlusskurse 31.10.2025 bis 30.10.2026. Farbprüfung: OKLab-ΔE unter simulierter Protanopie und Deuteranopie (Machado 2009), Kontrast nach WCAG.</footer>
+</div>
+
+<script type="application/json" id="ci-data">{"$schema_note":"Design tokens of Felix Schramm's personal CI. Derived from the cover letter template and CV (Century Gothic, forest green rule #2E5A2E, grey #666666). Categorical palettes validated for colour-vision deficiency (protan/deutan, OKLab Delta E) and contrast.","meta":{"name":"Felix Schramm CI","version":"1.2.0","date":"2026-11-01","default_mode":"dark","default_mode_note":"Mode used by charts unless they say otherwise. Light values stay available, e.g. for print.","sources":["profile/anschreiben_vorlage.docx","profile/Lebenslauf_Felix_Schramm_DE.docx"]},"typography":{"font_family":{"brand":"Century Gothic","web_fallback":"Questrial","stack_css":"'Century Gothic', 'Questrial', 'URW Gothic', 'TeX Gyre Adventor', sans-serif","stack_matplotlib":["Century Gothic","Questrial","URW Gothic","TeX Gyre Adventor","DejaVu Sans"],"mono_css":"'JetBrains Mono', 'SFMono-Regular', Consolas, monospace","note":"Century Gothic is a licensed Monotype font (ships with MS Office). For Streamlit Cloud and the web use Questrial from Google Fonts, it is the closest free geometric match."},"scale_pt_print":{"name":28,"h1":18,"h2":13,"body":10,"small":9.5},"scale_px_screen":{"display":40,"h1":28,"h2":20,"h3":16,"body":15,"small":13,"chart_title":15,"chart_label":12,"chart_tick":11},"weights":{"regular":400,"bold":700},"letter_spacing":{"section_label":"0.12em","note":"Section labels in caps (PROFIL, ERFAHRUNG) as in the CV."},"numbers":"tabular-nums for tables and axis ticks, proportional for hero figures"},"color":{"brand":{"forest":{"hex":"#2E5A2E","role":"Leitfarbe: rules, headings, logo, links","source":"CV/cover letter rule colour"},"forest_dark":{"hex":"#1F3F21","role":"hover / pressed"},"forest_tint":{"hex":"#EDF4ED","role":"highlight background, info boxes"},"copper":{"hex":"#BB6135","role":"sparing accent: call-outs, a single highlighted value"}},"neutral":{"light":{"page":"#F6F7F4","surface":"#FBFBF8","ink":"#1A1A1A","ink_secondary":"#666666","ink_muted":"#8A8C86","gridline":"#E3E5DF","axis":"#C4C7BF","border":"rgba(26,26,26,0.10)"},"dark":{"page":"#0F120F","surface":"#161A17","ink":"#EDEFEA","ink_secondary":"#BFC3BA","ink_muted":"#8A8C86","gridline":"#262B27","axis":"#3A403B","border":"rgba(255,255,255,0.10)","forest_on_dark":"#8EBC91"}},"categorical":{"note":"Assign in this fixed order, never cycled. Max 7 series; beyond that fold into 'Andere'. Scatter/choropleth/small multiples: max 3 slots. Light slots 3, 4, 5, 7 are below 3:1 on the surface, so always add direct labels or a table view.","validation":{"light":"adjacent CVD Delta E >= 14.5, normal vision >= 16.1, surface #FBFBF8","dark":"adjacent CVD Delta E >= 10.0, normal vision >= 18.5, all >= 3:1 on #161A17","first_three_all_pairs":"pass in both modes"},"light":[{"slot":1,"name":"forest","hex":"#2E7F3A"},{"slot":2,"name":"blue","hex":"#316CB5"},{"slot":3,"name":"orchid","hex":"#D788CC"},{"slot":4,"name":"copper","hex":"#E98D5B"},{"slot":5,"name":"teal","hex":"#00BFC8"},{"slot":6,"name":"violet","hex":"#8370C7"},{"slot":7,"name":"ochre","hex":"#D39E26"}],"dark":[{"slot":1,"name":"forest","hex":"#458D4D"},{"slot":2,"name":"blue","hex":"#346AAC"},{"slot":3,"name":"orchid","hex":"#C276A2"},{"slot":4,"name":"copper","hex":"#9F5021"},{"slot":5,"name":"teal","hex":"#00A1A9"},{"slot":6,"name":"violet","hex":"#6B5AA8"},{"slot":7,"name":"ochre","hex":"#A07100"}]},"sequential":{"note":"One hue, light to dark. Use for volume heatmaps, choropleths, density.","forest":["#EDF4ED","#D2E4D2","#B2D1B3","#8EBC91","#6AA66E","#489050","#2F7839","#136022","#004908"],"copper":["#FAEFEA","#F2D8CC","#E8BCA9","#DC9D81","#CE7E59","#BB6135","#A0491A","#863100","#6D1700"]},"diverging":{"note":"Negative arm copper, neutral grey midpoint, positive arm forest. Equal steps per arm. Always print the sign (+/-) because the hue pair is weak for red-green colour blindness.","returns_light":["#863100","#BB6135","#DC9D81","#F2D8CC","#E7E8E5","#D2E4D2","#8EBC91","#489050","#136022"],"returns_dark":["#E8BCA9","#CE7E59","#A0491A","#6D1700","#323331","#004908","#2F7839","#6AA66E","#B2D1B3"]},"finance":{"note":"Up/down follows the market convention (green/red) but is never colour-only: use filled vs hollow candles, triangle icons and signed numbers.","light":{"up":"#1F7A3F","down":"#E8735A","flat":"#8A8C86","volume":"#C4C7BF"},"dark":{"up":"#3A8A47","down":"#E9896D","flat":"#8A8C86","volume":"#3A403B"},"accessible_alternative":{"note":"Optional switch for colour-blind viewers: blue up / copper down, Delta E >= 21 under protan/deutan.","light":{"up":"#316CB5","down":"#E98D5B"},"dark":{"up":"#4A80C8","down":"#D27A3E"}},"moving_averages":{"note":"Price line stays ink, indicators recede.","sma_20":"#316CB5","sma_50":"#D39E26","line_style":"1.5px solid, price 2px"}},"status":{"good":"#0CA30C","warning":"#FAB219","serious":"#EC835A","critical":"#D03B3B","note":"Reserved for states (pipeline healthy, lag, failed). Never used as a series colour; always with icon + label."}},"chart":{"line_width_px":2,"marker_min_px":8,"bar_corner_radius_px":4,"bar_gap_px":2,"grid":"horizontal hairlines only, gridline colour","spines":"only bottom axis, axis colour","legend":"top left, no frame; plus direct end labels for <= 4 series","title_align":"left","dual_axis":"never; index to 100 or use two stacked panels instead"},"spacing_px":{"xs":4,"s":8,"m":16,"l":24,"xl":40},"radius_px":{"s":4,"m":8,"l":12}}</script>
+<script type="application/json" id="price-data">{"ORCL":[["2025-10-31",256.0837,262.3005,253.3206,259.1427,16898700],["2025-11-03",261.738,262.113,251.8602,254.4456,15709200],["2025-11-04",246.6795,251.9095,241.9527,244.8934,19772600],["2025-11-05",244.6368,249.0675,243.7684,247.0051,11991500],["2025-11-06",244.6664,245.7815,236.1306,240.5811,18678300],["2025-11-07",235.8445,237.226,229.2823,236.101,20969300],["2025-11-10",242.7027,243.9757,233.9399,237.6503,16698700],["2025-11-11",233.111,234.3149,225.8679,233.0321,20686600],["2025-11-12",233.6143,233.6834,223.1838,223.993,24195000],["2025-11-13",222.0194,222.1872,212.3784,214.6974,30009000],["2025-11-14",208.0464,224.0522,207.9872,219.9077,36053800],["2025-11-17",215.329,219.8584,212.714,216.9572,16143800],["2025-11-18",213.3554,220.7465,211.6679,217.5788,21098300],["2025-11-19",216.1677,225.1377,214.4408,222.5523,21679500],["2025-11-20",228.108,230.9105,207.5234,207.9082,27459600],["2025-11-21",204.3459,205.5597,190.9945,196.1357,44834100],["2025-11-24",194.2608,201.129,191.7346,197.6357,31144700],["2025-11-25",191.5175,196.7772,183.1791,194.4286,29595000],["2025-11-26",206.734,207.2274,199.5698,202.2539,26544100],["2025-11-28",196.8759,199.6685,195.001,199.2836,13848500],["2025-12-01",197.8528,200.8132,194.1029,198.287,13461200],["2025-12-02",202.4315,206.9313,197.3594,198.4449,19664500],["2025-12-03",197.685,205.1748,196.7673,204.9873,19060500],["2025-12-04",205.1156,212.5659,203.5959,211.5002,23316900],["2025-12-05",216.1085,216.6019,210.7996,214.7073,24208700],["2025-12-08",218.4275,221.7826,214.0461,217.6282,24711200],["2025-12-09",217.1249,219.6807,215.398,218.6051,17643600],["2025-12-10",218.8716,222.3451,214.7073,220.0656,47928000],["2025-12-11",188.1032,199.3231,183.7712,196.2246,100612700],["2025-12-12",193.7773,195.2378,183.5245,187.4618,55201600],["2025-12-15",185.804,186.475,179.0049,182.4785,43897500],["2025-12-16",182.2614,187.2941,182.0542,186.1592,32433500],["2025-12-17",180.8897,184.0376,174.7321,176.1038,50222000],["2025-12-18",180.3075,182.3206,176.2222,177.653,36297300],["2025-12-19",185.9027,192.5438,185.6362,189.4354,77008600],["2025-12-22",194.2214,196.1752,190.284,195.7608,27148000],["2025-12-23",193.8365,194.5964,189.6525,192.7609,18301600],["2025-12-24",192.4254,195.6621,191.853,194.8825,9282700],["2025-12-26",195.445,197.7245,193.5207,195.3759,11262000],["2025-12-29",191.5965,195.889,190.0966,192.8004,14748100],["2025-12-30",193.4714,195.7608,193.126,194.6062,14197400],["2025-12-31",193.8267,194.5964,192.159,192.3366,10341500],["2026-01-02",194.8628,195.968,191.6458,193.126,14540700],["2026-01-05",195.7213,199.0271,189.7906,190.0472,22635500],["2026-01-06",190.0176,192.307,188.1822,191.1919,16474500],["2026-01-07",192.7215,193.0866,189.465,190.2939,11171200],["2026-01-08",188.3598,188.4289,183.6922,187.146,19468500],["2026-01-09",189.6294,198.0592,186.7799,196.4168,26152700],["2026-01-12",195.5065,204.4112,194.9228,202.5115,25428500],["2026-01-13",202.8281,205.5985,198.5341,200.1468,15857400],["2026-01-14",199.5433,199.5433,188.7885,191.5588,22473200],["2026-01-15",192.944,192.944,187.3835,187.8386,16418600],["2026-01-16",187.898,189.8372,184.5538,189.0655,19224700],["2026-01-20",185.2068,185.2068,177.4598,178.0138,29129500],["2026-01-21",177.7764,178.6866,168.7926,172.0378,38190000],["2026-01-22",177.4696,178.2513,174.63,176.2922,21141900],["2026-01-23",170.7911,177.7467,170.1777,175.2831,23011300],["2026-01-26",177.2025,183.3467,176.6385,180.5071,21100400],["2026-01-27",177.2916,177.8159,171.8399,173.047,27093700],["2026-01-28",173.0668,179.7552,170.0392,170.9693,35882700],["2026-01-29",168.3473,168.4265,159.8088,167.2194,37254500],["2026-01-30",166.3883,167.1106,161.5105,162.8363,27362400],["2026-02-02",169.1092,169.3862,158.3049,158.3642,47421000],["2026-02-03",156.5833,157.6914,150.2907,153.0313,43260100],["2026-02-04",152.2596,152.3091,142.8998,145.1161,42323400],["2026-02-05",144.0574,144.9974,133.8171,135.034,42789000],["2026-02-06",138.2694,141.6828,137.4383,141.3069,29962400],["2026-02-09",146.9168,158.0575,145.4426,154.931,49936500],["2026-02-10",158.3049,163.6378,155.2971,158.196,40092200],["2026-02-11",161.9261,161.9261,152.3684,155.495,24538900],["2026-02-12",156.2568,157.355,150.8843,154.8222,23285400],["2026-02-13",157.5628,160.5805,153.6448,158.4434,18597000],["2026-02-17",156.3063,157.5925,151.2603,152.3387,19610800],["2026-02-18",152.7741,155.6335,149.7663,154.5154,14801100],["2026-02-19",155.5246,158.384,154.1197,154.8815,14976300],["2026-02-20",151.6759,152.3585,145.8285,146.5112,29621900],["2026-02-23",144.1465,144.2553,137.1217,139.8129,31749800],["2026-02-24",139.3478,145.2051,137.2602,144.5917,21336600],["2026-02-25",147.5797,151.6561,145.779,146.3232,27303900],["2026-02-26",147.2136,150.8843,143.6122,148.7175,20652200],["2026-02-27",142.3557,144.5323,140.5945,143.8595,36425200],["2026-03-02",140.1196,148.579,139.6842,147.6687,22418800],["2026-03-03",143.2164,149.3309,141.5344,147.4313,20120800],["2026-03-04",148.4207,151.9826,147.5203,150.7557,17585400],["2026-03-05",150.9734,156.2667,148.5295,153.15,24094800],["2026-03-06",151.2999,157.5034,150.0136,151.3394,38000600],["2026-03-09",149.1034,150.3896,144.8786,149.9543,31173500],["2026-03-10",151.9924,152.5069,146.8772,147.8172,51544600],["2026-03-11",164.6173,169.9403,158.8787,161.3918,83247500],["2026-03-12",162.9155,166.0519,156.9296,157.4738,37133700],["2026-03-13",157.3649,159.0667,152.5168,153.4667,26350400],["2026-03-16",154.4066,157.0582,152.873,154.3176,21607700],["2026-03-17",153.7932,157.2363,151.8737,153.0511,23929500],["2026-03-18",151.7748,153.3282,150.4292,151.2801,18051100],["2026-03-19",148.8659,155.2575,147.3126,153.8723,22046100],["2026-03-20",151.4285,151.6264,146.3825,148.0942,37551400],["2026-03-23",149.8158,154.1296,149.1133,152.7048,19927900],["2026-03-24",151.379,152.2695,145.2942,145.5316,26122100],["2026-03-25",147.649,148.2525,143.068,144.473,20683800],["2026-03-26",142.3655,144.9182,141.0298,141.297,16961900],["2026-03-27",139.4369,140.1889,136.8348,138.1804,17929600],["2026-03-30",138.5563,139.7041,135.4991,137.3295,20125700],["2026-03-31",138.8136,145.8384,138.3684,145.5514,24492000],["2026-04-01",147.5104,148.0645,143.1373,143.6913,20495900],["2026-04-02",141.2673,144.8885,138.8136,144.8292,14381900],["2026-04-06",145.8779,146.9762,142.326,143.998,12556700],["2026-04-07",142.2567,143.0384,138.4574,141.6532,17250400],["2026-04-08",148.7076,149.8554,141.386,142.138,23527000],["2026-04-09",141.1848,141.7806,135.0291,136.8758,30407800],["2026-04-10",136.3397,139.1693,133.6093,137.1042,26171800],["2026-04-13",138.7722,154.797,138.7225,154.509,49997700],["2026-04-14",166.7311,168.1907,160.4066,161.8363,59779800],["2026-04-15",165.6986,171.3281,165.0234,168.5977,43010800],["2026-04-16",175.1605,178.983,172.5592,177.0668,46997300],["2026-04-17",181.6241,183.1829,172.1224,173.8102,45282600],["2026-04-20",175.5477,176.491,172.2713,176.3123,22330900],["2026-04-21",177.0768,184.0169,174.7535,179.8766,39638000],["2026-04-22",184.8509,187.8294,181.495,186.1614,32448800],["2026-04-23",179.1121,180.5915,172.8373,175.0215,37084200],["2026-04-24",179.2213,179.4199,167.5949,172.043,33215000],["2026-04-27",171.348,172.311,166.7014,171.7253,21616600],["2026-04-28",161.0023,167.4957,160.8931,164.7752,33716500],["2026-04-29",162.8689,163.5838,159.5031,162.6604,20587500],["2026-04-30",160.8633,164.0008,159.1854,160.2378,21016400],["2026-05-01",165.2319,173.0557,164.9638,170.6033,26318000],["2026-05-04",174.7634,182.19,173.0159,179.0029,33504500],["2026-05-05",180.8298,185.1884,177.7221,184.0268,23497200],["2026-05-06",184.8707,192.9029,181.3659,192.6448,27685500],["2026-05-07",197.1921,198.7211,189.4379,193.2008,31803200],["2026-05-08",191.2052,196.5865,188.8521,194.5511,21158300],["2026-05-11",190.7782,194.283,189.2393,192.4562,16890600],["2026-05-12",191.5427,191.5427,179.5788,185.4962,22123400],["2026-05-13",187.6805,190.2024,183.7388,188.4053,15789300],["2026-05-14",186.8366,199.2771,184.1261,194.2135,22545000],["2026-05-15",189.1301,195.0277,187.5514,191.5725,15747100],["2026-05-18",188.6436,189.3982,181.9616,185.2778,19114300],["2026-05-19",184.6721,187.3727,179.6383,180.1646,16717700],["2026-05-20",178.6554,186.8763,177.5235,186.8167,16517200],["2026-05-21",187.6607,191.4435,185.8636,188.4152,12119700],["2026-05-22",190.3017,195.5936,189.7357,190.7087,10875800],["2026-05-26",191.92,193.8065,189.1996,191.6817,12856100],["2026-05-27",190.113,190.7683,186.5784,189.5967,12126000],["2026-05-28",192.6547,203.5365,191.9995,202.2458,25339900],["2026-05-29",207.5079,224.6745,206.525,224.1682,41082200],["2026-06-01",228.8545,248.4635,222.9966,246.3784,48390000],["2026-06-02",241.0666,247.2224,237.1349,242.8339,30294800],["2026-06-03",238.7632,238.793,225.9851,228.6857,23644700],["2026-06-04",225.3795,237.2441,222.4009,234.6528,19993800],["2026-06-05",227.8517,229.7877,207.9547,212.1545,29019900],["2026-06-08",216.1955,217.4961,207.8356,210.3078,17227200],["2026-06-09",212.3829,218.9258,196.378,204.3407,26040700],["2026-06-10",197.0829,210.9631,196.7652,199.8232,46108300],["2026-06-11",178.3873,183.4509,174.0287,182.7857,63678500],["2026-06-12",183.6892,184.2552,177.7221,182.8155,29562300],["2026-06-15",186.0522,193.9256,184.8807,191.2647,20279900],["2026-06-16",188.6535,193.9256,186.3203,186.9855,16985500],["2026-06-17",184.831,188.8322,181.2766,182.2198,16616600],["2026-06-18",181.7035,186.6479,176.4314,182.9743,31386100],["2026-06-22",181.0085,183.2623,173.1549,173.8202,22935400],["2026-06-23",169.0147,173.0855,163.4348,163.9809,33327900],["2026-06-24",161.3201,164.5667,154.241,156.4054,38305000],["2026-06-25",156.2267,156.4947,149.2866,151.3716,36844400],["2026-06-26",149.1873,152.4439,146.9434,147.4696,36532100],["2026-06-29",152.841,153.397,144.1634,146.7051,34310300],["2026-06-30",146.1988,148.8596,143.4486,145.5038,35926900],["2026-07-01",143.4585,146.4966,141.4827,141.4827,45964000],["2026-07-02",142.277,146.0101,137.8389,139.2686,44166700],["2026-07-06",143.2698,144.5804,140.1523,142.7337,36683000],["2026-07-07",142.694,144.5208,136.568,140.5891,47200000],["2026-07-08",138.0672,140.8274,136.568,139.487,34607300],["2026-07-09",140.4104,148.0058,139.9338,143.1904,35221900],["2026-07-10",145.1133,145.1432,138.7468,140.1218,29843300],["2026-07-13",138.5177,139.1354,130.866,131.0553,56690300],["2026-07-14",131.5136,132.2708,127.1298,127.4686,52670400],["2026-07-15",130.0789,133.4066,128.3652,132.0018,48520400],["2026-07-16",130.9955,131.2944,123.2043,123.7523,54780900],["2026-07-17",121.2515,127.9667,121.0523,125.9442,39917100],["2026-07-20",123.8121,125.0276,119.5877,120.9327,36793200],["2026-07-21",122.3575,126.9505,121.7597,126.5818,27748100],["2026-07-22",125.715,128.3652,124.2405,125.3763,21096700],["2026-07-23",123.5032,124.2405,118.9999,119.5977,30900600],["2026-07-24",122.0187,122.6265,114.3272,114.5663,46405700],["2026-07-27",117.5652,121.5405,116.3696,119.4582,36916600],["2026-07-28",117.7445,121.8792,114.0781,119.518,32665400],["2026-07-29",118.9799,121.4707,115.7718,117.3061,28081800],["2026-07-30",122.4172,127.8671,121.132,127.09,41338400],["2026-07-31",129.5907,131.9121,125.2368,129.3914,34438700],["2026-08-03",131.4339,142.5428,129.7302,141.3273,49696900],["2026-08-04",140.4904,148.1521,140.4904,145.203,43723500],["2026-08-05",144.4657,145.8506,141.9749,143.8579,23524100],["2026-08-06",138.7369,146.0399,138.2088,142.9413,23073300],["2026-08-07",144.7845,146.6177,141.8155,146.4783,22874000],["2026-08-10",147.7137,151.4299,146.0797,150.4934,24265000],["2026-08-11",150.6428,151.4299,143.7085,144.9439,28761800],["2026-08-12",152.2469,154.3192,147.345,152.7152,43559400],["2026-08-13",151.42,158.6731,151.3502,155.6443,25740000],["2026-08-14",155.2658,155.8137,148.2517,149.9654,21905500],["2026-08-17",147.903,149.8458,144.9638,146.1096,20668000],["2026-08-18",142.7221,145.462,141.8255,142.2638,19152300],["2026-08-19",142.1742,145.5417,136.9236,143.2801,26552900],["2026-08-20",143.7683,145.3823,140.5004,141.5465,15184400],["2026-08-21",143.1904,147.8034,142.0745,145.9303,19635000],["2026-08-24",144.5852,144.5852,140.7295,141.9251,14158600],["2026-08-25",142.772,145.8008,141.9849,144.2266,13329400],["2026-08-26",146.4583,151.0713,146.289,148.3214,18426100],["2026-08-27",151.5495,153.2632,146.9764,151.3801,30251400],["2026-08-28",153.034,153.4226,149.1583,150.2941,17800000],["2026-08-31",148.7598,150.7026,147.2056,148.5705,16118900],["2026-09-01",146.2092,146.2491,139.4343,140.7993,25443300],["2026-09-02",139.7432,146.1495,139.2052,145.2129,21906700],["2026-09-03",146.7273,156.1923,146.3786,153.4724,25101700],["2026-09-04",158.8724,159.1115,156.1326,158.1949,26511300],["2026-09-08",166.9824,170.071,160.5662,161.9211,37662800],["2026-09-09",162.9374,164.5414,159.7691,161.0344,27464600],["2026-09-10",157.7964,158.6532,151.958,152.3764,56824700],["2026-09-11",163.8241,165.3883,149.2879,149.7262,80438600],["2026-09-14",140.8989,144.7945,140.4904,144.2565,42159700],["2026-09-15",142.9314,144.3461,139.5041,139.8328,31552700],["2026-09-16",139.514,145.9801,138.4878,142.6325,34366400],["2026-09-17",146.2092,151.4399,145.6115,150.0351,27742400],["2026-09-18",149.9155,150.3439,143.8679,147.0661,39324900],["2026-09-21",148.3812,149.4273,145.6214,148.0126,22418300],["2026-09-22",150.6927,153.034,148.0524,148.6502,31260000],["2026-09-23",147.7535,148.1122,143.6985,144.0273,22682300],["2026-09-24",136.814,139.8229,132.9881,139.0258,56629400],["2026-09-25",138.0594,140.3609,136.4155,136.5948,23671000],["2026-09-28",132.2409,135.19,131.0951,132.1114,36060100],["2026-09-29",132.3007,143.1406,132.0416,137.2823,45709700],["2026-09-30",136.0369,137.9896,134.2535,136.7941,22321600],["2026-10-01",139.0856,139.7332,134.8313,137.5612,25459100],["2026-10-02",141.5664,144.3262,139.7432,141.7757,35409300],["2026-10-05",142.0048,146.1196,141.8454,141.955,18069600],["2026-10-06",143.3996,146.3985,143.3299,144.2365,20041600],["2026-10-07",142.0147,144.1668,140.8491,143.031,15739400],["2026-10-08",141.6661,142.2539,134.1638,135.19,42412600],["2026-10-09",136.7,142.9,136.49,141.4,25529900],["2026-10-12",141.56,141.56,136.52,137.39,21533100],["2026-10-13",135.91,144.18,135.55,143.2,26325800],["2026-10-14",140.0,141.05,129.23,130.55,52513600],["2026-10-15",128.07,135.08,127.6,134.47,31382100],["2026-10-16",133.49,133.8,127.36,128.23,36109100],["2026-10-19",130.66,131.4,129.12,129.59,23749200],["2026-10-20",128.51,134.35,127.45,131.14,26751800],["2026-10-21",133.12,133.52,127.7,129.13,26329100],["2026-10-22",126.35,127.94,122.76,125.54,36620100],["2026-10-23",124.87,128.33,124.39,126.16,19223400],["2026-10-26",126.06,127.99,123.75,126.06,23008500],["2026-10-27",126.88,132.34,126.86,130.53,26026700],["2026-10-28",131.32,148.48,128.38,144.54,81933800],["2026-10-29",144.14,144.61,136.59,139.56,39366900],["2026-10-30",133.62,135.2,129.0,130.67,40976300]],"MSFT":[["2025-10-31",524.564,525.0004,510.8964,513.5844,34006400],["2025-11-03",515.5681,520.6761,510.3907,512.8108,22374700],["2025-11-04",507.5837,511.3428,503.6957,510.1328,20958700],["2025-11-05",509.1112,510.6287,502.446,503.0213,23024300],["2025-11-06",501.5335,501.5732,491.7639,493.0434,27406500],["2025-11-07",492.8946,495.3048,489.2248,492.7657,24019800],["2025-11-10",495.9594,502.7138,494.7295,501.8707,26101500],["2025-11-11",500.6806,505.4414,498.2506,504.5289,17980000],["2025-11-12",505.2033,507.4945,495.0469,506.9688,26574900],["2025-11-13",506.1456,509.3096,497.1992,499.1829,25273100],["2025-11-14",494.1642,507.4251,493.3806,506.0166,28505700],["2025-11-17",504.3008,507.9408,500.7897,503.3486,19092800],["2025-11-18",491.3275,498.8754,482.8076,489.7604,33815100],["2025-11-19",486.1005,491.149,478.8898,483.1448,23245300],["2025-11-20",489.6039,490.4584,472.5024,475.4139,26802500],["2025-11-21",475.4834,475.9008,465.3179,469.1436,31769200],["2025-11-24",472.0055,473.8935,465.0695,471.0118,34421000],["2025-11-25",471.0814,476.1294,461.9593,473.983,28019800],["2025-11-26",483.2442,485.2316,478.1665,482.4393,25709100],["2025-11-28",484.5261,489.5244,483.5821,488.9083,14386700],["2025-12-01",485.3608,486.7718,481.5947,483.6715,23964000],["2025-12-02",483.6516,490.3889,483.2542,486.9109,19562700],["2025-12-03",473.3172,481.1873,472.2043,474.7183,34615100],["2025-12-04",476.7355,478.2857,473.4861,477.8087,22318200],["2025-12-05",479.4781,480.3526,475.8611,480.1141,22608700],["2025-12-08",481.8332,489.1964,481.3264,487.9245,21965900],["2025-12-09",486.0166,489.0176,485.4204,488.9182,14696100],["2025-12-10",480.9786,481.1972,472.085,475.5431,35756200],["2025-12-11",473.6253,482.966,472.8601,480.4221,24669200],["2025-12-12",476.7952,479.4086,473.3371,475.5133,21248100],["2025-12-15",477.0733,477.6894,469.5411,471.8266,23727700],["2025-12-16",468.935,474.8773,467.9115,473.3868,20705600],["2025-12-17",473.9035,476.974,472.0055,473.1184,24527200],["2025-12-18",475.1754,486.5135,474.8773,480.9289,28573500],["2025-12-19",484.2876,484.7745,479.4483,482.8567,70836100],["2025-12-22",483.0554,485.649,479.647,481.863,16963000],["2025-12-23",481.9226,484.7546,481.6841,483.7808,14683600],["2025-12-24",482.6181,486.0762,481.7735,484.9434,5855900],["2025-12-26",483.6417,485.0428,482.8964,484.6354,8842200],["2025-12-29",481.8033,485.2714,481.1276,484.0292,10893400],["2025-12-30",482.8666,486.593,482.4393,484.4069,13944500],["2025-12-31",484.7645,485.0627,480.2531,480.5711,15601600],["2026-01-02",481.3363,481.6046,467.196,469.9585,25571600],["2026-01-05",471.0714,473.0688,466.5402,469.869,25250300],["2026-01-06",470.813,475.7219,466.7886,475.4934,23037700],["2026-01-07",476.7355,486.6129,474.937,480.4221,25564200],["2026-01-08",478.2062,479.6173,472.8601,475.0959,18162600],["2026-01-09",471.0715,476.7951,469.2232,476.2585,18491000],["2026-01-12",473.665,477.9577,472.6812,474.1718,23519900],["2026-01-13",471.6876,472.7806,463.0126,467.7029,28545800],["2026-01-14",463.5194,465.2484,454.2879,456.484,28184300],["2026-01-15",461.1941,461.3233,453.0259,453.7811,23225800],["2026-01-16",454.9437,460.27,453.6023,456.9609,34246700],["2026-01-20",448.3754,453.9202,446.4476,451.6546,26130000],["2026-01-21",449.7467,449.8362,435.9145,441.3102,37980500],["2026-01-22",444.7981,449.9852,441.8965,448.2959,25349400],["2026-01-23",449.0213,468.1301,447.6898,463.0126,38000200],["2026-01-26",462.3766,471.2603,459.0875,467.3153,29291200],["2026-01-27",470.7137,479.8259,470.1771,477.5503,29213900],["2026-01-28",480.1637,480.6904,474.9866,478.5937,36875400],["2026-01-29",437.2162,439.7104,418.3658,430.7671,128855300],["2026-01-30",436.4014,436.8287,423.7616,427.5774,58566800],["2026-02-02",427.5277,428.0245,419.5881,420.701,42219900],["2026-02-03",419.3496,419.3893,405.9844,408.6177,61424100],["2026-02-04",408.409,417.1535,406.6601,411.5789,45012400],["2026-02-05",404.8714,405.726,389.8467,391.1882,66289200],["2026-02-06",396.6536,399.257,390.443,398.6111,53515300],["2026-02-09",402.2978,412.2745,398.3429,410.9926,45480500],["2026-02-10",416.9746,421.0091,410.0983,410.6647,44857900],["2026-02-11",413.5563,413.8345,398.482,401.8208,42491000],["2026-02-12",402.4468,403.6393,395.5009,399.3067,40802400],["2026-02-13",401.9003,402.9834,395.5406,398.79,34091600],["2026-02-17",396.7032,397.995,392.0428,394.3581,32078800],["2026-02-18",395.6201,400.0222,393.8216,397.0809,23223400],["2026-02-19",399.0728,402.7977,395.069,396.8518,28234000],["2026-02-20",394.5112,398.5051,393.5651,395.6267,34015200],["2026-02-23",393.4057,393.7643,381.5538,382.9182,43238300],["2026-02-24",382.5896,387.7885,380.1693,387.4299,33884700],["2026-02-25",388.9538,399.8496,388.5853,398.9831,43625500],["2026-02-26",403.0765,405.8453,397.1306,400.0986,34405900],["2026-02-27",389.3024,395.2184,388.3064,391.1548,51367200],["2026-03-02",391.2743,399.5707,389.0534,396.9414,35474900],["2026-03-03",391.5533,405.0585,391.0852,402.2997,38199200],["2026-03-04",399.6504,409.371,398.6943,403.5646,35808000],["2026-03-05",402.7877,409.9487,402.7678,409.0224,39001300],["2026-03-06",407.5484,411.3829,406.8612,407.3094,31123900],["2026-03-09",403.2857,408.5543,401.8714,407.7576,30131900],["2026-03-10",408.3751,408.5444,401.3037,404.1223,31706400],["2026-03-11",403.9331,407.3592,399.9691,403.2458,25512100],["2026-03-12",402.9968,404.4808,400.0886,400.238,27263900],["2026-03-13",399.3815,403.1662,392.6588,393.9535,26848000],["2026-03-16",396.4633,399.013,393.1966,398.3358,27733700],["2026-03-17",398.6545,402.7678,396.1446,397.7979,26228300],["2026-03-18",395.5271,396.3936,389.4219,390.2087,25908500],["2026-03-19",388.5255,390.9059,385.4978,387.4499,25138800],["2026-03-20",385.2289,385.438,378.5858,380.3287,50853200],["2026-03-23",382.3506,385.6472,380.1395,381.4542,29680100],["2026-03-24",380.8167,380.9263,370.3492,371.2356,42733600],["2026-03-25",375.3987,375.5381,368.1381,369.5424,31181200],["2026-03-26",369.3233,373.2076,363.716,364.4929,36836600],["2026-03-27",360.4393,360.9871,355.0711,355.33,37883400],["2026-03-30",360.4393,363.8854,354.842,357.5112,44797000],["2026-03-31",363.0786,371.3949,361.6046,368.676,45244400],["2026-04-01",371.9825,372.4805,366.7139,367.8792,29417200],["2026-04-02",365.7279,372.132,362.6802,371.9527,24099100],["2026-04-06",371.9826,372.2216,368.0087,371.375,16146600],["2026-04-07",368.8453,370.9468,365.0805,370.7874,21443300],["2026-04-08",383.4262,383.4461,369.9109,372.8191,33064800],["2026-04-09",370.9965,371.9925,365.5685,371.5642,30435300],["2026-04-10",371.4746,374.1239,368.5365,369.3731,28111100],["2026-04-13",372.1021,382.988,369.5225,382.8186,35745800],["2026-04-14",386.3543,393.097,384.9599,391.5233,37504500],["2026-04-15",396.3936,412.6976,395.1288,409.5603,45063400],["2026-04-16",418.1654,419.1215,410.4766,418.5638,41642400],["2026-04-17",423.1054,429.8381,418.9921,421.0836,48568200],["2026-04-20",419.4502,421.6214,414.6198,416.3826,27582200],["2026-04-21",418.5438,425.4558,415.5161,422.448,32048500],["2026-04-22",424.4699,431.9495,421.96,431.1727,29378200],["2026-04-23",418.1953,421.9501,409.7495,414.072,38308000],["2026-04-24",415.2871,423.2349,414.1218,422.9062,27457400],["2026-04-27",420.6752,425.3861,415.3867,423.1054,30867300],["2026-04-28",422.8564,428.1848,420.1971,427.5175,30438100],["2026-04-29",422.8663,425.0973,418.5937,422.7468,38288300],["2026-04-30",409.1519,412.7474,396.4036,406.1342,70909400],["2026-05-01",411.1339,415.4265,408.7834,412.7673,31372400],["2026-05-04",409.879,419.0817,409.1419,411.9506,28066500],["2026-05-05",413.6437,415.0978,407.15,409.7196,25700900],["2026-05-06",406.3532,416.7312,403.4749,412.2892,30285900],["2026-05-07",418.4144,426.2526,417.0698,419.0717,34942400],["2026-05-08",415.7054,416.9404,412.329,413.4445,33383800],["2026-05-11",406.2238,411.0243,403.8633,410.9944,35657900],["2026-05-12",412.8071,413.823,404.9988,406.1242,38594200],["2026-05-13",401.5727,404.6701,399.4114,403.5745,29667100],["2026-05-14",402.8475,410.1777,399.262,407.7775,27077500],["2026-05-15",412.5979,426.4418,411.2434,420.2171,50771200],["2026-05-18",414.9385,423.4042,413.9325,421.8306,32564100],["2026-05-19",428.1649,430.9536,414.809,415.7353,33018700],["2026-05-20",412.4984,420.3963,409.6399,419.3605,27864000],["2026-05-21",423.9519,425.5389,414.9289,418.3025,31393500],["2026-05-22",418.7517,423.6026,415.5477,417.7835,22390300],["2026-05-26",415.6475,418.9813,412.2439,415.2483,30398000],["2026-05-27",410.2377,415.1585,408.8104,411.8946,28901500],["2026-05-28",412.204,428.683,411.8946,426.1877,47250500],["2026-05-29",431.7372,449.4838,431.5476,449.394,79654400],["2026-06-01",463.9666,465.4438,457.4089,459.6547,53628900],["2026-06-02",446.0403,452.6479,439.6024,440.4808,37036800],["2026-06-03",437.6262,439.5625,423.4529,426.537,39037000],["2026-06-04",434.9911,435.3305,425.6088,427.2457,26899500],["2026-06-05",427.5351,428.663,413.6213,415.8871,34782200],["2026-06-08",413.3619,416.3762,407.7923,410.9663,32086700],["2026-06-09",408.2614,411.2059,397.7313,402.652,35317300],["2026-06-10",397.8011,404.2789,396.4137,396.6133,32576000],["2026-06-11",394.4674,396.1043,383.2785,389.6066,47224100],["2026-06-12",390.6945,391.0039,381.5517,390.0058,34865800],["2026-06-15",396.0544,400.9951,392.1119,399.0089,32266400],["2026-06-16",395.0463,396.0944,389.9559,393.09,31506800],["2026-06-17",389.5167,389.6365,376.611,378.198,41987800],["2026-06-18",377.1101,380.6534,372.5786,378.6871,59714200],["2026-06-22",375.034,380.9129,366.3803,366.6498,45171100],["2026-06-23",371.6803,376.5112,369.9735,373.2374,40647600],["2026-06-24",370.8719,378.1681,364.0946,364.7733,44509900],["2026-06-25",362.0883,363.5456,348.5439,352.167,66179000],["2026-06-26",356.4789,375.9023,354.7621,372.2692,186201600],["2026-06-29",376.7907,379.785,359.2237,367.8775,51229900],["2026-06-30",370.3328,373.447,366.7596,372.3191,44945700],["2026-07-01",380.1144,388.0994,374.1856,383.558,48065800],["2026-07-02",383.7576,391.4631,382.979,389.7563,42128900],["2026-07-06",386.3128,388.4188,380.5037,386.0133,34224500],["2026-07-07",391.7525,394.8267,387.4905,388.1094,29297500],["2026-07-08",383.3084,384.586,380.6135,382.6197,25908300],["2026-07-09",373.7464,383.9273,372.6485,383.6378,31083200],["2026-07-10",387.0713,391.1736,380.7832,384.3764,24644600],["2026-07-13",387.0214,392.9103,383.4282,390.2553,28914900],["2026-07-14",382.1007,387.4606,377.9385,384.2067,27863900],["2026-07-15",387.0713,398.2104,385.674,394.8866,36253700],["2026-07-16",397.5616,405.2271,391.3133,400.3463,37047400],["2026-07-17",394.118,397.6414,388.6583,393.08,33049800],["2026-07-20",390.6746,402.4224,388.9179,401.5341,27915800],["2026-07-21",398.0606,400.7156,395.5753,397.0026,24126600],["2026-07-22",398.8292,400.2465,386.2329,389.6066,28142500],["2026-07-23",389.2373,391.0439,376.6809,380.863,30351800],["2026-07-24",386.3227,388.299,379.9348,380.9828,27659400],["2026-07-27",389.347,393.4593,387.261,388.3689,27856200],["2026-07-28",392.4213,399.5678,390.5647,392.6109,32367500],["2026-07-29",392.6608,400.4961,388.0095,389.8062,47209000],["2026-07-30",437.0772,457.8281,431.6275,450.2524,110160700],["2026-07-31",449.1545,465.9628,448.4857,463.8468,60846000],["2026-08-03",475.2354,490.7262,474.1075,486.7337,66762100],["2026-08-04",479.9964,498.5016,478.2697,491.884,50455500],["2026-08-05",495.4273,497.3038,484.7674,486.5441,33388900],["2026-08-06",487.632,500.6176,487.6021,498.9207,36441500],["2026-08-07",498.272,504.2308,497.7929,499.0505,28846200],["2026-08-10",502.4941,512.7647,501.3262,505.1091,31206100],["2026-08-11",503.3824,504.3805,498.6113,502.8633,23049800],["2026-08-12",499.0505,500.5577,490.5964,491.5047,29001500],["2026-08-13",492.3431,500.398,492.0837,495.9464,23039000],["2026-08-14",495.4273,499.0705,492.9919,494.4691,16217600],["2026-08-17",489.2191,491.7343,477.5111,479.4474,29635800],["2026-08-18",480.6352,483.3601,476.2534,480.725,24087600],["2026-08-19",479.168,488.3806,478.4593,483.4,19961900],["2026-08-20",483.3,484.16,479.5,481.15,20020800],["2026-08-21",479.88,486.36,478.53,483.24,22510800],["2026-08-24",483.21,490.61,481.86,487.31,17230800],["2026-08-25",485.44,492.44,484.3,491.71,19519000],["2026-08-26",487.85,497.4,487.31,496.37,20758900],["2026-08-27",494.88,506.48,490.08,505.06,28688800],["2026-08-28",505.33,517.78,504.87,513.53,29207300],["2026-08-31",510.38,512.19,506.39,507.29,27208900],["2026-09-01",497.52,505.97,496.78,501.02,21046900],["2026-09-02",499.85,500.27,493.81,496.82,15336100],["2026-09-03",501.66,515.65,500.8,510.12,24125900],["2026-09-04",510.0,511.0,499.36,499.7,18101800],["2026-09-08",493.01,495.19,490.15,493.95,18882300],["2026-09-09",493.07,494.39,489.8,491.65,12889600],["2026-09-10",488.32,494.52,486.0,492.44,16038800],["2026-09-11",495.65,498.97,492.58,495.63,14510500],["2026-09-14",497.06,509.95,495.34,505.41,23091900],["2026-09-15",500.06,505.9,495.54,497.12,17794600],["2026-09-16",493.03,495.97,487.23,490.3,16670300],["2026-09-17",497.8,501.47,493.17,497.75,17841600],["2026-09-18",497.97,498.65,491.1,493.78,39622300],["2026-09-21",494.95,501.87,491.33,501.61,27959900],["2026-09-22",507.32,508.5,493.65,498.0,21652800],["2026-09-23",500.76,509.44,495.88,500.59,19445600],["2026-09-24",495.07,498.9,491.22,497.93,16657600],["2026-09-25",499.04,519.4,497.25,516.17,38193100],["2026-09-28",505.47,513.33,502.22,509.22,19626900],["2026-09-29",508.31,513.64,502.4,508.96,21341800],["2026-09-30",511.61,519.83,510.31,512.9,27223300],["2026-10-01",519.88,522.85,512.17,512.8,19731900],["2026-10-02",519.39,522.5,513.66,517.53,17822300],["2026-10-05",521.62,532.35,521.47,525.18,26604800],["2026-10-06",531.68,535.69,528.78,529.3,21107500],["2026-10-07",530.73,531.73,524.69,529.76,16790200],["2026-10-08",529.81,533.51,518.79,522.61,20228700],["2026-10-09",528.24,537.22,526.24,535.07,18500600],["2026-10-12",537.53,542.74,535.7,541.15,18314900],["2026-10-13",544.64,551.15,543.06,543.45,23852000],["2026-10-14",545.27,545.75,532.54,533.69,22324300],["2026-10-15",533.32,541.13,531.22,539.44,24151200],["2026-10-16",541.31,543.82,524.43,529.05,24845700],["2026-10-19",528.7,535.57,528.06,533.52,17994900],["2026-10-20",533.91,534.21,525.84,531.87,14576000],["2026-10-21",529.44,533.28,525.02,532.95,13940100],["2026-10-22",533.14,533.6,520.3,521.08,21266600],["2026-10-23",517.75,525.77,515.7,524.51,13671500],["2026-10-26",527.4,533.25,521.69,532.6,19021000],["2026-10-27",532.35,534.7,528.33,531.33,19532300],["2026-10-28",531.82,535.0,526.14,531.01,28594200],["2026-10-29",540.22,541.29,519.56,530.14,39333200],["2026-10-30",525.27,526.0,514.35,521.91,35618300]],"9988.HK":[["2025-10-30",22.2884,22.4684,21.7229,22.1213,112254088],["2025-10-31",21.8312,21.9341,21.2269,21.2269,97457096],["2025-11-03",21.1968,21.3767,20.7597,20.9782,74773287],["2025-11-04",21.078,21.078,20.3197,20.4354,89529769],["2025-11-05",20.1218,20.4687,19.8134,20.3659,94071358],["2025-11-06",20.659,21.2372,20.5434,21.1986,83528391],["2025-11-07",20.9652,20.9652,20.4128,20.567,66709927],["2025-11-10",20.9114,21.0912,20.6031,20.9884,57596575],["2025-11-11",20.7535,20.8691,20.3808,20.6121,73054852],["2025-11-12",20.1923,20.3594,19.9481,20.1537,96741580],["2025-11-13",19.7837,21.3391,19.7066,20.8249,155447392],["2025-11-14",20.1164,20.3606,19.8593,19.9107,101354219],["2025-11-17",19.5753,20.3079,19.5496,19.9094,113907864],["2025-11-18",19.6849,20.353,19.6849,19.8648,102880519],["2025-11-19",19.9927,20.2622,19.9029,20.0697,71141046],["2025-11-20",20.3078,20.5003,19.7562,19.8588,65486765],["2025-11-21",19.2499,19.3269,18.8521,18.9419,141043093],["2025-11-24",18.9705,20.0615,18.9705,19.8305,199790253],["2025-11-25",20.4098,20.6024,19.691,20.2558,147102629],["2025-11-26",19.784,20.2979,19.7069,19.8868,110863259],["2025-11-27",19.7777,19.8933,19.2769,19.3411,103303822],["2025-11-28",19.493,19.6727,19.3902,19.4544,66572166],["2025-12-01",19.6317,20.1321,19.5034,19.8755,93259220],["2025-12-02",20.5337,20.5337,20.0463,20.1361,74133971],["2025-12-03",19.992,20.0946,19.6455,19.7097,54076752],["2025-12-04",19.6483,19.905,19.5713,19.8152,57110210],["2025-12-05",19.665,19.9089,19.588,19.896,78815068],["2025-12-08",19.8904,19.9546,19.6081,19.6851,75226835],["2025-12-09",19.9124,20.1306,19.309,19.3731,69789164],["2025-12-10",19.317,19.6893,19.2015,19.6636,61369895],["2025-12-11",19.903,19.9672,19.3252,19.338,59433982],["2025-12-12",19.6002,19.7799,19.3563,19.7799,88532981],["2025-12-15",19.3507,19.4662,19.0556,19.0684,94298860],["2025-12-16",18.8557,18.8686,18.1754,18.5092,118119058],["2025-12-17",18.5142,18.9122,18.3729,18.7453,60486179],["2025-12-18",18.3745,18.6056,18.3488,18.5029,47014025],["2025-12-19",18.6142,18.8325,18.5115,18.6528,70392591],["2025-12-22",18.7424,19.0633,18.614,18.7937,58877432],["2025-12-23",18.8349,19.0018,18.7964,18.8991,47601549],["2025-12-24",18.7654,18.7654,18.7654,18.7654,0],["2025-12-29",18.9084,19.0884,18.42,18.42,62656820],["2025-12-30",18.4149,18.7233,18.402,18.5691,60201594],["2025-12-31",18.4482,18.461,18.2813,18.3326,35628222],["2026-01-02",18.3729,19.2069,18.3344,19.1171,48902470],["2026-01-05",19.3735,19.7197,19.2325,19.5915,102834720],["2026-01-06",19.3602,19.6553,19.3089,19.3474,112004139],["2026-01-07",18.8695,18.9593,18.4077,18.7156,149677478],["2026-01-08",18.4227,18.5895,18.0891,18.2944,107421412],["2026-01-09",18.9726,19.1648,18.7033,18.7803,115234256],["2026-01-12",18.8263,19.8132,18.711,19.7747,164580300],["2026-01-13",20.7555,21.0118,20.1662,20.4865,153153842],["2026-01-14",20.9744,21.7427,20.7567,21.6402,244622843],["2026-01-15",21.636,21.7897,20.893,21.0851,133061563],["2026-01-16",21.5087,21.6112,21.1372,21.2909,79370877],["2026-01-19",20.7533,20.8173,20.5099,20.5483,72500898],["2026-01-20",20.4729,20.7804,20.3191,20.4601,55456218],["2026-01-21",20.2742,21.1195,20.2742,20.9018,67441221],["2026-01-22",21.2661,21.3302,20.8562,21.1124,59810988],["2026-01-23",21.9333,22.0358,21.5617,21.5874,93252549],["2026-01-26",21.7211,21.8108,21.0804,21.1701,67819829],["2026-01-27",21.3684,21.7656,21.125,21.7656,73661350],["2026-01-28",21.8342,22.2568,21.5909,22.2183,102209414],["2026-01-29",21.9063,22.3032,21.8038,22.1879,67539478],["2026-01-30",21.755,21.8446,21.3711,21.6526,75134065],["2026-02-02",21.0654,21.4747,20.5922,20.8863,100747598],["2026-02-03",21.154,21.2307,19.8495,20.5913,111086312],["2026-02-04",20.378,20.7487,20.0839,20.3908,71689072],["2026-02-05",19.8825,20.509,19.6907,20.4067,89720504],["2026-02-06",19.623,20.0448,19.5846,19.8147,78125091],["2026-02-09",20.3932,20.4827,20.1503,20.1886,58582947],["2026-02-10",20.4131,20.7838,20.2853,20.5154,58402811],["2026-02-11",20.6093,20.7882,20.3921,20.456,51639528],["2026-02-12",20.1795,20.384,19.9495,20.269,56768511],["2026-02-13",19.6798,19.9865,19.667,19.8587,69945660],["2026-02-16",19.7708,19.7708,19.7708,19.7708,0],["2026-02-20",19.1726,19.3899,18.8019,18.8019,70273864],["2026-02-23",19.1889,19.598,19.1122,19.4573,44852186],["2026-02-24",19.15,19.2139,18.7795,18.9073,82838070],["2026-02-25",19.1284,19.1795,18.9113,18.9368,47742854],["2026-02-26",18.9439,19.0078,18.2669,18.2669,98872855],["2026-02-27",18.2583,18.5775,18.1561,18.2455,88719769],["2026-03-02",17.8257,17.9406,17.315,17.4171,134838521],["2026-03-03",17.7526,17.7782,17.1907,17.2162,88507248],["2026-03-04",16.7915,17.0219,16.3436,16.6251,163124992],["2026-03-05",16.6752,16.7902,15.9852,16.1386,141677427],["2026-03-06",16.2111,16.8626,16.16,16.6965,100859931],["2026-03-09",15.9995,16.5362,15.9867,16.4468,102893047],["2026-03-10",16.732,17.1408,16.6043,17.0514,98445281],["2026-03-11",17.2995,17.3761,16.9038,17.0059,61695884],["2026-03-12",16.6705,17.0407,16.5429,16.7982,57889342],["2026-03-13",16.7558,17.1769,16.641,16.909,51862084],["2026-03-16",16.9605,17.2412,16.6925,17.1009,50025123],["2026-03-17",17.2479,17.6689,17.1714,17.1714,76247583],["2026-03-18",17.1313,17.8706,16.9656,17.5519,108384226],["2026-03-19",16.9155,17.1067,16.7243,16.8262,112049539],["2026-03-20",15.7478,16.1685,15.6075,15.7733,206068855],["2026-03-23",15.4034,15.5054,15.0081,15.2631,136352855],["2026-03-24",15.5541,15.8091,15.2736,15.7071,86973171],["2026-03-25",15.9767,16.7679,15.747,16.4489,148277825],["2026-03-26",16.354,16.354,15.6641,15.7152,87500096],["2026-03-27",15.6998,15.8402,15.4956,15.6488,53442572],["2026-03-30",15.0747,15.4829,15.0365,15.3681,80519074],["2026-03-31",15.3993,15.5651,15.0169,15.1699,72026359],["2026-04-01",15.7126,15.8018,15.4832,15.6362,67832865],["2026-04-02",15.4221,15.4221,14.976,15.1034,95121535],["2026-04-08",15.5435,16.3086,15.467,16.13,181819816],["2026-04-09",15.6994,15.8142,15.5592,15.6739,82451818],["2026-04-10",15.9526,16.2586,15.9398,16.0036,78382509],["2026-04-13",15.878,15.878,15.6229,15.7122,51100996],["2026-04-14",16.0105,16.1764,15.7171,15.883,52390198],["2026-04-15",16.5129,16.7041,16.3726,16.3981,95222677],["2026-04-16",16.7959,17.357,16.7321,17.3187,127392595],["2026-04-17",17.2384,17.5194,17.1874,17.4172,83379143],["2026-04-20",17.3087,17.6531,17.1812,17.4746,71204282],["2026-04-21",17.6304,17.6304,17.2095,17.3881,44920044],["2026-04-22",17.0044,17.0172,16.66,16.7748,69494718],["2026-04-23",16.9117,16.9244,16.5163,16.6311,54768842],["2026-04-24",16.3369,16.9363,16.1584,16.8088,63648525],["2026-04-27",16.8033,17.071,16.5866,16.5993,51858735],["2026-04-28",16.4171,16.6465,16.0602,16.1239,72924924],["2026-04-29",16.4194,16.6488,16.3429,16.6488,59643280],["2026-04-30",16.3402,16.3784,16.0598,16.0598,88190461],["2026-05-04",16.4208,17.1093,16.4081,16.7906,67792478],["2026-05-05",16.7308,16.922,16.565,16.7308,25517465],["2026-05-06",16.8782,17.5028,16.687,17.1077,115976497],["2026-05-07",17.7869,17.9654,17.6593,17.9654,116084635],["2026-05-08",17.711,17.8258,17.6218,17.7238,59348966],["2026-05-11",17.4546,17.5567,17.008,17.0846,98275069],["2026-05-12",17.0346,17.3536,16.9836,17.0091,57483637],["2026-05-13",16.8433,17.124,16.6263,16.9453,89332520],["2026-05-14",18.2572,18.3721,17.53,17.5938,171292701],["2026-05-15",17.5997,17.5997,16.7197,16.8727,90144879],["2026-05-18",16.6349,17.209,16.4053,16.8008,94625028],["2026-05-19",16.6474,17.2597,16.6474,17.0046,75905647],["2026-05-20",16.9483,17.2799,16.706,16.8208,64904996],["2026-05-21",16.9129,16.9129,16.0073,16.071,124833824],["2026-05-22",16.3464,16.3974,16.0659,16.1934,67105437],["2026-05-26",16.2182,16.4859,15.8484,16.2692,81943801],["2026-05-27",16.2787,16.3042,15.7561,15.8453,73913384],["2026-05-28",15.7731,15.7986,15.3013,15.5308,113734767],["2026-05-29",15.7101,15.8504,15.3786,15.4168,106781469],["2026-06-01",15.4629,15.8325,15.4501,15.6541,64910941],["2026-06-02",15.8174,16.7223,15.7282,16.6841,126607691],["2026-06-03",16.5696,16.6078,16.1235,16.1362,90810223],["2026-06-04",15.9602,16.0112,15.6542,15.7434,60737375],["2026-06-05",15.7463,15.9503,15.5041,15.6061,75982909],["2026-06-08",15.0837,15.3259,15.0199,15.1474,84021112],["2026-06-09",14.9906,15.1946,14.9269,14.9269,66707175],["2026-06-10",14.8138,14.8776,14.1758,14.482,115892674],["2026-06-11",14.3321,14.4087,13.5408,13.7068,160350719],["2026-06-12",13.9109,14.1916,13.8853,14.064,74743889],["2026-06-15",14.4359,14.4487,13.785,13.9509,83179704],["2026-06-16",14.0405,14.066,13.5682,13.6575,69138026],["2026-06-17",13.8268,13.8396,13.5077,13.6481,71467113],["2026-06-18",13.4525,13.5291,13.0696,13.3887,160333163],["2026-06-22",13.1182,13.2458,12.863,13.1309,99214294],["2026-06-23",13.19,13.19,12.5904,12.6223,98049349],["2026-06-24",12.646,12.9458,12.4547,12.6779,103216499],["2026-06-25",12.4124,12.5336,11.9914,12.119,141402714],["2026-06-26",11.7354,11.7991,11.308,11.4165,176208269],["2026-06-29",11.6937,12.1719,11.6236,11.8595,123324036],["2026-06-30",11.8618,11.983,11.645,11.8427,89897596],["2026-07-02",12.1497,12.4175,11.9266,12.0477,106165597],["2026-07-03",12.0046,12.2405,11.9217,11.9983,67295654],["2026-07-06",12.0174,12.419,11.7942,12.2341,81423639],["2026-07-07",12.2604,12.8151,12.152,12.2158,100211364],["2026-07-08",12.3635,13.9002,12.3125,13.7089,282125685],["2026-07-09",14.0455,14.4027,13.7138,13.7776,190535828],["2026-07-10",14.0381,14.421,13.9105,14.0637,103843838],["2026-07-13",14.1336,14.6821,14.0698,14.1209,100489536],["2026-07-14",14.0734,14.3668,13.6523,14.1372,100890456],["2026-07-15",14.2393,14.6475,13.9203,14.4689,112769038],["2026-07-16",14.8247,15.284,14.7992,14.914,153608858],["2026-07-17",14.8332,15.0501,14.119,14.3613,125635830],["2026-07-20",14.7964,15.1664,14.7072,14.8985,125351835],["2026-07-21",15.2921,15.4324,14.7309,14.9222,98262426],["2026-07-22",14.7806,14.8316,14.3725,14.4873,120611396],["2026-07-23",14.5538,14.6813,14.0946,14.6558,52344763],["2026-07-24",14.2199,14.3092,13.7991,14.0286,107488512],["2026-07-27",14.206,14.2315,13.8744,14.1549,58415973],["2026-07-28",14.4102,14.5632,14.1552,14.2827,75913853],["2026-07-29",14.5267,14.7308,14.2461,14.4884,93154775],["2026-07-30",14.5371,14.6392,14.0653,14.2566,74326961],["2026-07-31",14.5484,15.2114,14.4464,14.9181,144668807],["2026-08-03",15.4301,16.0677,15.3153,15.9657,192268809],["2026-08-04",16.1699,16.476,15.9021,16.0424,125358922],["2026-08-05",16.373,16.4495,16.0159,16.3347,93382622],["2026-08-06",16.1284,16.1284,15.7714,15.8607,67212277],["2026-08-07",15.9734,16.0371,15.5017,15.7822,58259425],["2026-08-10",15.9843,16.252,15.8314,16.15,53629555],["2026-08-11",16.4943,16.6091,16.0482,16.1119,74286963],["2026-08-12",15.8544,15.9181,15.4593,15.625,65057854],["2026-08-13",15.4468,15.8164,15.434,15.536,58154432],["2026-08-14",15.3303,15.394,15.1009,15.2793,56905091],["2026-08-17",15.5482,15.7266,15.3953,15.5737,48563292],["2026-08-18",15.5532,16.3563,15.4257,16.1524,120433806],["2026-08-19",15.8853,16.1276,15.7069,15.8343,70727616],["2026-08-20",16.1479,16.454,15.8545,16.0969,92028319],["2026-08-21",16.4723,16.5488,15.4906,15.6818,146890540],["2026-08-24",14.4275,14.4785,14.0448,14.351,362953456],["2026-08-25",14.6503,14.6758,14.3185,14.5737,124296637],["2026-08-26",14.7613,15.0293,14.7486,14.8762,133860910],["2026-08-27",14.9768,14.9768,14.6834,14.7344,83206714],["2026-08-28",14.4287,14.6456,14.3522,14.5308,73086522],["2026-08-31",14.6688,14.6688,14.3117,14.5668,82619229],["2026-09-01",14.3132,14.377,13.9688,14.0836,99751649],["2026-09-02",14.0549,14.0804,13.685,14.0166,76466094],["2026-09-03",14.0915,14.117,13.5814,13.7089,69972408],["2026-09-04",13.9668,14.273,13.9668,14.0434,103698738],["2026-09-07",14.0678,14.1571,13.9148,13.9785,40367117],["2026-09-08",13.9032,14.2476,13.8522,13.967,44150465],["2026-09-09",14.0919,14.1429,13.8496,14.0026,46572012],["2026-09-10",13.6696,13.6696,13.4146,13.6314,65902181],["2026-09-11",13.3908,13.7352,13.3526,13.7097,56226973],["2026-09-14",13.4532,13.5935,13.3512,13.5042,48442049],["2026-09-15",13.6426,13.8721,13.4896,13.6681,47161376],["2026-09-16",13.7294,13.7294,13.5254,13.5381,34061594],["2026-09-17",13.3859,13.5134,13.2839,13.3986,50647519],["2026-09-18",13.5612,14.1093,13.523,13.9308,90084892],["2026-09-21",14.1114,14.3663,14.0349,14.3536,54733772],["2026-09-22",14.6338,15.08,14.5318,14.6338,123942194],["2026-09-23",14.5105,14.5615,13.9112,14.0005,86835983],["2026-09-24",13.8094,14.1664,13.7839,14.0262,37259984],["2026-09-25",13.707,13.8473,13.554,13.8218,28037888],["2026-09-28",13.7428,13.9595,13.5771,13.7301,45286580],["2026-09-29",13.5888,13.6653,13.4104,13.5379,57027476],["2026-09-30",13.4207,13.6883,13.4079,13.5864,47287932],["2026-10-02",13.2672,13.3437,13.0888,13.3055,39772509],["2026-10-05",13.2662,13.4956,13.2025,13.4319,24811599],["2026-10-06",13.8276,13.9168,13.7256,13.7893,31496596],["2026-10-07",13.5964,13.6473,13.0739,13.4307,59110253],["2026-10-08",13.3038,13.5969,13.1636,13.291,66440072],["2026-10-09",13.3164,13.6732,13.291,13.635,72349748],["2026-10-12",14.0559,14.0686,13.7373,13.7883,46617409],["2026-10-13",13.7243,13.7625,13.3675,13.6606,49272346],["2026-10-14",13.7862,14.4233,13.6334,14.0793,101342353],["2026-10-15",13.7875,13.9277,13.3925,13.5581,79762680],["2026-10-16",13.8648,14.1324,13.8011,13.8648,51610590],["2026-10-20",13.6093,13.6475,13.3162,13.3672,59859490],["2026-10-21",13.6461,13.6971,13.1619,13.2129,51695515],["2026-10-22",12.9486,12.9741,12.3369,12.4069,131777384],["2026-10-23",12.5699,12.589,12.1615,12.4805,92267571],["2026-10-26",12.4197,12.56,12.2476,12.4898,39194859],["2026-10-27",12.6703,12.6894,12.3134,12.3644,36071183],["2026-10-28",12.4675,12.697,12.3783,12.6077,44221702],["2026-10-29",12.5306,12.537,12.2375,12.2502,63350107],["2026-10-30",12.1659,12.5546,12.1213,12.3698,60402093]],"SAP.DE":[["2025-10-30",255.9197,259.6849,255.178,257.6882,1387271],["2025-10-31",255.6367,257.5143,254.6126,255.4092,1209055],["2025-11-03",255.5056,261.9102,254.372,259.4164,1081196],["2025-11-04",255.988,256.7809,253.7226,256.0446,982932],["2025-11-05",254.0553,259.7023,252.7001,257.4435,944453],["2025-11-06",255.0384,256.4516,245.938,246.3902,1263039],["2025-11-07",249.4448,249.8423,244.2776,244.9022,1495029],["2025-11-10",248.308,249.7837,245.1864,245.4702,1208040],["2025-11-11",246.2085,248.8791,245.6971,246.6631,1024146],["2025-11-12",249.9297,251.126,248.5624,248.8472,1121213],["2025-11-13",248.6062,250.9429,247.7513,248.6062,961985],["2025-11-14",244.4838,244.9985,237.3924,241.4528,2184437],["2025-11-17",241.6789,241.9073,234.9402,236.425,1334374],["2025-11-18",231.8178,235.4649,230.7921,234.0403,1354135],["2025-11-19",233.6797,236.3559,232.0285,234.0213,1173122],["2025-11-20",234.8485,237.8557,234.0541,234.4513,1092550],["2025-11-21",231.378,236.1416,230.6408,232.5122,1520744],["2025-11-24",234.9677,237.1176,233.3835,234.7979,2706084],["2025-11-25",232.2769,233.8627,229.1617,232.0503,1286031],["2025-11-26",233.6912,235.3401,231.5874,235.0558,1239164],["2025-11-27",236.3844,238.1527,235.8139,236.1562,473852],["2025-11-28",235.9385,238.9042,235.3682,237.8776,901070],["2025-12-01",237.9678,239.4508,236.2566,238.31,1068756],["2025-12-02",236.8964,239.065,235.6408,237.2388,901545],["2025-12-03",238.1099,240.5682,235.7088,236.109,997604],["2025-12-04",239.4808,244.9301,238.6778,241.0869,1760993],["2025-12-05",241.8494,245.8564,240.4756,244.1391,1025075],["2025-12-08",244.0851,244.1424,239.2778,240.4797,1104633],["2025-12-09",239.4173,241.5351,238.5588,240.3903,798949],["2025-12-10",240.7481,241.377,236.6889,241.2055,1275692],["2025-12-11",234.7216,242.8909,232.2478,240.8198,1724153],["2025-12-12",242.7024,243.9144,240.2205,240.3359,1233372],["2025-12-15",241.1072,245.7239,240.5878,241.9728,1340450],["2025-12-16",239.0863,240.7623,236.7746,238.8551,1368390],["2025-12-17",238.578,240.4265,236.6717,239.2134,1274255],["2025-12-18",239.0674,242.3581,238.9519,241.8385,1493435],["2025-12-19",240.1118,241.3224,236.4798,240.7459,3975152],["2025-12-22",239.4641,242.3423,239.0612,240.0973,823365],["2025-12-23",241.7466,242.0358,240.069,240.3004,621651],["2025-12-29",241.0757,242.2333,239.8602,241.3072,706217],["2025-12-30",241.5995,242.6414,240.5576,241.1943,608689],["2026-01-02",240.2152,241.1396,231.1451,233.3404,1859956],["2026-01-05",230.4168,237.3224,229.7262,237.3224,1313820],["2026-01-06",234.5359,234.939,231.08,232.7503,1513269],["2026-01-07",233.9438,239.518,233.0244,239.518,1606761],["2026-01-08",239.5701,240.259,236.4126,237.1015,1215756],["2026-01-09",237.2905,245.6014,236.1441,243.4233,1743178],["2026-01-12",242.8817,244.7105,240.7672,243.5675,1075939],["2026-01-13",243.6136,251.7016,242.3517,244.8756,1595981],["2026-01-14",243.9045,245.221,235.9479,235.9479,1783626],["2026-01-15",236.3684,236.3684,232.6466,235.4523,1654581],["2026-01-16",232.3007,233.0997,227.7346,230.7596,2129166],["2026-01-19",226.2637,227.9098,223.4517,224.0004,1653220],["2026-01-20",220.7491,222.649,217.5675,222.031,2510708],["2026-01-21",223.4237,224.1848,217.8883,220.31,2402017],["2026-01-22",219.8068,220.6332,215.0089,217.9014,3492201],["2026-01-23",224.5805,230.5909,221.5984,228.7646,2762755],["2026-01-26",228.8966,234.4937,227.1942,234.3188,1659316],["2026-01-27",235.4341,237.0691,226.8622,228.357,1900259],["2026-01-28",231.0239,234.4272,229.6531,231.7802,1635649],["2026-01-29",210.8239,212.1902,190.9429,193.8873,15846791],["2026-01-30",197.3635,203.0818,195.4103,200.6815,5332696],["2026-02-02",199.589,204.1098,197.0257,204.0166,2798987],["2026-02-03",206.3961,207.3475,192.2419,193.7502,5539886],["2026-02-04",192.8744,194.9194,185.4383,194.2687,6228386],["2026-02-05",197.3028,201.6198,194.9819,197.8366,5467507],["2026-02-06",194.566,198.55,193.0836,198.2952,3765742],["2026-02-09",199.5437,203.9393,199.5437,203.4044,3621850],["2026-02-10",206.366,209.4562,203.9078,208.6836,3975433],["2026-02-11",204.2685,206.256,197.5811,197.5811,4581824],["2026-02-12",198.6638,201.7001,196.9589,198.1733,3882942],["2026-02-13",199.33,203.4614,197.6962,200.4037,3903966],["2026-02-16",203.9813,203.9813,196.4428,196.4662,2679506],["2026-02-17",195.1731,200.5796,193.7748,197.6666,3611161],["2026-02-18",198.0024,202.8272,198.0024,202.0581,1941388],["2026-02-19",201.3547,202.3284,197.1584,197.9234,1995824],["2026-02-20",198.4722,201.4579,196.5048,201.1339,2424609],["2026-02-23",198.5312,199.5087,193.5039,195.3425,2863777],["2026-02-24",192.3249,195.804,189.9591,192.3249,4602328],["2026-02-25",191.7899,194.5919,190.4236,193.1098,2555619],["2026-02-26",193.9273,202.6873,192.6958,200.0849,2727344],["2026-02-27",199.6241,201.1793,195.3066,198.417,2673448],["2026-03-02",192.666,195.5337,190.6309,193.221,2776438],["2026-03-03",190.4741,191.1182,185.5052,190.3361,3971985],["2026-03-04",193.223,193.223,189.4777,191.122,2444753],["2026-03-05",191.644,197.708,190.477,195.6256,2961032],["2026-03-06",198.2214,199.8651,194.3177,197.1713,3348087],["2026-03-09",196.8412,196.9999,190.9492,194.7563,1990823],["2026-03-10",196.0248,197.487,190.1532,193.7401,3187246],["2026-03-11",190.7868,192.9104,186.1284,188.8914,2953782],["2026-03-12",185.0143,191.8019,184.7873,189.5772,2614254],["2026-03-13",187.388,190.7415,187.0934,188.5662,1798070],["2026-03-16",188.6113,188.6113,185.5529,186.0476,1676463],["2026-03-17",187.2995,189.1313,185.2189,187.978,2458959],["2026-03-18",187.4508,189.1528,182.9574,183.1844,3129716],["2026-03-19",179.243,183.2111,177.7549,180.3703,3819500],["2026-03-20",183.2879,183.5383,172.154,175.1139,9373510],["2026-03-23",171.0314,183.6035,170.9632,174.8962,4165368],["2026-03-24",170.9272,172.3882,166.6358,168.4848,4380715],["2026-03-25",169.9192,171.9293,166.0133,167.7721,3757697],["2026-03-26",165.2987,168.3454,163.1614,164.4347,3752998],["2026-03-27",165.3068,167.0989,161.1781,161.6998,3568581],["2026-03-30",161.5253,166.3392,161.3445,166.1358,3074669],["2026-03-31",166.4394,168.1297,164.3209,165.5379,3271596],["2026-04-01",170.1011,171.9904,165.9584,169.4183,3180299],["2026-04-02",167.0821,170.1593,164.5063,169.7034,1928056],["2026-04-07",168.0274,170.3425,163.5334,164.8044,1971337],["2026-04-08",174.9018,177.7287,170.7188,172.0289,3395450],["2026-04-09",168.6469,169.1513,157.6865,159.9336,4350277],["2026-04-10",160.5321,163.4062,159.1526,160.2332,3951579],["2026-04-13",158.9793,163.5943,158.4282,163.5943,2057774],["2026-04-14",166.3193,168.3791,164.838,166.0184,2534544],["2026-04-15",166.751,170.2085,165.846,170.0229,2324674],["2026-04-16",171.3246,177.5023,170.8601,176.1088,2670491],["2026-04-17",176.1317,184.6822,175.9926,181.021,4233873],["2026-04-20",176.5042,176.8274,173.0175,173.41,2407016],["2026-04-21",176.3883,177.8252,174.1635,175.16,2598088],["2026-04-22",174.7944,175.9031,170.2675,173.016,2486738],["2026-04-23",166.0991,169.253,161.4027,161.9552,3994908],["2026-04-24",170.1964,173.4133,168.2203,169.2083,4394579],["2026-04-27",170.4791,173.495,168.9827,171.4691,2068745],["2026-04-28",171.3033,172.9864,170.0814,171.6261,1734214],["2026-04-29",173.1107,173.1107,166.5891,168.087,1784169],["2026-04-30",166.0031,169.5419,165.4516,167.1751,2631605],["2026-05-04",171.1189,171.9261,168.0286,170.7269,2630593],["2026-05-05",168.7733,173.326,168.6813,172.2223,3139132],["2026-05-06",175.7366,183.2816,173.6512,174.94,5138480],["2026-05-07",176.9163,179.9237,172.8517,177.8326,3630721],["2026-05-08",175.6687,176.0441,170.3895,171.5157,2875828],["2026-05-11",173.2847,174.9088,169.6599,170.013,1835601],["2026-05-12",168.4533,171.1155,165.8853,167.7465,2187078],["2026-05-13",165.9156,167.1126,158.9448,159.9071,3135843],["2026-05-14",160.3927,165.4541,160.3224,165.4541,2576291],["2026-05-15",165.6015,170.3597,164.9018,168.0039,2710614],["2026-05-18",167.3635,173.1939,166.6667,171.7305,2511733],["2026-05-19",176.5755,186.0628,176.4123,182.6595,6183013],["2026-05-20",178.6568,179.8872,174.6176,178.0765,2810791],["2026-05-21",178.7745,179.2627,173.5198,175.4264,2100123],["2026-05-22",178.2452,179.9419,174.6194,176.3858,2037817],["2026-05-25",178.2662,180.0359,176.776,179.8496,1212676],["2026-05-26",179.751,179.8906,175.0262,176.2597,1564674],["2026-05-27",174.7853,176.8799,172.6208,174.5526,1722051],["2026-05-28",174.2686,177.9399,171.4804,176.1275,2281432],["2026-05-29",176.121,182.1805,175.0955,180.922,7257453],["2026-06-01",183.4935,196.6801,183.3071,195.5851,5267172],["2026-06-02",197.8032,201.5731,186.796,189.4955,4129222],["2026-06-03",191.1602,192.3922,180.6771,181.235,2462389],["2026-06-04",181.3622,192.2054,181.3622,190.9748,3249594],["2026-06-05",190.1455,195.9518,187.5211,187.5211,2968649],["2026-06-08",184.4307,185.606,181.2735,182.1722,2043998],["2026-06-09",180.9965,182.0802,177.2383,178.345,2387460],["2026-06-10",177.7598,178.0136,168.5777,172.6843,3601973],["2026-06-11",171.3501,171.3501,160.7143,161.3833,5026187],["2026-06-12",162.0633,165.976,160.0491,162.3643,2852066],["2026-06-15",165.9241,170.1476,165.8544,166.1329,2314357],["2026-06-16",165.1478,169.1826,165.1014,165.6811,1906476],["2026-06-17",166.4171,166.8582,162.191,163.9093,2502892],["2026-06-18",160.8497,161.6782,154.5437,155.1881,4843939],["2026-06-19",155.6073,156.6614,151.528,153.7051,7123362],["2026-06-22",151.8816,153.2571,149.7266,151.5607,3549485],["2026-06-23",150.0383,155.7061,149.8783,153.7178,2524792],["2026-06-24",152.281,154.8756,150.3238,153.4645,1990009],["2026-06-25",151.8513,152.3282,148.9219,150.1936,2502826],["2026-06-26",150.4062,153.8601,148.7474,153.542,2078018],["2026-06-29",156.1198,157.7365,154.7991,155.5733,2076994],["2026-06-30",155.751,155.8195,152.0274,153.0554,2895462],["2026-07-01",154.6047,161.019,153.6916,160.7907,3028943],["2026-07-02",161.1123,161.7495,156.7659,161.2488,2900438],["2026-07-03",161.6312,162.1109,158.4328,159.5065,1384012],["2026-07-06",160.9516,163.2392,159.0301,160.1967,1676267],["2026-07-07",163.0224,166.0202,162.4732,164.6472,2303327],["2026-07-08",161.9797,162.8692,156.3234,157.327,2185868],["2026-07-09",157.6242,157.7613,153.1696,157.3272,1818966],["2026-07-10",157.2551,160.7537,156.6834,157.3008,1511294],["2026-07-13",157.3815,160.6432,156.4236,160.4836,1762018],["2026-07-14",158.561,159.9954,148.9754,155.6466,4777567],["2026-07-15",153.5702,159.3054,152.542,156.4949,2631224],["2026-07-16",157.3719,158.5649,155.0091,157.8766,1823630],["2026-07-17",160.9119,161.9877,157.1581,157.8447,2631191],["2026-07-20",157.7017,160.0329,154.2505,157.9988,1995160],["2026-07-21",157.2734,157.3875,154.533,155.7661,2100094],["2026-07-22",155.1146,155.5479,150.5759,150.5759,3063860],["2026-07-23",149.4939,151.1143,145.4998,146.4355,3338860],["2026-07-24",148.8999,160.7773,148.8771,159.5031,4092805],["2026-07-27",162.2416,172.7022,161.8086,172.3831,4522787],["2026-07-28",173.043,181.6383,171.6787,181.0471,3621245],["2026-07-29",182.0024,185.9422,178.1766,184.5075,4475041],["2026-07-30",186.3425,187.0994,177.9714,178.7971,4334799],["2026-07-31",178.4994,182.3713,177.0014,181.7029,3541483],["2026-08-03",184.7042,194.7475,184.2424,190.0606,3968193],["2026-08-04",187.4087,193.9679,186.8793,192.61,2997262],["2026-08-05",193.6525,199.0497,192.9375,195.1979,3232827],["2026-08-06",198.1393,200.0578,194.256,197.6076,3547480],["2026-08-07",200.3227,206.9379,200.3227,205.0939,3606631],["2026-08-10",206.7674,207.9693,203.2312,207.2066,1838407],["2026-08-11",207.8354,211.5765,205.6878,208.6437,2063778],["2026-08-12",208.1337,208.9187,202.4773,203.1237,2148931],["2026-08-13",204.6351,205.5805,201.545,202.2138,1307474],["2026-08-14",209.9435,214.2577,206.8059,207.7979,2829216],["2026-08-17",207.1041,209.3726,205.6226,207.8448,1486644],["2026-08-18",207.4941,213.0075,206.1505,211.3859,2213533],["2026-08-19",210.3983,216.5123,208.8699,215.2617,2167039],["2026-08-20",214.5409,217.2492,213.07,216.7122,1373774],["2026-08-21",216.4354,220.1989,214.5888,219.8717,1829234],["2026-08-24",218.2816,219.8002,216.7163,218.6788,1540364],["2026-08-25",217.4978,218.9214,213.2272,216.401,1668248],["2026-08-26",210.0519,212.6671,206.4328,210.1687,3651018],["2026-08-27",212.7015,222.375,211.1164,221.3028,2826929],["2026-08-28",220.8882,223.7324,219.1164,223.0097,2187400],["2026-08-31",218.4056,222.6471,218.1043,221.2333,4377990],["2026-09-01",216.0881,218.249,212.9746,214.0666,2353295],["2026-09-02",211.2477,214.1698,209.5547,210.3896,1589670],["2026-09-03",210.9458,217.2946,210.8531,215.0007,1584544],["2026-09-04",218.3797,220.8217,215.0773,215.9145,2847247],["2026-09-07",213.1865,214.046,208.959,212.3039,1802718],["2026-09-08",211.9951,213.6695,209.3207,211.2742,2100343],["2026-09-09",212.7808,217.4783,210.8739,212.618,2442888],["2026-09-10",209.4095,209.8748,204.9886,206.8733,3314805],["2026-09-11",203.9636,207.6324,199.8769,205.798,2845545],["2026-09-14",209.6415,216.5283,209.6415,215.9486,2629809],["2026-09-15",215.542,216.258,211.5693,216.0502,1942232],["2026-09-16",214.4382,215.4766,210.1923,215.2458,1922824],["2026-09-17",216.2528,217.0098,211.7566,215.6334,1518878],["2026-09-18",213.5693,214.9005,209.5068,210.1494,7136397],["2026-09-21",212.0308,213.3624,209.4822,209.9185,1756918],["2026-09-22",208.8163,214.9384,208.1055,209.0226,1549917],["2026-09-23",211.6723,214.9922,210.0467,213.4582,1542040],["2026-09-24",210.0183,211.1337,207.446,209.6313,2328556],["2026-09-25",209.7732,211.4794,209.0224,211.4794,1891585],["2026-09-28",210.7203,212.4953,203.5295,209.3777,1971789],["2026-09-29",208.3703,211.9186,207.3013,210.7586,1372775],["2026-09-30",209.2382,211.1662,205.337,210.5538,2263391],["2026-10-01",209.1909,215.5115,205.4076,211.5243,2235546],["2026-10-02",211.2949,212.3299,206.9074,206.9074,1469523],["2026-10-05",208.2766,212.1482,207.8264,208.2541,1363827],["2026-10-06",209.2653,213.3707,208.7044,211.5536,1261950],["2026-10-07",210.441,212.3766,209.3607,211.1387,1672939],["2026-10-08",209.5099,212.6239,205.8359,206.7992,1543500],["2026-10-09",211.9037,215.9404,211.7692,214.6846,2369793],["2026-10-12",213.5398,221.7193,212.6434,217.8872,1894384],["2026-10-13",218.7402,221.1732,216.5305,220.1687,1961267],["2026-10-14",220.2801,223.3726,218.7787,220.6611,1900721],["2026-10-15",223.3193,227.26,220.5206,225.3009,2846911],["2026-10-16",224.9358,228.9725,222.7829,223.3884,2546811],["2026-10-19",224.0158,225.4078,221.5013,224.3301,1749869],["2026-10-20",225.7739,228.1853,223.7102,226.0543,1673840],["2026-10-21",226.5557,234.246,224.5349,234.246,2738671],["2026-10-22",233.4007,243.3996,230.4235,241.9391,3403741],["2026-10-23",239.6342,242.2151,235.7067,240.588,2056249],["2026-10-26",239.4948,242.9161,238.0926,238.0926,1672274],["2026-10-27",237.7228,240.5162,236.5495,238.1697,1577179],["2026-10-28",236.9505,238.5643,232.8325,235.0584,1449807],["2026-10-29",229.8081,235.8322,226.6845,233.0433,2266622],["2026-10-30",235.6217,239.7593,235.0066,236.2368,2032568]]}</script>
+<script>
+(function () {
+  const CI = JSON.parse(document.getElementById('ci-data').textContent);
+  const RAW = JSON.parse(document.getElementById('price-data').textContent);
+  const TICKERS = Object.keys(RAW);
+  const SLOT = Object.fromEntries(TICKERS.map((t, i) => [t, `var(--s${i + 1})`]));
+  const NS = 'http://www.w3.org/2000/svg';
+  const nf = (d) => new Intl.NumberFormat('de-DE', { minimumFractionDigits: d, maximumFractionDigits: d });
+  const f0 = nf(0), f1 = nf(1), f2 = nf(2);
+  const pct = (v, d = 1) => (v > 0 ? '+' : v < 0 ? '−' : '') + nf(d).format(Math.abs(v * 100)) + ' %';
+  const dLong = new Intl.DateTimeFormat('de-DE', { day: '2-digit', month: '2-digit', year: 'numeric' });
+  const dMon = new Intl.DateTimeFormat('de-DE', { month: 'short' });
+  const dMonY = new Intl.DateTimeFormat('de-DE', { month: 'short', year: '2-digit' });
+
+  // ---------- data ----------
+  const data = {};
+  TICKERS.forEach((t) => {
+    data[t] = RAW[t].map((r) => ({ d: new Date(r[0] + 'T12:00:00'), o: r[1], h: r[2], l: r[3], c: r[4], v: r[5] }));
+  });
+  // Compare shared dates, but keep native histories for volatility and running highs.
+  const byDate = Object.fromEntries(TICKERS.map((t) => [t, new Map(data[t].map((r) => [+r.d, r]))]));
+  const dates = data[TICKERS[0]].map((r) => r.d).filter((d) => TICKERS.every((t) => byDate[t].has(+d)));
+  const aligned = Object.fromEntries(TICKERS.map((t) => [t, dates.map((d) => byDate[t].get(+d))]));
+
+  // ---------- typography scale ----------
+  const scale = [['display 40', 40, 'Felix Schramm'], ['h1 28', 28, 'Real-Time Stock Pipeline'], ['h2 20', 20, 'Kursentwicklung 2026'], ['body 15', 15, 'Streaming-Pipeline mit Kafka, Spark und PostgreSQL.'], ['label 12', 12, 'PROFIL · ERFAHRUNG · PROJEKTE']];
+  document.getElementById('scale').innerHTML = scale.map(([k, s, t]) =>
+    `<div class="scale-row"><span class="k">${k}</span><span style="font-size:${s}px;line-height:1.2;${s === 12 ? 'letter-spacing:.14em;color:var(--forest)' : ''}">${t}</span></div>`).join('');
+
+  // ---------- swatches ----------
+  const b = CI.color.brand, nl = CI.color.neutral.light;
+  const brand = [['Waldgrün', b.forest.hex, 'Leitfarbe'], ['Waldgrün dunkel', b.forest_dark.hex, 'Hover'], ['Waldgrün hell', b.forest_tint.hex, 'Flächen'], ['Kupfer', b.copper.hex, 'Akzent, sparsam'], ['Tinte', nl.ink, 'Text'], ['Grau', nl.ink_secondary, 'Sekundärtext']];
+  document.getElementById('brand').innerHTML = brand.map(([n, h, r]) =>
+    `<div class="chip"><div class="sw" style="background:${h}"></div><div>${n}</div><div class="hex">${h} · ${r}</div></div>`).join('');
+  const L = CI.color.categorical.light, D = CI.color.categorical.dark;
+  const names = { forest: 'Waldgrün', blue: 'Blau', copper: 'Kupfer', teal: 'Petrol', violet: 'Violett', ochre: 'Ocker', orchid: 'Orchidee' };
+  document.getElementById('cat').innerHTML = '<thead><tr><th>Slot</th><th>Farbe</th><th>Hell</th><th>Dunkel</th></tr></thead><tbody>' +
+    L.map((c, i) => `<tr><td>${c.slot}</td><td>${names[c.name]}</td><td><span class="pair"><i style="background:${c.hex}"></i>${c.hex}</span></td><td><span class="pair"><i style="background:${D[i].hex}"></i>${D[i].hex}</span></td></tr>`).join('') + '</tbody>';
+  document.getElementById('ramp-seq').innerHTML = CI.color.sequential.forest.map((h) => `<div style="background:${h}" title="${h}"></div>`).join('');
+  document.getElementById('ramp-div').innerHTML = [0, 1, 2, 3, 4, 5, 6, 7, 8].map((i) => `<div style="background:var(--d${i})"></div>`).join('');
+  document.getElementById('json-view').textContent = JSON.stringify(CI, null, 2);
+
+  // ---------- copy buttons ----------
+  function copy(btn, text) {
+    const label = btn.textContent;
+    const done = (msg) => { btn.textContent = msg; setTimeout(() => { btn.textContent = label; }, 1600); };
+    try {
+      navigator.clipboard.writeText(text).then(() => done('Kopiert'), () => done('Bitte markieren und kopieren'));
+    } catch (e) { done('Bitte markieren und kopieren'); }
+  }
+  document.getElementById('copy-json').addEventListener('click', (e) => copy(e.currentTarget, JSON.stringify(CI, null, 2)));
+  document.querySelectorAll('[data-copy]').forEach((btn) => btn.addEventListener('click', () => copy(btn, document.getElementById(btn.dataset.copy).textContent)));
+
+  // ---------- helpers ----------
+  function el(tag, attrs, parent) {
+    const n = document.createElementNS(NS, tag);
+    for (const k in attrs) n.setAttribute(k, attrs[k]);
+    if (parent) parent.appendChild(n);
+    return n;
+  }
+  function text(parent, x, y, s, attrs) {
+    const t = el('text', Object.assign({ x, y, 'font-size': 11, fill: 'var(--muted)' }, attrs || {}), parent);
+    t.textContent = s;
+    return t;
+  }
+  function nice(min, max, count) {
+    const step0 = (max - min) / count, mag = Math.pow(10, Math.floor(Math.log10(step0))), f = step0 / mag;
+    const step = (f < 1.5 ? 1 : f < 3 ? 2 : f < 7 ? 5 : 10) * mag;
+    const lo = Math.floor(min / step) * step, hi = Math.ceil(max / step) * step, ticks = [];
+    for (let v = lo; v <= hi + step / 1e6; v += step) ticks.push(+v.toFixed(10));
+    return { lo, hi, ticks };
+  }
+  function monthStarts(ds) {
+    const idx = [];
+    ds.forEach((d, i) => { if (i === 0 || d.getMonth() !== ds[i - 1].getMonth()) idx.push(i); });
+    return idx;
+  }
+  function legend(id, items) {
+    document.getElementById(id).innerHTML = items.map(([n, c, box, hollow]) =>
+      `<span><i class="${box ? 'box' : ''}" style="${hollow ? `background:transparent;box-shadow:inset 0 0 0 1.5px ${c}` : `background:${c}`}"></i>${n}</span>`).join('');
+  }
+  function makeTip(host) {
+    let tip = host.querySelector('.tip');
+    if (!tip) { tip = document.createElement('div'); tip.className = 'tip'; tip.hidden = true; host.appendChild(tip); }
+    return tip;
+  }
+  function placeTip(tip, host, x, y) {
+    const w = tip.offsetWidth, hw = host.clientWidth;
+    let left = x + 14; if (left + w > hw) left = x - w - 14; if (left < 0) left = 0;
+    tip.style.left = left + 'px'; tip.style.top = Math.max(0, y - 10) + 'px';
+  }
+
+  // ---------- line chart (indexed + drawdown) ----------
+  function lineChart(hostId, cfg) {
+    const host = document.getElementById(hostId);
+    const W = Math.max(300, host.clientWidth), narrow = W < 560;
+    const H = narrow ? 250 : 320, m = { t: 12, r: narrow ? 70 : 92, b: 28, l: narrow ? 38 : 46 };
+    host.querySelectorAll('svg').forEach((s) => s.remove());
+    const svg = el('svg', { viewBox: `0 0 ${W} ${H}`, role: 'img', 'aria-label': cfg.aria });
+    host.prepend(svg);
+    const all = cfg.series.flatMap((s) => s.vals);
+    const y = nice(Math.min(...all, cfg.baseline), Math.max(...all, cfg.baseline), narrow ? 4 : 6);
+    const n = dates.length, X = (i) => m.l + (i / (n - 1)) * (W - m.l - m.r);
+    const Y = (v) => m.t + (1 - (v - y.lo) / (y.hi - y.lo)) * (H - m.t - m.b);
+    y.ticks.forEach((t) => {
+      el('line', { x1: m.l, x2: W - m.r, y1: Y(t), y2: Y(t), stroke: t === cfg.baseline ? 'var(--axis)' : 'var(--grid)', 'stroke-width': 1 }, svg);
+      text(svg, m.l - 8, Y(t) + 4, cfg.yFmt(t), { 'text-anchor': 'end' });
+    });
+    // drop a month start that sits right before the next one (the lone 31.10. base day)
+    const ms = monthStarts(dates).filter((i, k, a) => !(k + 1 < a.length && a[k + 1] - i < 8));
+    ms.forEach((i, k) => {
+      if (narrow && k % 2) return;
+      const d = dates[i];
+      text(svg, X(i), H - 8, d.getMonth() === 0 || k === 0 ? dMonY.format(d) : dMon.format(d), { 'text-anchor': 'middle' });
+    });
+    cfg.series.forEach((s) => {
+      const dpath = s.vals.map((v, i) => (i ? 'L' : 'M') + X(i).toFixed(1) + ' ' + Y(v).toFixed(1)).join('');
+      el('path', { d: dpath, fill: 'none', stroke: s.color, 'stroke-width': 2, 'stroke-linejoin': 'round', 'stroke-linecap': 'round' }, svg);
+    });
+    // end labels, pushed apart so they never collide
+    const ends = cfg.series.map((s) => ({ s, y: Y(s.vals[n - 1]) })).sort((a, b) => a.y - b.y);
+    for (let i = 1; i < ends.length; i++) if (ends[i].y - ends[i - 1].y < 15) ends[i].y = ends[i - 1].y + 15;
+    ends.forEach((e) => {
+      el('circle', { cx: X(n - 1), cy: Y(e.s.vals[n - 1]), r: 4, fill: e.s.color, stroke: 'var(--surface)', 'stroke-width': 2 }, svg);
+      text(svg, X(n - 1) + 9, e.y + 4, e.s.name + ' ' + cfg.endFmt(e.s.vals[n - 1]), { fill: 'var(--ink)', 'font-size': 12 });
+    });
+    // crosshair
+    const cross = el('line', { y1: m.t, y2: H - m.b, stroke: 'var(--axis)', 'stroke-width': 1, visibility: 'hidden' }, svg);
+    const dots = cfg.series.map((s) => el('circle', { r: 4, fill: s.color, stroke: 'var(--surface)', 'stroke-width': 2, visibility: 'hidden' }, svg));
+    const hit = el('rect', { x: m.l, y: m.t, width: W - m.l - m.r, height: H - m.t - m.b, fill: 'transparent' }, svg);
+    const tip = makeTip(host);
+    const scaleK = () => svg.getBoundingClientRect().width / W;
+    function show(ev) {
+      const r = svg.getBoundingClientRect(), k = scaleK();
+      const px = (ev.clientX - r.left) / k;
+      const i = Math.max(0, Math.min(n - 1, Math.round(((px - m.l) / (W - m.l - m.r)) * (n - 1))));
+      cross.setAttribute('x1', X(i)); cross.setAttribute('x2', X(i)); cross.setAttribute('visibility', 'visible');
+      dots.forEach((d, j) => { d.setAttribute('cx', X(i)); d.setAttribute('cy', Y(cfg.series[j].vals[i])); d.setAttribute('visibility', 'visible'); });
+      tip.innerHTML = `<div class="t">${dLong.format(dates[i])}</div>` + cfg.series.map((s) =>
+        `<div class="r"><span><span class="dot" style="background:${s.color}"></span> ${s.name}</span><b>${cfg.tipFmt(s, i)}</b></div>`).join('');
+      tip.hidden = false;
+      placeTip(tip, host, X(i) * k, (ev.clientY - r.top));
+    }
+    function hide() { tip.hidden = true; cross.setAttribute('visibility', 'hidden'); dots.forEach((d) => d.setAttribute('visibility', 'hidden')); }
+    hit.addEventListener('pointermove', show);
+    hit.addEventListener('pointerdown', show);
+    hit.addEventListener('pointerleave', hide);
+  }
+
+  // ---------- candlestick + volume ----------
+  const sma = (arr, w) => arr.map((_, i) => (i < w - 1 ? null : arr.slice(i - w + 1, i + 1).reduce((a, b) => a + b, 0) / w));
+  function candleChart(hostId) {
+    const host = document.getElementById(hostId);
+    const all = data.MSFT, closes = all.map((r) => r.c);
+    const s20 = sma(closes, 20), s50 = sma(closes, 50), N = 60, off = all.length - N;
+    const rows = all.slice(off);
+    const W = Math.max(300, host.clientWidth), narrow = W < 560;
+    const H = narrow ? 300 : 380, m = { t: 10, r: 12, b: 26, l: narrow ? 38 : 46 };
+    const volH = Math.round((H - m.t - m.b) * 0.22), gap = 14, priceH = H - m.t - m.b - volH - gap;
+    host.querySelectorAll('svg').forEach((s) => s.remove());
+    const svg = el('svg', { viewBox: `0 0 ${W} ${H}`, role: 'img', 'aria-label': 'MSFT Tageskerzen mit Volumen' });
+    host.prepend(svg);
+    const lows = rows.map((r) => r.l), highs = rows.map((r) => r.h);
+    const smaVis = s20.slice(off).concat(s50.slice(off)).filter((v) => v !== null);
+    const y = nice(Math.min(...lows, ...smaVis), Math.max(...highs, ...smaVis), narrow ? 4 : 5);
+    const band = (W - m.l - m.r) / N, X = (i) => m.l + band * (i + 0.5);
+    const Y = (v) => m.t + (1 - (v - y.lo) / (y.hi - y.lo)) * priceH;
+    const vMax = Math.max(...rows.map((r) => r.v)), vTop = m.t + priceH + gap;
+    const VY = (v) => vTop + volH - (v / vMax) * volH;
+    y.ticks.forEach((t) => {
+      el('line', { x1: m.l, x2: W - m.r, y1: Y(t), y2: Y(t), stroke: 'var(--grid)' }, svg);
+      text(svg, m.l - 8, Y(t) + 4, f0.format(t), { 'text-anchor': 'end' });
+    });
+    text(svg, m.l - 8, vTop + 9, 'Vol.', { 'text-anchor': 'end' });
+    el('line', { x1: m.l, x2: W - m.r, y1: vTop + volH, y2: vTop + volH, stroke: 'var(--axis)' }, svg);
+    const cw = Math.max(2, Math.min(9, band * 0.62));
+    rows.forEach((r, i) => {
+      const up = r.c >= r.o, col = up ? 'var(--up)' : 'var(--down)';
+      el('rect', { x: X(i) - Math.max(1, band * 0.36), y: VY(r.v), width: Math.max(2, band * 0.72), height: vTop + volH - VY(r.v), rx: 1.5, fill: 'var(--vol)' }, svg);
+      el('line', { x1: X(i), x2: X(i), y1: Y(r.h), y2: Y(r.l), stroke: col, 'stroke-width': 1.2 }, svg);
+      const top = Y(Math.max(r.o, r.c)), h = Math.max(1, Math.abs(Y(r.o) - Y(r.c)));
+      el('rect', { x: X(i) - cw / 2, y: top, width: cw, height: h, rx: 1, fill: up ? 'var(--surface)' : col, stroke: col, 'stroke-width': 1.2 }, svg);
+    });
+    [[s20, 'var(--sma20)'], [s50, 'var(--sma50)']].forEach(([s, c]) => {
+      const p = rows.map((_, i) => s[off + i]).map((v, i) => (i ? 'L' : 'M') + X(i).toFixed(1) + ' ' + Y(v).toFixed(1)).join('');
+      el('path', { d: p, fill: 'none', stroke: c, 'stroke-width': 1.5, 'stroke-linejoin': 'round' }, svg);
+    });
+    const ds = rows.map((r) => r.d);
+    monthStarts(ds).forEach((i) => text(svg, X(i), H - 6, dMon.format(ds[i]), { 'text-anchor': 'middle' }));
+    const hl = el('rect', { y: m.t, height: H - m.t - m.b, width: band, fill: 'var(--ink)', opacity: 0, 'pointer-events': 'none' }, svg);
+    const hit = el('rect', { x: m.l, y: m.t, width: W - m.l - m.r, height: H - m.t - m.b, fill: 'transparent' }, svg);
+    const tip = makeTip(host);
+    function show(ev) {
+      const r = svg.getBoundingClientRect(), k = r.width / W;
+      const i = Math.max(0, Math.min(N - 1, Math.floor(((ev.clientX - r.left) / k - m.l) / band)));
+      const row = rows[i], prev = all[off + i - 1], ch = row.c / prev.c - 1;
+      hl.setAttribute('x', m.l + band * i); hl.setAttribute('opacity', 0.06);
+      tip.innerHTML = `<div class="t">${dLong.format(row.d)}</div>` +
+        [['Eröffnung', f2.format(row.o)], ['Hoch', f2.format(row.h)], ['Tief', f2.format(row.l)], ['Schluss', f2.format(row.c)]].map(([a, v]) => `<div class="r"><span>${a}</span><b>${v}</b></div>`).join('') +
+        `<div class="r"><span>Veränderung</span><b class="${ch >= 0 ? 'pos' : 'neg'}">${ch >= 0 ? '▲' : '▼'} ${pct(ch, 2)}</b></div>` +
+        `<div class="r"><span>Volumen</span><b>${f1.format(row.v / 1e6)} Mio.</b></div>`;
+      tip.hidden = false;
+      placeTip(tip, host, X(i) * k, ev.clientY - r.top);
+    }
+    hit.addEventListener('pointermove', show);
+    hit.addEventListener('pointerdown', show);
+    hit.addEventListener('pointerleave', () => { tip.hidden = true; hl.setAttribute('opacity', 0); });
+  }
+
+  // ---------- monthly returns heatmap ----------
+  function heatmap() {
+    const ends = Object.fromEntries(TICKERS.map((t) => {
+      const monthly = new Map();
+      data[t].forEach((r) => monthly.set(r.d.getFullYear() + '-' + r.d.getMonth(), r));
+      return [t, monthly];
+    }));
+    const keys = [...ends[TICKERS[0]].keys()].filter((k) => TICKERS.every((t) => ends[t].has(k)));
+    const months = keys.slice(1); // first key is 31.10.2025, the base
+    const bins = [-0.10, -0.05, -0.02, -0.005, 0.005, 0.02, 0.05, 0.10];
+    const bin = (v) => { let i = 0; while (i < bins.length && v >= bins[i]) i++; return i; };
+    let html = '<thead><tr><th></th>' + months.map((k) => { const d = ends[TICKERS[0]].get(k).d; return `<th>${d.getMonth() === 0 || k === months[0] ? dMonY.format(d) : dMon.format(d)}</th>`; }).join('') + '</tr></thead><tbody>';
+    TICKERS.forEach((t) => {
+      html += `<tr><th class="row">${t}</th>`;
+      months.forEach((k, j) => {
+        const prevK = keys[j], c = ends[t].get(k).c, p = ends[t].get(prevK).c, r = c / p - 1, b = bin(r);
+        const strong = b <= 1 || b >= 7;
+        html += `<td class="${strong ? 'strong' : ''}" style="background:var(--d${b})" title="${t} ${dMonY.format(ends[t].get(k).d)}: ${pct(r, 2)}">${pct(r, 1).replace(' %', '')}</td>`;
+      });
+      html += '</tr>';
+    });
+    document.getElementById('c-heat').innerHTML = html + '</tbody>';
+  }
+
+  // ---------- KPI tiles ----------
+  function kpis() {
+    document.getElementById('kpis').innerHTML = TICKERS.map((t) => {
+      const rows = data[t], c = rows.map((r) => r.c), last = c[c.length - 1], ret = last / c[0] - 1;
+      const lr = c.slice(1).map((v, i) => Math.log(v / c[i])), mean = lr.reduce((a, b) => a + b, 0) / lr.length;
+      const vol = Math.sqrt(lr.reduce((a, b) => a + (b - mean) ** 2, 0) / (lr.length - 1)) * Math.sqrt(252);
+      let peak = c[0], mdd = 0; c.forEach((v) => { peak = Math.max(peak, v); mdd = Math.min(mdd, v / peak - 1); });
+      const day = last / c[c.length - 2] - 1;
+      return `<div class="kpi"><div class="tk"><i style="background:${SLOT[t]}"></i>${t}</div>
+        <div class="big">${f2.format(last)}<small>USD</small></div>
+        <dl><dt>Letzter Tag</dt><dd class="${day >= 0 ? 'pos' : 'neg'}">${day >= 0 ? '▲' : '▼'} ${pct(day, 2)}</dd>
+        <dt>12 Monate</dt><dd class="${ret >= 0 ? 'pos' : 'neg'}">${ret >= 0 ? '▲' : '▼'} ${pct(ret)}</dd>
+        <dt>Volatilität p. a.</dt><dd>${f1.format(vol * 100)} %</dd>
+        <dt>Max. Drawdown</dt><dd>${pct(mdd)}</dd></dl></div>`;
+    }).join('');
+  }
+
+  // ---------- render ----------
+  const idxSeries = TICKERS.map((t) => ({ name: t, color: SLOT[t], vals: aligned[t].map((r) => (r.c / aligned[t][0].c) * 100), raw: aligned[t] }));
+  const ddSeries = TICKERS.map((t) => {
+    let peak = 0;
+    const daily = new Map(data[t].map((r) => { peak = Math.max(peak, r.c); return [+r.d, (r.c / peak - 1) * 100]; }));
+    return { name: t, color: SLOT[t], vals: dates.map((d) => daily.get(+d)) };
+  });
+  legend('lg-idx', TICKERS.map((t) => [t, SLOT[t]]));
+  legend('lg-dd', TICKERS.map((t) => [t, SLOT[t]]));
+  legend('lg-candle', [['steigt', 'var(--up)', true, true], ['fällt', 'var(--down)', true], ['Ø 20 Tage', 'var(--sma20)'], ['Ø 50 Tage', 'var(--sma50)'], ['Volumen', 'var(--vol)', true]]);
+  function renderAll() {
+    lineChart('c-idx', { series: idxSeries, baseline: 100, aria: 'Indexierte Kursentwicklung ' + TICKERS.join(', '), yFmt: (v) => f0.format(v), endFmt: (v) => f0.format(v),
+      tipFmt: (s, i) => `${f1.format(s.vals[i])} <span class="muted">(${f2.format(s.raw[i].c)} USD)</span>` });
+    lineChart('c-dd', { series: ddSeries, baseline: 0, aria: 'Drawdown ' + TICKERS.join(', '), yFmt: (v) => f0.format(v) + ' %', endFmt: (v) => (v < -0.05 ? '−' : '') + f1.format(Math.abs(v)) + ' %',
+      tipFmt: (s, i) => (s.vals[i] < -0.05 ? '−' : '') + f1.format(Math.abs(s.vals[i])) + ' %' });
+    candleChart('c-candle');
+  }
+  heatmap();
+  kpis();
+  renderAll();
+  let rt; window.addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(renderAll, 120); });
+})();
+</script>
