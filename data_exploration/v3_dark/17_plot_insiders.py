@@ -7,9 +7,9 @@ zero/unknown-value events get a small outlined marker and no implied value.
 
 import pandas as pd
 import yfinance as yf
+from ci import COLORS, NEUTRAL, german, legend_row, month_axis, save
 from matplotlib.lines import Line2D
 from msft_data import figure, load_close
-from v3_dark.ci import COLORS, NEUTRAL, german, legend_row, month_axis, save
 
 KINDS = [
     ("Sale", "v", "Verkauf", COLORS[2]),
@@ -109,5 +109,5 @@ if __name__ == "__main__":
     plot(
         prepare_transactions(yf.Ticker("MSFT").insider_transactions, prices),
         prices,
-        "data_exploration/12_insiders.png",
+        "data_exploration/v3_dark/17_insiders.png",
     )

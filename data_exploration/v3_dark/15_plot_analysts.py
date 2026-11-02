@@ -2,10 +2,10 @@
 
 import pandas as pd
 import yfinance as yf
+from ci import CI, COLORS, MODE, NEUTRAL, german, save
 from matplotlib.lines import Line2D
 from matplotlib.patches import Patch
 from msft_data import figure
-from v3_dark.ci import CI, COLORS, MODE, NEUTRAL, german, save
 
 RATINGS = ["strongBuy", "buy", "hold", "sell", "strongSell"]
 LABELS = ["Stark kaufen", "Kaufen", "Halten", "Verkaufen", "Stark verkaufen"]
@@ -125,5 +125,5 @@ if __name__ == "__main__":
     plot(
         stock.analyst_price_targets,
         stock.recommendations,
-        "data_exploration/10_analysts.png",
+        "data_exploration/v3_dark/15_analysts.png",
     )

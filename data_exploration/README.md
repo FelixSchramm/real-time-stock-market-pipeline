@@ -10,15 +10,18 @@ variables.
 ## Scripts
 
 Run from the repo root. The three version folders share the original plots
-01–04; additional comparisons live in `v3_dark/`, while the Microsoft epic
-uses standalone scripts directly in `data_exploration/`.
+01–04. The complete dark-mode series lives in `v3_dark/`, numbered 01–19;
+each script and its PNG share the same number. The Microsoft charts continue
+the original sequence as 09–19.
 
 - `v1_basic/`: first version, CI colors and font only.
 - `v2_polished/`: title and subtitle at the left edge instead of axis titles,
   German month names and number format, a labeled dot on the last value,
   legend as one row above the plot, a card behind the chart.
 - `v3_dark/`: same as v2, permanently in the CI default mode (`meta.default_mode`
-  in the JSON, currently dark). Plain file names, no switch needed.
+  in the JSON, currently dark). Complete series 01–19, no switch needed.
+- `v4/`: self-contained company analysis and before/after comparison; its
+  frozen baseline keeps the historical file names. See [V4](v4/README.md).
 
 | Script (in every folder) | Output |
 |---|---|
@@ -67,27 +70,28 @@ commit spreadsheet identifiers, quantities, weights or cost bases.
 
 ## Microsoft business and market charts
 
-These standalone scripts reuse the dark CI from `v3_dark/ci.py`. Each command
+These scripts live in `v3_dark/` alongside `ci.py` and their shared
+`msft_data.py` helper. Each command
 fetches real Yahoo data and writes its PNG next to the script. For example:
 
 ```sh
-python data_exploration/04_plot_cashflow_annual.py
-python data_exploration/14_plot_implied_vol.py
+python data_exploration/v3_dark/09_plot_cashflow_annual.py
+python data_exploration/v3_dark/19_plot_implied_vol.py
 ```
 
 | Script | Output | Content |
 |---|---|---|
-| `04_plot_cashflow_annual.py` | [04_cashflow_annual.png](04_cashflow_annual.png) | Operating cash flow, positive capex and free cash flow by fiscal year, billion USD |
-| `05_plot_income.py` | [05_income.png](05_income.png) | Quarterly revenue/net income and separate net/operating margin panel |
-| `06_plot_earnings_reaction.py` | [06_earnings_reaction.png](06_earnings_reaction.png) | EPS surprise versus the strictly next trading day's close return |
-| `07_plot_pe_ratio.py` | [07_pe_ratio.png](07_pe_ratio.png) | Historical P/E using the sum of four consecutive reported adjusted EPS |
-| `08_plot_benchmark.py` | [08_benchmark.png](08_benchmark.png) | MSFT versus S&P 500 and Nasdaq-100, with a separate MSFT drawdown panel |
-| `09_plot_dividends.py` | [09_dividends.png](09_dividends.png) | Dividend per share and trailing twelve-calendar-month dividend yield |
-| `10_plot_analysts.py` | [10_analysts.png](10_analysts.png) | Current target range, mean/median and recommendation counts |
-| `11_plot_price_targets.py` | [11_price_targets.png](11_price_targets.png) | Individual analyst target actions on the year-to-date price chart |
-| `12_plot_insiders.py` | [12_insiders.png](12_insiders.png) | Insider trades by type and reported value; markers at daily closes |
-| `13_plot_holders.py` | [13_holders.png](13_holders.png) | Ten largest reported institutional holders, with filing dates and changes |
-| `14_plot_implied_vol.py` | [14_implied_vol.png](14_implied_vol.png) | Call IV by strike for three expiries around 7, 30 and 90 days |
+| `v3_dark/09_plot_cashflow_annual.py` | [v3_dark/09_cashflow_annual.png](v3_dark/09_cashflow_annual.png) | Operating cash flow, positive capex and free cash flow by fiscal year, billion USD |
+| `v3_dark/10_plot_income.py` | [v3_dark/10_income.png](v3_dark/10_income.png) | Quarterly revenue/net income and separate net/operating margin panel |
+| `v3_dark/11_plot_earnings_reaction.py` | [v3_dark/11_earnings_reaction.png](v3_dark/11_earnings_reaction.png) | EPS surprise versus the strictly next trading day's close return |
+| `v3_dark/12_plot_pe_ratio.py` | [v3_dark/12_pe_ratio.png](v3_dark/12_pe_ratio.png) | Historical P/E using the sum of four consecutive reported adjusted EPS |
+| `v3_dark/13_plot_benchmark.py` | [v3_dark/13_benchmark.png](v3_dark/13_benchmark.png) | MSFT versus S&P 500 and Nasdaq-100, with a separate MSFT drawdown panel |
+| `v3_dark/14_plot_dividends.py` | [v3_dark/14_dividends.png](v3_dark/14_dividends.png) | Dividend per share and trailing twelve-calendar-month dividend yield |
+| `v3_dark/15_plot_analysts.py` | [v3_dark/15_analysts.png](v3_dark/15_analysts.png) | Current target range, mean/median and recommendation counts |
+| `v3_dark/16_plot_price_targets.py` | [v3_dark/16_price_targets.png](v3_dark/16_price_targets.png) | Individual analyst target actions on the year-to-date price chart |
+| `v3_dark/17_plot_insiders.py` | [v3_dark/17_insiders.png](v3_dark/17_insiders.png) | Insider trades by type and reported value; markers at daily closes |
+| `v3_dark/18_plot_holders.py` | [v3_dark/18_holders.png](v3_dark/18_holders.png) | Ten largest reported institutional holders, with filing dates and changes |
+| `v3_dark/19_plot_implied_vol.py` | [v3_dark/19_implied_vol.png](v3_dark/19_implied_vol.png) | Call IV by strike for three expiries around 7, 30 and 90 days |
 
 ### Data conventions and limits
 
@@ -116,7 +120,7 @@ python data_exploration/14_plot_implied_vol.py
 Regenerate all additional charts from the repository root:
 
 ```sh
-for script in data_exploration/[0-9][0-9]_plot_*.py data_exploration/v3_dark/0[5-8]_plot_*.py; do
+for script in data_exploration/v3_dark/[0-9][0-9]_plot_*.py; do
     python "$script" || break
 done
 python -m unittest discover -s tests -v
@@ -133,19 +137,19 @@ Click any preview to open the full image.
 
 | KPI tiles | Annual cash flow | Quarterly income |
 |---|---|---|
-| [![KPIs](v3_dark/08_kpi_tiles.png)](v3_dark/08_kpi_tiles.png) | [![Cash flow](04_cashflow_annual.png)](04_cashflow_annual.png) | [![Income](05_income.png)](05_income.png) |
+| [![KPIs](v3_dark/08_kpi_tiles.png)](v3_dark/08_kpi_tiles.png) | [![Cash flow](v3_dark/09_cashflow_annual.png)](v3_dark/09_cashflow_annual.png) | [![Income](v3_dark/10_income.png)](v3_dark/10_income.png) |
 
 | Earnings reaction | Historical P/E | Benchmark |
 |---|---|---|
-| [![Earnings](06_earnings_reaction.png)](06_earnings_reaction.png) | [![P/E](07_pe_ratio.png)](07_pe_ratio.png) | [![Benchmark](08_benchmark.png)](08_benchmark.png) |
+| [![Earnings](v3_dark/11_earnings_reaction.png)](v3_dark/11_earnings_reaction.png) | [![P/E](v3_dark/12_pe_ratio.png)](v3_dark/12_pe_ratio.png) | [![Benchmark](v3_dark/13_benchmark.png)](v3_dark/13_benchmark.png) |
 
 | Dividends | Analyst snapshot | Target actions |
 |---|---|---|
-| [![Dividends](09_dividends.png)](09_dividends.png) | [![Analysts](10_analysts.png)](10_analysts.png) | [![Targets](11_price_targets.png)](11_price_targets.png) |
+| [![Dividends](v3_dark/14_dividends.png)](v3_dark/14_dividends.png) | [![Analysts](v3_dark/15_analysts.png)](v3_dark/15_analysts.png) | [![Targets](v3_dark/16_price_targets.png)](v3_dark/16_price_targets.png) |
 
 | Insider transactions | Institutional holders | Implied volatility |
 |---|---|---|
-| [![Insiders](12_insiders.png)](12_insiders.png) | [![Holders](13_holders.png)](13_holders.png) | [![IV](14_implied_vol.png)](14_implied_vol.png) |
+| [![Insiders](v3_dark/17_insiders.png)](v3_dark/17_insiders.png) | [![Holders](v3_dark/18_holders.png)](v3_dark/18_holders.png) | [![IV](v3_dark/19_implied_vol.png)](v3_dark/19_implied_vol.png) |
 
 Current owner workflow: publish checked work directly to `main`, without a
 separate PR or review, and show updated chart images in chat.

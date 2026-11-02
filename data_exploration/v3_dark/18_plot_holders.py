@@ -6,9 +6,9 @@ retrieval date are explicit; holding changes refer to the previous report.
 
 import pandas as pd
 import yfinance as yf
+from ci import COLORS, NEUTRAL, save
 from matplotlib.ticker import FuncFormatter
 from msft_data import figure, percent
-from v3_dark.ci import COLORS, NEUTRAL, save
 
 
 def plot(holders, major, path):
@@ -66,5 +66,5 @@ if __name__ == "__main__":
     plot(
         stock.institutional_holders,
         stock.major_holders,
-        "data_exploration/13_holders.png",
+        "data_exploration/v3_dark/18_holders.png",
     )

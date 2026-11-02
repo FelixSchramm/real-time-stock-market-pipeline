@@ -6,7 +6,7 @@ explicitly request adjusted closes instead. Never fill absent fundamentals.
 
 import pandas as pd
 import yfinance as yf
-from v3_dark.ci import german, new_figure
+from ci import german, new_figure
 
 
 def figure(title, subtitle, **panels):

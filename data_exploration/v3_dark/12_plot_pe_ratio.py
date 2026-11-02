@@ -7,10 +7,10 @@ then on the next available trading session. No future EPS are backfilled.
 """
 
 import pandas as pd
+from ci import COLORS, NEUTRAL, end_label, german, legend_row, save
 from matplotlib.dates import DateFormatter, YearLocator
 from matplotlib.lines import Line2D
 from msft_data import figure, load_close, load_earnings
-from v3_dark.ci import COLORS, NEUTRAL, end_label, german, legend_row, save
 
 
 def trailing_pe(earnings, close):
@@ -83,5 +83,5 @@ if __name__ == "__main__":
     reports = load_earnings()
     plot(
         trailing_pe(reports, load_close(start=reports.index.min())),
-        "data_exploration/07_pe_ratio.png",
+        "data_exploration/v3_dark/12_pe_ratio.png",
     )

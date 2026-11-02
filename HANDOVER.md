@@ -1,7 +1,7 @@
 # HANDOVER
 
 **Last updated:** 2026-11-02
-**Chain status:** V4 comparison complete; direct main publication authorized; relay inactive
+**Chain status:** V3 file layout consolidated; V4 comparison preserved; relay inactive
 
 ## Session instructions
 
@@ -10,6 +10,20 @@ without a review. This overrides the reviewer/relay steps in `CLAUDE.md` for
 this work. No reviewer, successor session or fallback routine was created.
 The current owner workflow is direct checked writes to main, without PRs or
 review, with chart images shown in chat. The automatic relay remains inactive. #21 (CI distribution) remains deferred.
+
+## V3 file layout
+
+The eleven Microsoft scripts and their existing PNGs now live in
+`data_exploration/v3_dark/`, numbered 09–19 after the original 01–08.
+`msft_data.py` moved beside the scripts. Imports, PNG output paths, test module
+names and the live chart catalog follow the new layout. V4 and its immutable
+baseline retain their historical files and paths; the baseline integrity test
+locates the renamed originals and still compares their bytes.
+
+Verification: all 21 offline tests pass, including the byte-for-byte baseline
+comparison. All 19 V3 scripts import successfully; their numbering, PNG output
+paths and README links are checked. Black, Ruff and whitespace checks pass.
+No chart data or PNG contents were regenerated during this reorganization.
 
 ## V4 company-analysis comparison
 
@@ -23,7 +37,8 @@ PNGs, a GitHub before/after catalog and a local HTML comparison gallery.
 New business views cover segments, balance sheet, ROIC, cash quality, capital
 allocation, per-share economics, estimate revisions and reverse DCF.
 Five market comparisons support EUR/USD and price/total-return variants.
-All original analysis scripts, plots and style files remain unchanged.
+The original chart calculations, PNG bytes and style files were preserved.
+The later V3 reorganization above changes only live file paths and imports.
 
 The snapshot was fetched on 2026-11-01 at 22:50 UTC with yfinance 1.7.0;
 latest market session is 2026-10-30. Segment figures are independently
@@ -53,8 +68,8 @@ Competitive advantages remain research hypotheses, not an automated score.
 - #7: price, daily/year return, annual log volatility and max-drawdown tiles
   using the approved stock selection (`v3_dark/08`).
 - #9–#19: all eleven Microsoft epic charts, including optional institutional
-  holders and implied volatility. Scripts and generated PNGs are directly in
-  `data_exploration/`, numbered 04–14 as specified by the issues.
+  holders and implied volatility. Scripts and generated PNGs are now in
+  `data_exploration/v3_dark/`, numbered 09–19 in the consolidated series.
 - #8: epic implementation complete. The chart catalog documents each script,
   units, event timing and snapshot limitations, with a complete PNG gallery.
 - Shared CI, end-label spacing, drawdown arithmetic and a small Microsoft

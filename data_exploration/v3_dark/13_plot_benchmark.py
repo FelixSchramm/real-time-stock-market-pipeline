@@ -5,11 +5,11 @@ no currency conversion. The drawdown is relative to the high since year start.
 """
 
 import yfinance as yf
+from ci import COLORS, NEUTRAL, end_labels, legend_row, month_axis, save
 from matplotlib.lines import Line2D
 from matplotlib.ticker import FuncFormatter
 from msft_data import figure, percent
-from v3_dark.ci import COLORS, NEUTRAL, end_labels, legend_row, month_axis, save
-from v3_dark.returns import drawdown
+from returns import drawdown
 
 NAMES = {"MSFT": "MSFT", "^GSPC": "S&P 500", "^NDX": "Nasdaq-100"}
 PALETTE = dict(zip(NAMES.values(), [COLORS[1], COLORS[0], COLORS[2]]))
@@ -65,4 +65,4 @@ def plot(close, path):
 
 
 if __name__ == "__main__":
-    plot(load_prices(), "data_exploration/08_benchmark.png")
+    plot(load_prices(), "data_exploration/v3_dark/13_benchmark.png")

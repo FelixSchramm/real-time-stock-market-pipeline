@@ -5,10 +5,10 @@ and the strictly next trading day's close, never the previous trading day.
 """
 
 import pandas as pd
+from ci import FINANCE, NEUTRAL, legend_row, save
 from matplotlib.lines import Line2D
 from matplotlib.ticker import FuncFormatter
 from msft_data import figure, load_close, load_earnings, percent
-from v3_dark.ci import FINANCE, NEUTRAL, legend_row, save
 
 
 def reactions(earnings, close):
@@ -113,5 +113,5 @@ if __name__ == "__main__":
     earnings = load_earnings()
     plot(
         reactions(earnings, load_close(start=earnings.index.min())),
-        "data_exploration/06_earnings_reaction.png",
+        "data_exploration/v3_dark/11_earnings_reaction.png",
     )

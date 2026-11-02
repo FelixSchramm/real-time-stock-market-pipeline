@@ -1,11 +1,11 @@
 """Plot Microsoft quarterly income and calculated profit margins (#10)."""
 
 import yfinance as yf
+from ci import COLORS, end_labels, legend_row, save
 from matplotlib.lines import Line2D
 from matplotlib.patches import Patch
 from matplotlib.ticker import FuncFormatter
 from msft_data import figure, fiscal_label, percent, statement
-from v3_dark.ci import COLORS, end_labels, legend_row, save
 
 ROWS = ["Total Revenue", "Net Income", "Operating Income"]
 
@@ -72,5 +72,5 @@ def plot(income, path):
 if __name__ == "__main__":
     plot(
         statement(yf.Ticker("MSFT").quarterly_income_stmt, ROWS),
-        "data_exploration/05_income.png",
+        "data_exploration/v3_dark/10_income.png",
     )

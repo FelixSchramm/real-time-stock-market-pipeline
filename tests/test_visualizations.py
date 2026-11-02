@@ -12,19 +12,19 @@ from unittest.mock import patch
 import numpy as np
 import pandas as pd
 
-ROOT = Path(__file__).resolve().parents[1] / "data_exploration"
-sys.path[:0] = [str(ROOT), str(ROOT / "v3_dark")]
+ROOT = Path(__file__).resolve().parents[1] / "data_exploration" / "v3_dark"
+sys.path.insert(0, str(ROOT))
 monthly = importlib.import_module("06_plot_monthly_returns")
 kpi = importlib.import_module("08_plot_kpi_tiles")
 returns = importlib.import_module("returns")
 stocks = importlib.import_module("stocks")
-income = importlib.import_module("05_plot_income")
-reaction = importlib.import_module("06_plot_earnings_reaction")
-pe = importlib.import_module("07_plot_pe_ratio")
-dividends = importlib.import_module("09_plot_dividends")
-targets = importlib.import_module("11_plot_price_targets")
-insiders = importlib.import_module("12_plot_insiders")
-options = importlib.import_module("14_plot_implied_vol")
+income = importlib.import_module("10_plot_income")
+reaction = importlib.import_module("11_plot_earnings_reaction")
+pe = importlib.import_module("12_plot_pe_ratio")
+dividends = importlib.import_module("14_plot_dividends")
+targets = importlib.import_module("16_plot_price_targets")
+insiders = importlib.import_module("17_plot_insiders")
+options = importlib.import_module("19_plot_implied_vol")
 data = importlib.import_module("msft_data")
 
 

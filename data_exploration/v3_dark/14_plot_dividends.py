@@ -6,10 +6,10 @@ by the unadjusted USD close. It is a trailing yield, not a forward estimate.
 
 import pandas as pd
 import yfinance as yf
+from ci import COLORS, end_label, german, save
 from matplotlib.dates import DateFormatter, YearLocator
 from matplotlib.ticker import FuncFormatter
 from msft_data import daily_index, figure, load_close, percent
-from v3_dark.ci import COLORS, end_label, german, save
 
 
 def dividend_yield(dividends, close):
@@ -80,5 +80,5 @@ if __name__ == "__main__":
     plot(
         daily_index(yf.Ticker("MSFT").dividends),
         load_close(),
-        "data_exploration/09_dividends.png",
+        "data_exploration/v3_dark/14_dividends.png",
     )

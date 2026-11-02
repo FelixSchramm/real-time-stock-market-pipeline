@@ -113,6 +113,11 @@ class V4Finance(unittest.TestCase):
         root = V4.parents[1]
         for old in (V4 / "baseline/data_exploration").rglob("*.png"):
             original = root / old.relative_to(V4 / "baseline")
+            # The eleven root-level V3 charts now continue the series as 09–19.
+            relative = old.relative_to(V4 / "baseline/data_exploration")
+            if relative.parent == Path("."):
+                number, suffix = relative.name.split("_", 1)
+                original = V4.parent / "v3_dark" / f"{int(number) + 5:02d}_{suffix}"
             self.assertEqual(old.read_bytes(), original.read_bytes(), str(original))
 
 

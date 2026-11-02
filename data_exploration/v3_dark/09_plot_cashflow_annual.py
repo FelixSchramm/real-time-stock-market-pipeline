@@ -1,9 +1,9 @@
 """Plot reported Microsoft annual cash flows in billion USD (#9)."""
 
 import yfinance as yf
+from ci import COLORS, german, legend_row, save
 from matplotlib.patches import Patch
 from msft_data import figure, fiscal_label, statement
-from v3_dark.ci import COLORS, german, legend_row, save
 
 SERIES = ["Operating Cash Flow", "Capital Expenditure", "Free Cash Flow"]
 LABELS = ["Operativer Cashflow", "Capex (Investitionen)", "Free Cashflow"]
@@ -47,4 +47,4 @@ def plot(data, path):
 
 
 if __name__ == "__main__":
-    plot(load_cashflow(), "data_exploration/04_cashflow_annual.png")
+    plot(load_cashflow(), "data_exploration/v3_dark/09_cashflow_annual.png")

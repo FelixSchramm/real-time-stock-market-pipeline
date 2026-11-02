@@ -5,9 +5,9 @@ published target. Missing or zero targets are excluded, never forward-filled.
 """
 
 import yfinance as yf
+from ci import COLORS, NEUTRAL, legend_row, month_axis, save
 from matplotlib.lines import Line2D
 from msft_data import daily_index, figure, load_close
-from v3_dark.ci import COLORS, NEUTRAL, legend_row, month_axis, save
 
 ACTIONS = [
     ("Raises", "^", "Kursziel erhöht", COLORS[0]),
@@ -78,5 +78,5 @@ if __name__ == "__main__":
     plot(
         prepare_actions(yf.Ticker("MSFT").upgrades_downgrades, prices),
         prices,
-        "data_exploration/11_price_targets.png",
+        "data_exploration/v3_dark/16_price_targets.png",
     )
